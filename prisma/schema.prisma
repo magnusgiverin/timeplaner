@@ -1,5 +1,5 @@
 // This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// learn more about it in the docs https//pris.ly/d/prisma-schema
 
 generator client {
     provider = "prisma-client-js"
@@ -17,4 +17,47 @@ model Post {
     updatedAt DateTime @updatedAt
 
     @@index([name])
+}
+
+model Program {
+    programId   String  @id
+    disp_name   String
+    name        String
+    study_level String 
+
+    @@index([programId])
+}
+
+model Course {
+    courseId                String  @id
+    name                    String
+    ownerid                 Int?
+    showtype                Int?
+    detailtype              String?
+    name_en                 String?
+    name_nn                 String?
+    coursetype              String?
+    tpsort                  String?
+    showdiscipline          Int?
+    campusid                String?
+    yearfrom_und            Int?
+    seasonfrom_und          String?
+    yearto_und              String?
+    seasonto_und            String?
+    yearfrom_ex             Int?
+    seasonfrom_ex           String?
+    yearto_ex               String?
+    seasonto_ex             String?
+    departmentid_secondary  Int?
+    create_activity_zoom    Int?
+    authorized_netgroups    String?
+    tpn_copy_daytime        String?
+    nofterms                Int?
+    terminnr                Int?
+    fullname                String?
+    fullname_en             String?
+    fullname_nn             String?
+    idtermin                String?
+
+    @@index([courseId])
 }

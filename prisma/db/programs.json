@@ -1,0 +1,2294 @@
+[
+    {
+        "disp_name": "Aldring og eldres helse (Videreutdanning h\u00f8yere grad) SPVIDAEHS", 
+        "id": "SPVIDAEHS", 
+        "name": "Aldring og eldres helse", 
+        "studylevel": "Videreutdanning h\u00f8yere grad"
+    }, 
+    {
+        "disp_name": "Allmenn litteraturvitenskap (Bachelor) BALIT", 
+        "id": "BALIT", 
+        "name": "Allmenn litteraturvitenskap", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Allmenn litteraturvitenskap (\u00c5rsstudium) \u00c5ALIT", 
+        "id": "\u00c5ALIT", 
+        "name": "Allmenn litteraturvitenskap", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Allmenn litteraturvitenskap (Mastergrad 2 \u00e5r) MALIT", 
+        "id": "MALIT", 
+        "name": "Allmenn litteraturvitenskap", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Anestesisykepleie (Videreutdanning h\u00f8yere grad) VASP", 
+        "id": "VASP", 
+        "name": "Anestesisykepleie", 
+        "studylevel": "Videreutdanning h\u00f8yere grad"
+    }, 
+    {
+        "disp_name": "Antikkens kultur og klassiske fag (Bachelor) BAKKF", 
+        "id": "BAKKF", 
+        "name": "Antikkens kultur og klassiske fag", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Applied Computer Science (Mastergrad 2 \u00e5r) MACS", 
+        "id": "MACS", 
+        "name": "Applied Computer Science", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Arbeids- og organisasjonspsykologi (Mastergrad 2 \u00e5r) MAOPSY", 
+        "id": "MAOPSY", 
+        "name": "Arbeids- og organisasjonspsykologi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Arkeologi (Mastergrad 2 \u00e5r) MARK", 
+        "id": "MARK", 
+        "name": "Arkeologi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Arkeologi (Bachelor) BARK", 
+        "id": "BARK", 
+        "name": "Arkeologi", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Arkitektur (Mastergrad 2 \u00e5r) MAAR2", 
+        "id": "MAAR2", 
+        "name": "Arkitektur", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Arkitektur (Ph.d.) PHAAR", 
+        "id": "PHAAR", 
+        "name": "Arkitektur", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Arkitektur (Master - 5 \u00e5r) MAAR", 
+        "id": "MAAR", 
+        "name": "Arkitektur", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Arkiv og dokumentasjonsforvaltning (Mastergrad 2 \u00e5r) MAD", 
+        "id": "MAD", 
+        "name": "Arkiv og dokumentasjonsforvaltning", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Arkiv- og samlingsforvaltning (Bachelor) LTARKIV", 
+        "id": "LTARKIV", 
+        "name": "Arkiv- og samlingsforvaltning", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Audiologi (audiograf) (Bachelor) HSGAUB", 
+        "id": "HSGAUB", 
+        "name": "Audiologi (audiograf)", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Automatisering og intelligente systemer (Bachelor) BIAIS", 
+        "id": "BIAIS", 
+        "name": "Automatisering og intelligente systemer", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Avansert klinisk allmennsykepleie (Mastergrad 2 \u00e5r) MAKALLMSP", 
+        "id": "MAKALLMSP", 
+        "name": "Avansert klinisk allmennsykepleie", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Avansert sykepleie  (Videreutdanning h\u00f8yere grad) SPVAKSPL", 
+        "id": "SPVAKSPL", 
+        "name": "Avansert sykepleie ", 
+        "studylevel": "Videreutdanning h\u00f8yere grad"
+    }, 
+    {
+        "disp_name": "Barnesykepleie (Videreutdanning h\u00f8yere grad) VBASP", 
+        "id": "VBASP", 
+        "name": "Barnesykepleie", 
+        "studylevel": "Videreutdanning h\u00f8yere grad"
+    }, 
+    {
+        "disp_name": "Barnevern (Mastergrad 2 \u00e5r) HSMBV", 
+        "id": "HSMBV", 
+        "name": "Barnevern", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Barnevern (barnevernspedagog) (Bachelor) HSGBVB", 
+        "id": "HSGBVB", 
+        "name": "Barnevern (barnevernspedagog)", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Barnevernsarbeid (Mastergrad 2 \u00e5r) MBVARB", 
+        "id": "MBVARB", 
+        "name": "Barnevernsarbeid", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Bevegelsesvitenskap (Bachelor) BBEV", 
+        "id": "BBEV", 
+        "name": "Bevegelsesvitenskap", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Billedkunst (Bachelor) BBK", 
+        "id": "BBK", 
+        "name": "Billedkunst", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Biofysikk (Ph.d.) PHBIFY", 
+        "id": "PHBIFY", 
+        "name": "Biofysikk", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Bioingeni\u00f8rfag (Bachelor) BBIOING", 
+        "id": "BBIOING", 
+        "name": "Bioingeni\u00f8rfag", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Biologi (Bachelor) BBI", 
+        "id": "BBI", 
+        "name": "Biologi", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Biologi (Ph.d.) PHBI", 
+        "id": "PHBI", 
+        "name": "Biologi", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Biologi og kjemi (\u00c5rsstudium) \u00c5BIKJ", 
+        "id": "\u00c5BIKJ", 
+        "name": "Biologi og kjemi", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Biology (Mastergrad 2 \u00e5r) MSBIO", 
+        "id": "MSBIO", 
+        "name": "Biology", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Biomarin innovasjon (Bachelor) 298BMI", 
+        "id": "298BMI", 
+        "name": "Biomarin innovasjon", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Biotechnology (Mastergrad 2 \u00e5r) MSBIOTECH", 
+        "id": "MSBIOTECH", 
+        "name": "Biotechnology", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Bioteknologi (Ph.d.) PHBIOT", 
+        "id": "PHBIOT", 
+        "name": "Bioteknologi", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Bioteknologi (Bachelor) 427BT", 
+        "id": "427BT", 
+        "name": "Bioteknologi", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Bioteknologi (Master - 5 \u00e5r) MBIOT5", 
+        "id": "MBIOT5", 
+        "name": "Bioteknologi", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Bygg- og milj\u00f8teknikk (Master - 5 \u00e5r) MTBYGG", 
+        "id": "MTBYGG", 
+        "name": "Bygg- og milj\u00f8teknikk", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Bygg- og milj\u00f8teknikk (Mastergrad 2 \u00e5r) MIBYGG", 
+        "id": "MIBYGG", 
+        "name": "Bygg- og milj\u00f8teknikk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Byggingeni\u00f8r (Bachelor) BIBYG-F", 
+        "id": "BIBYG-F", 
+        "name": "Byggingeni\u00f8r", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Byggingeni\u00f8r (Bachelor) BIBYGG", 
+        "id": "BIBYGG", 
+        "name": "Byggingeni\u00f8r", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Bygningsinformasjonsmodellering - BIM  (\u00c5rsstudium) \u00c5RBIM", 
+        "id": "\u00c5RBIM", 
+        "name": "Bygningsinformasjonsmodellering - BIM ", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "B\u00e6rekrafts-, arbeidsmilj\u00f8- og sikkerhetsledelse (Mastergrad 2 \u00e5r) MHMS", 
+        "id": "MHMS", 
+        "name": "B\u00e6rekrafts-, arbeidsmilj\u00f8- og sikkerhetsledelse", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "B\u00e6rekrafts-, arbeidsmilj\u00f8- og sikkerhetsledelse (Mastergrad 2 \u00e5r) MIHMS", 
+        "id": "MIHMS", 
+        "name": "B\u00e6rekrafts-, arbeidsmilj\u00f8- og sikkerhetsledelse", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Chemistry (Mastergrad 2 \u00e5r) MSCHEM", 
+        "id": "MSCHEM", 
+        "name": "Chemistry", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Childhood Studies (Mastergrad 2 \u00e5r) MPCHILD", 
+        "id": "MPCHILD", 
+        "name": "Childhood Studies", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Circular Economy (Mastergrad 2 \u00e5r) MSCE", 
+        "id": "MSCE", 
+        "name": "Circular Economy", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Coastal and Marine Engineering and Management (Mastergrad 2 \u00e5r) MSCOMEMA", 
+        "id": "MSCOMEMA", 
+        "name": "Coastal and Marine Engineering and Management", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Cold Climate Engineering (Mastergrad 2 \u00e5r) MSCCE", 
+        "id": "MSCCE", 
+        "name": "Cold Climate Engineering", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Colour in Science and Industry (COSI) (Mastergrad 2 \u00e5r) MACS-COSI", 
+        "id": "MACS-COSI", 
+        "name": "Colour in Science and Industry (COSI)", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Computational Colour and Spectral Imaging (Mastergrad 2 \u00e5r) MSCOSI", 
+        "id": "MSCOSI", 
+        "name": "Computational Colour and Spectral Imaging", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Creative Music Technology (Mastergrad 2 \u00e5r) MMUST", 
+        "id": "MMUST", 
+        "name": "Creative Music Technology", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Dance Knowledge, Practice and Heritage (Mastergrad 2 \u00e5r) MACHOREO", 
+        "id": "MACHOREO", 
+        "name": "Dance Knowledge, Practice and Heritage", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Dance Studies (Mastergrad 2 \u00e5r) MDANS", 
+        "id": "MDANS", 
+        "name": "Dance Studies", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Dataingeni\u00f8r (Bachelor) BIDATA", 
+        "id": "BIDATA", 
+        "name": "Dataingeni\u00f8r", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Datateknologi (Mastergrad 2 \u00e5r) MIDT", 
+        "id": "MIDT", 
+        "name": "Datateknologi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Datateknologi (Master - 5 \u00e5r) MTDT", 
+        "id": "MTDT", 
+        "name": "Datateknologi", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Datateknologi og informatikk (Ph.d.) PHCOS", 
+        "id": "PHCOS", 
+        "name": "Datateknologi og informatikk", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Design (Ph.d.) PHDESIG", 
+        "id": "PHDESIG", 
+        "name": "Design", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Digital Infrastructure and Cyber Security (Mastergrad 2 \u00e5r) MSTCNNS", 
+        "id": "MSTCNNS", 
+        "name": "Digital Infrastructure and Cyber Security", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Digital forretningsutvikling (Bachelor) ITBAITBEDR", 
+        "id": "ITBAITBEDR", 
+        "name": "Digital forretningsutvikling", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Digital infrastruktur og cybersikkerhet (Bachelor) BDIGSEC", 
+        "id": "BDIGSEC", 
+        "name": "Digital infrastruktur og cybersikkerhet", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Digital samhandling (Mastergrad 2 \u00e5r) ITMAIKTSA", 
+        "id": "ITMAIKTSA", 
+        "name": "Digital samhandling", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Diverse studier - Fakultet for samfunns- og utdanningsvitenskap (\u00c5rsstudium) EMNE/SU", 
+        "id": "EMNE/SU", 
+        "name": "Diverse studier - Fakultet for samfunns- og utdanningsvitenskap", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Drama og teater (Mastergrad 2 \u00e5r) MDT", 
+        "id": "MDT", 
+        "name": "Drama og teater", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Drama og teater (\u00c5rsstudium) \u00c5DRAMA", 
+        "id": "\u00c5DRAMA", 
+        "name": "Drama og teater", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Drama og teater (Bachelor) BDRAMA", 
+        "id": "BDRAMA", 
+        "name": "Drama og teater", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Eiendomsutvikling og -forvaltning (Mastergrad 2 \u00e5r) MAEIENDOM", 
+        "id": "MAEIENDOM", 
+        "name": "Eiendomsutvikling og -forvaltning", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Eiendomsutvikling og -forvaltning (Erfaringsbasert master) MEIENDOM", 
+        "id": "MEIENDOM", 
+        "name": "Eiendomsutvikling og -forvaltning", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "Electric Power Engineering (Mastergrad 2 \u00e5r) MSELPOWER", 
+        "id": "MSELPOWER", 
+        "name": "Electric Power Engineering", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Electronic Systems Design (Mastergrad 2 \u00e5r) MSELSYS", 
+        "id": "MSELSYS", 
+        "name": "Electronic Systems Design", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Elektrifisering og digitalisering (Bachelor) BELDIG", 
+        "id": "BELDIG", 
+        "name": "Elektrifisering og digitalisering", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Elektroingeni\u00f8r (Bachelor) BIELEKTRO", 
+        "id": "BIELEKTRO", 
+        "name": "Elektroingeni\u00f8r", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Elektronikk og telekommunikasjon (Ph.d.) PHET", 
+        "id": "PHET", 
+        "name": "Elektronikk og telekommunikasjon", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Elektronisk systemdesign og innovasjon (Master - 5 \u00e5r) MTELSYS", 
+        "id": "MTELSYS", 
+        "name": "Elektronisk systemdesign og innovasjon", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Elkraftteknikk (Ph.d.) PHELKT", 
+        "id": "PHELKT", 
+        "name": "Elkraftteknikk", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Embedded Computing Systems (Mastergrad 2 \u00e5r) MSECS", 
+        "id": "MSECS", 
+        "name": "Embedded Computing Systems", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Energi og milj\u00f8 (Master - 5 \u00e5r) MTENERG", 
+        "id": "MTENERG", 
+        "name": "Energi og milj\u00f8", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Energi og milj\u00f8 (Mastergrad 2 \u00e5r) MIENERG", 
+        "id": "MIENERG", 
+        "name": "Energi og milj\u00f8", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Engelsk (Bachelor) BENG", 
+        "id": "BENG", 
+        "name": "Engelsk", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Engelsk (Mastergrad 2 \u00e5r) MENG", 
+        "id": "MENG", 
+        "name": "Engelsk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Engelsk (\u00c5rsstudium) \u00c5ENG", 
+        "id": "\u00c5ENG", 
+        "name": "Engelsk", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Engelsk- og fremmedspr\u00e5kdidaktikk (Mastergrad 2 \u00e5r) MDID-ENGFRSPR\u00c5K", 
+        "id": "MDID-ENGFRSPR\u00c5K", 
+        "name": "Engelsk- og fremmedspr\u00e5kdidaktikk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "English Linguistics and Language Acquisition (Mastergrad 2 \u00e5r) MPHFENG", 
+        "id": "MPHFENG", 
+        "name": "English Linguistics and Language Acquisition", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Entrepreneurship (Mastergrad 2 \u00e5r) MSENTRE", 
+        "id": "MSENTRE", 
+        "name": "Entrepreneurship", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Entrepren\u00f8rskap (Mastergrad 2 \u00e5r) MENTRE", 
+        "id": "MENTRE", 
+        "name": "Entrepren\u00f8rskap", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Environmental Contamination and Toxicology (Mastergrad 2 \u00e5r) MSENCOTO", 
+        "id": "MSENCOTO", 
+        "name": "Environmental Contamination and Toxicology", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Environmental Engineering (Mastergrad 2 \u00e5r) MSENVIENG", 
+        "id": "MSENVIENG", 
+        "name": "Environmental Engineering", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Environmental Toxicology and Chemistry (Mastergrad 2 \u00e5r) MSENVITOX", 
+        "id": "MSENVITOX", 
+        "name": "Environmental Toxicology and Chemistry", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Ergoterapi (Bachelor) BERGO", 
+        "id": "BERGO", 
+        "name": "Ergoterapi", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Estetiske fag (Ph.d.) PHESTET", 
+        "id": "PHESTET", 
+        "name": "Estetiske fag", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Europastudier (Bachelor) BEUROP", 
+        "id": "BEUROP", 
+        "name": "Europastudier", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "European Studies (Mastergrad 2 \u00e5r) MEURSTUD", 
+        "id": "MEURSTUD", 
+        "name": "European Studies", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Fagdidaktikk (Mastergrad 2 \u00e5r) MDID", 
+        "id": "MDID", 
+        "name": "Fagdidaktikk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Farmasi (Mastergrad 2 \u00e5r) MFARMASI", 
+        "id": "MFARMASI", 
+        "name": "Farmasi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Fedme og helse (Mastergrad 2 \u00e5r) MKLIHELFH", 
+        "id": "MKLIHELFH", 
+        "name": "Fedme og helse", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Film- og medievitenskap (Mastergrad 2 \u00e5r) MFMV", 
+        "id": "MFMV", 
+        "name": "Film- og medievitenskap", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Film- og videoproduksjon (Mastergrad 2 \u00e5r) MMPROD", 
+        "id": "MMPROD", 
+        "name": "Film- og videoproduksjon", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Film- og videoproduksjon (Bachelor) BFVPROD", 
+        "id": "BFVPROD", 
+        "name": "Film- og videoproduksjon", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Filmvitenskap (\u00c5rsstudium) \u00c5FV", 
+        "id": "\u00c5FV", 
+        "name": "Filmvitenskap", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Filmvitenskap (Bachelor) BFV", 
+        "id": "BFV", 
+        "name": "Filmvitenskap", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Filosofi (\u00c5rsstudium) \u00c5FI", 
+        "id": "\u00c5FI", 
+        "name": "Filosofi", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Filosofi (Mastergrad 2 \u00e5r) MFI", 
+        "id": "MFI", 
+        "name": "Filosofi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Filosofi og etikk (Bachelor) BFI", 
+        "id": "BFI", 
+        "name": "Filosofi og etikk", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Finansiell \u00f8konomi (Mastergrad 2 \u00e5r) MFIN\u00d8K", 
+        "id": "MFIN\u00d8K", 
+        "name": "Finansiell \u00f8konomi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Fine Art (Mastergrad 2 \u00e5r) MFA", 
+        "id": "MFA", 
+        "name": "Fine Art", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Fleksibel PPU for allmennfag (Praktisk pedagogisk utdanning) FPPU-A", 
+        "id": "FPPU-A", 
+        "name": "Fleksibel PPU for allmennfag", 
+        "studylevel": "Praktisk pedagogisk utdanning"
+    }, 
+    {
+        "disp_name": "Fleksibel PPU for yrkesfag (Praktisk pedagogisk utdanning) FPPU-Y", 
+        "id": "FPPU-Y", 
+        "name": "Fleksibel PPU for yrkesfag", 
+        "studylevel": "Praktisk pedagogisk utdanning"
+    }, 
+    {
+        "disp_name": "Folkehelse (Mastergrad 2 \u00e5r) MFHLS", 
+        "id": "MFHLS", 
+        "name": "Folkehelse", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Forkurs for ingeni\u00f8r- og sivilingeni\u00f8rutdanning (Forpr\u00f8ve/forkurs) 252FK", 
+        "id": "252FK", 
+        "name": "Forkurs for ingeni\u00f8r- og sivilingeni\u00f8rutdanning", 
+        "studylevel": "Forpr\u00f8ve/forkurs"
+    }, 
+    {
+        "disp_name": "Forkurs for ingeni\u00f8r- og sivilingeni\u00f8rutdanning (Forpr\u00f8ve/forkurs) FTFORKURS", 
+        "id": "FTFORKURS", 
+        "name": "Forkurs for ingeni\u00f8r- og sivilingeni\u00f8rutdanning", 
+        "studylevel": "Forpr\u00f8ve/forkurs"
+    }, 
+    {
+        "disp_name": "Fornybar energi, ingeni\u00f8r (Bachelor) BIFOREN", 
+        "id": "BIFOREN", 
+        "name": "Fornybar energi, ingeni\u00f8r", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Fransk (Bachelor) BFRA", 
+        "id": "BFRA", 
+        "name": "Fransk", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Fransk (Mastergrad 2 \u00e5r) MFRAN", 
+        "id": "MFRAN", 
+        "name": "Fransk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Fransk (\u00c5rsstudium) \u00c5FRAN", 
+        "id": "\u00c5FRAN", 
+        "name": "Fransk", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Fransk med didaktikk (\u00c5rsstudium) \u00c5FRANCAEN", 
+        "id": "\u00c5FRANCAEN", 
+        "name": "Fransk med didaktikk", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Fremmedspr\u00e5k (Bachelor) BFS", 
+        "id": "BFS", 
+        "name": "Fremmedspr\u00e5k", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Funksjonshemming og samfunn (Mastergrad 2 \u00e5r) MFUNKSAM", 
+        "id": "MFUNKSAM", 
+        "name": "Funksjonshemming og samfunn", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Fysikk (Bachelor) BFY", 
+        "id": "BFY", 
+        "name": "Fysikk", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Fysikk (Ph.d.) PHFY", 
+        "id": "PHFY", 
+        "name": "Fysikk", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Fysikk og matematikk (Master - 5 \u00e5r) MTFYMA", 
+        "id": "MTFYMA", 
+        "name": "Fysikk og matematikk", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Fysioterapi (Bachelor) HSGFTB", 
+        "id": "HSGFTB", 
+        "name": "Fysioterapi", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Fysisk planlegging (Mastergrad 2 \u00e5r) MFYSPL", 
+        "id": "MFYSPL", 
+        "name": "Fysisk planlegging", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Generell psykologi (Mastergrad 2 \u00e5r) MGENPSY", 
+        "id": "MGENPSY", 
+        "name": "Generell psykologi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Geografi (Mastergrad 2 \u00e5r) MGEOG", 
+        "id": "MGEOG", 
+        "name": "Geografi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Geografi (Bachelor) BGEOG", 
+        "id": "BGEOG", 
+        "name": "Geografi", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Geografi (\u00c5rsstudium) \u00c5GEOG", 
+        "id": "\u00c5GEOG", 
+        "name": "Geografi", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Geologi (Mastergrad 2 \u00e5r) MGEOL", 
+        "id": "MGEOL", 
+        "name": "Geologi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Geologi (Bachelor) BGEOL", 
+        "id": "BGEOL", 
+        "name": "Geologi", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Geomatikkingeni\u00f8r (Bachelor) BIGEOMAT", 
+        "id": "BIGEOMAT", 
+        "name": "Geomatikkingeni\u00f8r", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Geotechnics and Geohazards (Mastergrad 2 \u00e5r) MSGEOTECH", 
+        "id": "MSGEOTECH", 
+        "name": "Geotechnics and Geohazards", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Global Health (Mastergrad 2 \u00e5r) MSPUHE", 
+        "id": "MSPUHE", 
+        "name": "Global Health", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Global Manufacturing Management (Mastergrad 2 \u00e5r) MSGLOMAN", 
+        "id": "MSGLOMAN", 
+        "name": "Global Manufacturing Management", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Globalisation and Sustainable Development (Mastergrad 2 \u00e5r) MSGLOPOL", 
+        "id": "MSGLOPOL", 
+        "name": "Globalisation and Sustainable Development", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Grafisk design (Bachelor) BMED", 
+        "id": "BMED", 
+        "name": "Grafisk design", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Grunnskolel\u00e6rerutdanning 1.-7. trinn (Master - 5 \u00e5r) MGLU1-7", 
+        "id": "MGLU1-7", 
+        "name": "Grunnskolel\u00e6rerutdanning 1.-7. trinn", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Grunnskolel\u00e6rerutdanning 5.-10. trinn (Master - 5 \u00e5r) MGLU5-10", 
+        "id": "MGLU5-10", 
+        "name": "Grunnskolel\u00e6rerutdanning 5.-10. trinn", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Havbruksingeni\u00f8r (Bachelor) BIHAV", 
+        "id": "BIHAV", 
+        "name": "Havbruksingeni\u00f8r", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Helseinformatikk (Erfaringsbasert master) MHI", 
+        "id": "MHI", 
+        "name": "Helseinformatikk", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "Helseledelse (Mastergrad 2 \u00e5r) MHLED", 
+        "id": "MHLED", 
+        "name": "Helseledelse", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Helsesykepleie (Mastergrad 2 \u00e5r) MHELSP", 
+        "id": "MHELSP", 
+        "name": "Helsesykepleie", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Helsevitenskap (Ph.d.) PHHLS", 
+        "id": "PHHLS", 
+        "name": "Helsevitenskap", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Historie (Bachelor) BHIST", 
+        "id": "BHIST", 
+        "name": "Historie", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Historie (Mastergrad 2 \u00e5r) MHIST", 
+        "id": "MHIST", 
+        "name": "Historie", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Historie (\u00c5rsstudium) \u00c5HIST", 
+        "id": "\u00c5HIST", 
+        "name": "Historie", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Historie og kulturfag (Ph.d.) PHHIST", 
+        "id": "PHHIST", 
+        "name": "Historie og kulturfag", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Humanistiske fag (\u00c5rsstudium) EMNE/HF", 
+        "id": "EMNE/HF", 
+        "name": "Humanistiske fag", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Hydropower Development (Mastergrad 2 \u00e5r) MSB1", 
+        "id": "MSB1", 
+        "name": "Hydropower Development", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Idrettsvitenskap (Mastergrad 2 \u00e5r) MIDR", 
+        "id": "MIDR", 
+        "name": "Idrettsvitenskap", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Industrial Design (Mastergrad 2 \u00e5r) MSDESIG", 
+        "id": "MSDESIG", 
+        "name": "Industrial Design", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Industrial Ecology (Mastergrad 2 \u00e5r) MSINDECOL", 
+        "id": "MSINDECOL", 
+        "name": "Industrial Ecology", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Industriell design (Master - 5 \u00e5r) MTDESIG", 
+        "id": "MTDESIG", 
+        "name": "Industriell design", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Industriell innovasjon og digital sikkerhet (Mastergrad 2 \u00e5r) MIIDS", 
+        "id": "MIIDS", 
+        "name": "Industriell innovasjon og digital sikkerhet", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Industriell kjemi og bioteknologi (Master - 5 \u00e5r) MTKJ", 
+        "id": "MTKJ", 
+        "name": "Industriell kjemi og bioteknologi", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Industriell kybernetikk (Mastergrad 2 \u00e5r) MIIK", 
+        "id": "MIIK", 
+        "name": "Industriell kybernetikk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Industriell \u00f8konomi og teknologiledelse (Master - 5 \u00e5r) MTI\u00d8T", 
+        "id": "MTI\u00d8T", 
+        "name": "Industriell \u00f8konomi og teknologiledelse", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Informasjonsbehandling (Bachelor) ITBAINFO", 
+        "id": "ITBAINFO", 
+        "name": "Informasjonsbehandling", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Informasjonssikkerhet og kommunikasjonsteknologi (Ph.d.) PHISCT", 
+        "id": "PHISCT", 
+        "name": "Informasjonssikkerhet og kommunikasjonsteknologi", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Informatics (Mastergrad 2 \u00e5r) MSIT", 
+        "id": "MSIT", 
+        "name": "Informatics", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Informatikk (Bachelor) BIT", 
+        "id": "BIT", 
+        "name": "Informatikk", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Information Security (Mastergrad 2 \u00e5r) MISD", 
+        "id": "MISD", 
+        "name": "Information Security", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Information Security (Mastergrad 2 \u00e5r) MIS", 
+        "id": "MIS", 
+        "name": "Information Security", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Information Security (Erfaringsbasert master) MISEB", 
+        "id": "MISEB", 
+        "name": "Information Security", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "Ingeni\u00f8rvitenskap (Ph.d.) PHIV", 
+        "id": "PHIV", 
+        "name": "Ingeni\u00f8rvitenskap", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Ingeni\u00f8rvitenskap og IKT (Master - 5 \u00e5r) MTING", 
+        "id": "MTING", 
+        "name": "Ingeni\u00f8rvitenskap og IKT", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Innovasjon, entrepren\u00f8rskap og samfunn (Mastergrad 2 \u00e5r) MENTRESAM", 
+        "id": "MENTRESAM", 
+        "name": "Innovasjon, entrepren\u00f8rskap og samfunn", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Innovative Sustainable Energy Engineering (Mastergrad 2 \u00e5r) MSISEE", 
+        "id": "MSISEE", 
+        "name": "Innovative Sustainable Energy Engineering", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Intensivsykepleie (Videreutdanning h\u00f8yere grad) VISP", 
+        "id": "VISP", 
+        "name": "Intensivsykepleie", 
+        "studylevel": "Videreutdanning h\u00f8yere grad"
+    }, 
+    {
+        "disp_name": "Interaction Design (Mastergrad 2 \u00e5r) MIXD", 
+        "id": "MIXD", 
+        "name": "Interaction Design", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Interaksjonsdesign (Bachelor) BIXD", 
+        "id": "BIXD", 
+        "name": "Interaksjonsdesign", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Internasjonal Business og Markedsf\u00f8ring (Mastergrad 2 \u00e5r) 860MIB", 
+        "id": "860MIB", 
+        "name": "Internasjonal Business og Markedsf\u00f8ring", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Jordmorfag (Erfaringsbasert master) MJORDMOR", 
+        "id": "MJORDMOR", 
+        "name": "Jordmorfag", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "Kardiologisk sykepleie (Videreutdanning h\u00f8yere grad) SPVKAR", 
+        "id": "SPVKAR", 
+        "name": "Kardiologisk sykepleie", 
+        "studylevel": "Videreutdanning h\u00f8yere grad"
+    }, 
+    {
+        "disp_name": "Kirkemusikk (\u00c5rsstudium) \u00c5KIRKMUS", 
+        "id": "\u00c5KIRKMUS", 
+        "name": "Kirkemusikk", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Kjemi (Bachelor) BKJ", 
+        "id": "BKJ", 
+        "name": "Kjemi", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Kjemi (Ph.d.) PHKJ", 
+        "id": "PHKJ", 
+        "name": "Kjemi", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Kjemiingeni\u00f8r (Bachelor) FTHINGKJ", 
+        "id": "FTHINGKJ", 
+        "name": "Kjemiingeni\u00f8r", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Kjemisk prosessteknologi (Ph.d.) PHKJPROS", 
+        "id": "PHKJPROS", 
+        "name": "Kjemisk prosessteknologi", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Klassiske fag (Mastergrad 2 \u00e5r) MKLAS", 
+        "id": "MKLAS", 
+        "name": "Klassiske fag", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Klassiske fag (Bachelor) BKLASS", 
+        "id": "BKLASS", 
+        "name": "Klassiske fag", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Klinisk helsevitenskap (Mastergrad 2 \u00e5r) MKLIHEL", 
+        "id": "MKLIHEL", 
+        "name": "Klinisk helsevitenskap", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Klinisk sykepleie (Erfaringsbasert master) MKLISP", 
+        "id": "MKLISP", 
+        "name": "Klinisk sykepleie", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "Kommunikasjonsteknologi og digital sikkerhet (Master - 5 \u00e5r) MTKOM", 
+        "id": "MTKOM", 
+        "name": "Kommunikasjonsteknologi og digital sikkerhet", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Kompletterende utdanning for sykepleiere med utdanning fra land utenfor EU/E\u00d8S (\u00c5rsstudium) VKOMSP", 
+        "id": "VKOMSP", 
+        "name": "Kompletterende utdanning for sykepleiere med utdanning fra land utenfor EU/E\u00d8S", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Kreftsykepleie (Videreutdanning h\u00f8yere grad) VKRESP", 
+        "id": "VKRESP", 
+        "name": "Kreftsykepleie", 
+        "studylevel": "Videreutdanning h\u00f8yere grad"
+    }, 
+    {
+        "disp_name": "Kulturminneforvaltning (Bachelor) BKULMI", 
+        "id": "BKULMI", 
+        "name": "Kulturminneforvaltning", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Kulturminneforvaltning (Mastergrad 2 \u00e5r) MKULMI", 
+        "id": "MKULMI", 
+        "name": "Kulturminneforvaltning", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Kunnskap, teknologi og samfunn (STS) (Mastergrad 2 \u00e5r) MSTS", 
+        "id": "MSTS", 
+        "name": "Kunnskap, teknologi og samfunn (STS)", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Kunnskap, teknologi og samfunn (STS) (\u00c5rsstudium) \u00c5STS", 
+        "id": "\u00c5STS", 
+        "name": "Kunnskap, teknologi og samfunn (STS)", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Kunstfagdidaktikk (Mastergrad 2 \u00e5r) MDID-KUNSTFAG", 
+        "id": "MDID-KUNSTFAG", 
+        "name": "Kunstfagdidaktikk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Kunsthistorie (Mastergrad 2 \u00e5r) MKUH", 
+        "id": "MKUH", 
+        "name": "Kunsthistorie", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Kunsthistorie (Bachelor) BKUH", 
+        "id": "BKUH", 
+        "name": "Kunsthistorie", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Kunsthistorie (\u00c5rsstudium) \u00c5KUH", 
+        "id": "\u00c5KUH", 
+        "name": "Kunsthistorie", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Kunstnerisk utviklingsarbeid (Ph.d.) PHKUNST", 
+        "id": "PHKUNST", 
+        "name": "Kunstnerisk utviklingsarbeid", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Kybernetikk og robotikk (Master - 5 \u00e5r) MTTK", 
+        "id": "MTTK", 
+        "name": "Kybernetikk og robotikk", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Kybernetikk og robotikk (Mastergrad 2 \u00e5r) MITK", 
+        "id": "MITK", 
+        "name": "Kybernetikk og robotikk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Latin (\u00c5rsstudium) \u00c5LAT", 
+        "id": "\u00c5LAT", 
+        "name": "Latin", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Ledelse av teknologi (Mastergrad 2 \u00e5r) \u00d8AMLT", 
+        "id": "\u00d8AMLT", 
+        "name": "Ledelse av teknologi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Lektorutdanning i geografi for trinn 8 \u2212 13  (Master - 5 \u00e5r) MLGEOG", 
+        "id": "MLGEOG", 
+        "name": "Lektorutdanning i geografi for trinn 8 \u2212 13 ", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Lektorutdanning i historie for trinn 8 \u2013 13 (Master - 5 \u00e5r) MLHIST", 
+        "id": "MLHIST", 
+        "name": "Lektorutdanning i historie for trinn 8 \u2013 13", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Lektorutdanning i kropps\u00f8ving og idrettsfag for trinn 8 \u2212 13 (Master - 5 \u00e5r) MLKIDR", 
+        "id": "MLKIDR", 
+        "name": "Lektorutdanning i kropps\u00f8ving og idrettsfag for trinn 8 \u2212 13", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Lektorutdanning i realfag for trinn 8 \u2013 13 (Master - 5 \u00e5r) MLREAL", 
+        "id": "MLREAL", 
+        "name": "Lektorutdanning i realfag for trinn 8 \u2013 13", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Lektorutdanning i samfunnsfag for trinn 8 \u2013 13 (Master - 5 \u00e5r) MLSAM", 
+        "id": "MLSAM", 
+        "name": "Lektorutdanning i samfunnsfag for trinn 8 \u2013 13", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Lektorutdanning i spr\u00e5kfag for trinn 8 \u2013 13 (Master - 5 \u00e5r) MLSPR\u00c5K", 
+        "id": "MLSPR\u00c5K", 
+        "name": "Lektorutdanning i spr\u00e5kfag for trinn 8 \u2013 13", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Likestilling og mangfold (\u00c5rsstudium) \u00c5LIMA", 
+        "id": "\u00c5LIMA", 
+        "name": "Likestilling og mangfold", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Likestilling og mangfold (Mastergrad 2 \u00e5r) MKKS", 
+        "id": "MKKS", 
+        "name": "Likestilling og mangfold", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Lindrende behandling (Ph.d.) PHPALC", 
+        "id": "PHPALC", 
+        "name": "Lindrende behandling", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Logistikkingeni\u00f8r (Bachelor) FTHINGLOG", 
+        "id": "FTHINGLOG", 
+        "name": "Logistikkingeni\u00f8r", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Logistikkledelse (Bachelor) BLOG", 
+        "id": "BLOG", 
+        "name": "Logistikkledelse", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Logopedi (Erfaringsbasert master) MLOGO", 
+        "id": "MLOGO", 
+        "name": "Logopedi", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "L\u00e6rerspesialist (Erfaringsbasert master) MLS", 
+        "id": "MLS", 
+        "name": "L\u00e6rerspesialist", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "L\u00e6ring i arbeidsliv og samfunn (Mastergrad 2 \u00e5r) MVL", 
+        "id": "MVL", 
+        "name": "L\u00e6ring i arbeidsliv og samfunn", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Marin teknikk (Mastergrad 2 \u00e5r) MIMART", 
+        "id": "MIMART", 
+        "name": "Marin teknikk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Marin teknikk (Master - 5 \u00e5r) MTMART", 
+        "id": "MTMART", 
+        "name": "Marin teknikk", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Marine Technology (Mastergrad 2 \u00e5r) MSN1", 
+        "id": "MSN1", 
+        "name": "Marine Technology", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Marine and Maritime Intelligent Robotics (Mastergrad 2 \u00e5r) MSMIR", 
+        "id": "MSMIR", 
+        "name": "Marine and Maritime Intelligent Robotics", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Maritime Engineering (Mastergrad 2 \u00e5r) MSNMME", 
+        "id": "MSNMME", 
+        "name": "Maritime Engineering", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Markedsf\u00f8ring, innovasjon og ledelse (Bachelor) 359ML", 
+        "id": "359ML", 
+        "name": "Markedsf\u00f8ring, innovasjon og ledelse", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Maskiningeni\u00f8r (Bachelor) BIMASKIN", 
+        "id": "BIMASKIN", 
+        "name": "Maskiningeni\u00f8r", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Maskiningeni\u00f8r (Bachelor) BIMAS-F", 
+        "id": "BIMAS-F", 
+        "name": "Maskiningeni\u00f8r", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Master i simulering og visualisering (Mastergrad 2 \u00e5r) 880MVS", 
+        "id": "880MVS", 
+        "name": "Master i simulering og visualisering", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Master of Science in Health Management in Aquaculture (Mastergrad 2 \u00e5r) MSAQUAH", 
+        "id": "MSAQUAH", 
+        "name": "Master of Science in Health Management in Aquaculture", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Matematikkdidaktikk (Mastergrad 2 \u00e5r) MDID-MATEMATIKK", 
+        "id": "MDID-MATEMATIKK", 
+        "name": "Matematikkdidaktikk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Matematiske fag (Bachelor) BMAT", 
+        "id": "BMAT", 
+        "name": "Matematiske fag", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Matematiske fag (Ph.d.) PHMA", 
+        "id": "PHMA", 
+        "name": "Matematiske fag", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Matematiske fag (\u00c5rsstudium) \u00c5MATSTAT", 
+        "id": "\u00c5MATSTAT", 
+        "name": "Matematiske fag", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Materials Science and Engineering (Mastergrad 2 \u00e5r) MSMT", 
+        "id": "MSMT", 
+        "name": "Materials Science and Engineering", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Materialteknologi (Bachelor) FTHINGMAT", 
+        "id": "FTHINGMAT", 
+        "name": "Materialteknologi", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Materialteknologi (Master - 5 \u00e5r) MTMT", 
+        "id": "MTMT", 
+        "name": "Materialteknologi", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Materialteknologi (Ph.d.) PHMT", 
+        "id": "PHMT", 
+        "name": "Materialteknologi", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Mathematical Sciences (Mastergrad 2 \u00e5r) MSMNFMA", 
+        "id": "MSMNFMA", 
+        "name": "Mathematical Sciences", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Matvitenskap, teknologi og b\u00e6rekraft (Mastergrad 2 \u00e5r) FTMAMAT", 
+        "id": "FTMAMAT", 
+        "name": "Matvitenskap, teknologi og b\u00e6rekraft", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Matvitenskap, teknologi og b\u00e6rekraft (Bachelor) MTMAT", 
+        "id": "MTMAT", 
+        "name": "Matvitenskap, teknologi og b\u00e6rekraft", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Medier, kommunikasjon og informasjonsteknologi (Mastergrad 2 \u00e5r) MMEDIE", 
+        "id": "MMEDIE", 
+        "name": "Medier, kommunikasjon og informasjonsteknologi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Medievitenskap (\u00c5rsstudium) \u00c5MV", 
+        "id": "\u00c5MV", 
+        "name": "Medievitenskap", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Medievitenskap (Bachelor) BMV", 
+        "id": "BMV", 
+        "name": "Medievitenskap", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Medisin (Ph.d.) PHMED", 
+        "id": "PHMED", 
+        "name": "Medisin", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Medisin og helsevitenskap (Ph.d.) PHMEDHV", 
+        "id": "PHMEDHV", 
+        "name": "Medisin og helsevitenskap", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Medisinsk MR-avbildning (Mastergrad 2 \u00e5r) HSMMR", 
+        "id": "HSMMR", 
+        "name": "Medisinsk MR-avbildning", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Medisinsk bildeteknologi (Mastergrad 2 \u00e5r) MMEDBT", 
+        "id": "MMEDBT", 
+        "name": "Medisinsk bildeteknologi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Medisinsk teknologi (Ph.d.) PHMEDT", 
+        "id": "PHMEDT", 
+        "name": "Medisinsk teknologi", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Medisinske og biologiske fag (\u00c5rsstudium) 184BG", 
+        "id": "184BG", 
+        "name": "Medisinske og biologiske fag", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Medisinstudiet (Profesjonsstudium) CMED", 
+        "id": "CMED", 
+        "name": "Medisinstudiet", 
+        "studylevel": "Profesjonsstudium"
+    }, 
+    {
+        "disp_name": "Molecular Medicine (Mastergrad 2 \u00e5r) MSMOLMED", 
+        "id": "MSMOLMED", 
+        "name": "Molecular Medicine", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Music Performance (Mastergrad 2 \u00e5r) MMUSP", 
+        "id": "MMUSP", 
+        "name": "Music Performance", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Musikk, ut\u00f8vende (Bachelor studium, fire\u00e5rig) BMUSP", 
+        "id": "BMUSP", 
+        "name": "Musikk, ut\u00f8vende", 
+        "studylevel": "Bachelor studium, fire\u00e5rig"
+    }, 
+    {
+        "disp_name": "Musikk, ut\u00f8vende - jazz (Bachelor) BMUSK", 
+        "id": "BMUSK", 
+        "name": "Musikk, ut\u00f8vende - jazz", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Musikkteknologi (Bachelor) BMUST", 
+        "id": "BMUST", 
+        "name": "Musikkteknologi", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Musikkvitenskap (Bachelor) BMUSV", 
+        "id": "BMUSV", 
+        "name": "Musikkvitenskap", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Musikkvitenskap (Mastergrad 2 \u00e5r) MMUSV", 
+        "id": "MMUSV", 
+        "name": "Musikkvitenskap", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Musikkvitenskap (\u00c5rsstudium) \u00c5MUSV", 
+        "id": "\u00c5MUSV", 
+        "name": "Musikkvitenskap", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "NTNUs Entrepren\u00f8rskole (Mastergrad 2 \u00e5r) MIENTRE", 
+        "id": "MIENTRE", 
+        "name": "NTNUs Entrepren\u00f8rskole", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Nanoteknologi (Master - 5 \u00e5r) MTNANO", 
+        "id": "MTNANO", 
+        "name": "Nanoteknologi", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Nasjonal Paramedic-utdanning for ambulansepersonell (\u00c5rsstudium) SPPARAMED", 
+        "id": "SPPARAMED", 
+        "name": "Nasjonal Paramedic-utdanning for ambulansepersonell", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Nasjonal paramedic-utdanning  (\u00c5rsstudium) \u00c5RPARAMED", 
+        "id": "\u00c5RPARAMED", 
+        "name": "Nasjonal paramedic-utdanning ", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Natural Gas Technology (Mastergrad 2 \u00e5r) MSGASTECH", 
+        "id": "MSGASTECH", 
+        "name": "Natural Gas Technology", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Natural Resources Management (Mastergrad 2 \u00e5r) MSNARM", 
+        "id": "MSNARM", 
+        "name": "Natural Resources Management", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Naturfagdidaktikk (Mastergrad 2 \u00e5r) MDID-NATURFAG", 
+        "id": "MDID-NATURFAG", 
+        "name": "Naturfagdidaktikk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Nautikk (Bachelor) 353MN", 
+        "id": "353MN", 
+        "name": "Nautikk", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Nautiske operasjoner (Ph.d.) PHNAUT", 
+        "id": "PHNAUT", 
+        "name": "Nautiske operasjoner", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Naval Architecture (Mastergrad 2 \u00e5r) 850MD", 
+        "id": "850MD", 
+        "name": "Naval Architecture", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Neuroscience (Mastergrad 2 \u00e5r) MSNEUR", 
+        "id": "MSNEUR", 
+        "name": "Neuroscience", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Nordisk og litteraturvitenskap (Bachelor) BNORDLIT", 
+        "id": "BNORDLIT", 
+        "name": "Nordisk og litteraturvitenskap", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Nordisk spr\u00e5k og litteratur (Mastergrad 2 \u00e5r) MNORD", 
+        "id": "MNORD", 
+        "name": "Nordisk spr\u00e5k og litteratur", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Nordisk spr\u00e5k og litteratur (\u00c5rsstudium) \u00c5NORD", 
+        "id": "\u00c5NORD", 
+        "name": "Nordisk spr\u00e5k og litteratur", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Nordisk spr\u00e5k og litteratur og norsk som andrespr\u00e5k (Bachelor) BNORDISK", 
+        "id": "BNORDISK", 
+        "name": "Nordisk spr\u00e5k og litteratur og norsk som andrespr\u00e5k", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Norsk for utlendinger (Halv\u00e5rsstudium og kortere) NFUT", 
+        "id": "NFUT", 
+        "name": "Norsk for utlendinger", 
+        "studylevel": "Halv\u00e5rsstudium og kortere"
+    }, 
+    {
+        "disp_name": "Norsk som andrespr\u00e5k (Bachelor) BNORSK", 
+        "id": "BNORSK", 
+        "name": "Norsk som andrespr\u00e5k", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Norsk tegnspr\u00e5k (Bachelor) LTBATGTOLK", 
+        "id": "LTBATGTOLK", 
+        "name": "Norsk tegnspr\u00e5k", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Norskdidaktikk (Mastergrad 2 \u00e5r) MDID-NORSK", 
+        "id": "MDID-NORSK", 
+        "name": "Norskdidaktikk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Ocean Resources (Mastergrad 2 \u00e5r) MSOCEAN", 
+        "id": "MSOCEAN", 
+        "name": "Ocean Resources", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Operasjonssykepleie (Videreutdanning h\u00f8yere grad) VOSP", 
+        "id": "VOSP", 
+        "name": "Operasjonssykepleie", 
+        "studylevel": "Videreutdanning h\u00f8yere grad"
+    }, 
+    {
+        "disp_name": "Operativ maritim ledelse (Mastergrad 2 \u00e5r) MLAKMO", 
+        "id": "MLAKMO", 
+        "name": "Operativ maritim ledelse", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Operativ maritim ledelse (Erfaringsbasert master) 830MDO", 
+        "id": "830MDO", 
+        "name": "Operativ maritim ledelse", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "Organisasjon og ledelse (Erfaringsbasert master) MORG", 
+        "id": "MORG", 
+        "name": "Organisasjon og ledelse", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "Organisasjon, digitalisering, administrasjon og arbeid (Mastergrad 2 \u00e5r) MODAA", 
+        "id": "MODAA", 
+        "name": "Organisasjon, digitalisering, administrasjon og arbeid", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Palliativ omsorg  (Videreutdanning h\u00f8yere grad) VPALLIATIV", 
+        "id": "VPALLIATIV", 
+        "name": "Palliativ omsorg ", 
+        "studylevel": "Videreutdanning h\u00f8yere grad"
+    }, 
+    {
+        "disp_name": "Paramedisin (Bachelor) BPARAMED", 
+        "id": "BPARAMED", 
+        "name": "Paramedisin", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Pedagogikk (Mastergrad 2 \u00e5r) MPED", 
+        "id": "MPED", 
+        "name": "Pedagogikk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Pedagogikk (\u00c5rsstudium) \u00c5PED", 
+        "id": "\u00c5PED", 
+        "name": "Pedagogikk", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Pedagogikk (Bachelor) BPED", 
+        "id": "BPED", 
+        "name": "Pedagogikk", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Pedagogikk for l\u00e6rere (Erfaringsbasert master) MPEDL\u00c6R", 
+        "id": "MPEDL\u00c6R", 
+        "name": "Pedagogikk for l\u00e6rere", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "Pedagogisk-psykologisk r\u00e5dgivning (Erfaringsbasert master) MPPR", 
+        "id": "MPPR", 
+        "name": "Pedagogisk-psykologisk r\u00e5dgivning", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "Petroleum Engineering (Mastergrad 2 \u00e5r) MSG1", 
+        "id": "MSG1", 
+        "name": "Petroleum Engineering", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Petroleum Geosciences (Mastergrad 2 \u00e5r) MSG2", 
+        "id": "MSG2", 
+        "name": "Petroleum Geosciences", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Petroleumsfag (Master - 5 \u00e5r) MTPETR", 
+        "id": "MTPETR", 
+        "name": "Petroleumsfag", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Physical Activity and Health (Mastergrad 2 \u00e5r) MSPAHE", 
+        "id": "MSPAHE", 
+        "name": "Physical Activity and Health", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Physics (Mastergrad 2 \u00e5r) MSPHYS", 
+        "id": "MSPHYS", 
+        "name": "Physics", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Polymer Technology (Mastergrad 2 \u00e5r) MSPOLYTECH", 
+        "id": "MSPOLYTECH", 
+        "name": "Polymer Technology", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Praktisk-pedagogisk utdanning - heltid (Praktisk pedagogisk utdanning) PRPED", 
+        "id": "PRPED", 
+        "name": "Praktisk-pedagogisk utdanning - heltid", 
+        "studylevel": "Praktisk pedagogisk utdanning"
+    }, 
+    {
+        "disp_name": "Product and System Design  (Mastergrad 2 \u00e5r) 840MD", 
+        "id": "840MD", 
+        "name": "Product and System Design ", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Produktdesign og teknologi (\u00c5rsstudium) \u00c5RTEK", 
+        "id": "\u00c5RTEK", 
+        "name": "Produktdesign og teknologi", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Produktdesign og teknologi (Bachelor) BTEKD", 
+        "id": "BTEKD", 
+        "name": "Produktdesign og teknologi", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Produktutvikling og produksjon (Master - 5 \u00e5r) MTPROD", 
+        "id": "MTPROD", 
+        "name": "Produktutvikling og produksjon", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Produktutvikling og produksjon (Mastergrad 2 \u00e5r) MIPROD", 
+        "id": "MIPROD", 
+        "name": "Produktutvikling og produksjon", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Programmering (Bachelor) BPROG", 
+        "id": "BPROG", 
+        "name": "Programmering", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Project Management (Mastergrad 2 \u00e5r) MSPROMAN", 
+        "id": "MSPROMAN", 
+        "name": "Project Management", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Psykisk helse (Erfaringsbasert master) MPHLS", 
+        "id": "MPHLS", 
+        "name": "Psykisk helse", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "Psykisk helsearbeid (Videreutdanning h\u00f8yere grad) SPVPH1", 
+        "id": "SPVPH1", 
+        "name": "Psykisk helsearbeid", 
+        "studylevel": "Videreutdanning h\u00f8yere grad"
+    }, 
+    {
+        "disp_name": "Psykologi (Bachelor) BPSY", 
+        "id": "BPSY", 
+        "name": "Psykologi", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Psykologi (Mastergrad 2 \u00e5r) MPSY", 
+        "id": "MPSY", 
+        "name": "Psykologi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Psykologi (\u00c5rsstudium) \u00c5PSY", 
+        "id": "\u00c5PSY", 
+        "name": "Psykologi", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Psykologutdanning (Profesjonsstudium) CPSYR", 
+        "id": "CPSYR", 
+        "name": "Psykologutdanning", 
+        "studylevel": "Profesjonsstudium"
+    }, 
+    {
+        "disp_name": "Psykologutdanning, 6-\u00e5rig l\u00f8p (Profesjonsstudium) CPSY6", 
+        "id": "CPSY6", 
+        "name": "Psykologutdanning, 6-\u00e5rig l\u00f8p", 
+        "studylevel": "Profesjonsstudium"
+    }, 
+    {
+        "disp_name": "Psykososialt arbeid med barn og unge (Videreutdanning h\u00f8yere grad) HSVPABU", 
+        "id": "HSVPABU", 
+        "name": "Psykososialt arbeid med barn og unge", 
+        "studylevel": "Videreutdanning h\u00f8yere grad"
+    }, 
+    {
+        "disp_name": "Public Administration (Erfaringsbasert master) \u00d8AMPA3", 
+        "id": "\u00d8AMPA3", 
+        "name": "Public Administration", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "Radiografi (Bachelor) BRADIO", 
+        "id": "BRADIO", 
+        "name": "Radiografi", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Realfagskurs 1/2 \u00e5rig (Forpr\u00f8ve/forkurs) FTREALFAG", 
+        "id": "FTREALFAG", 
+        "name": "Realfagskurs 1/2 \u00e5rig", 
+        "studylevel": "Forpr\u00f8ve/forkurs"
+    }, 
+    {
+        "disp_name": "Regnskap og revisjon (Mastergrad 2 \u00e5r) MRR", 
+        "id": "MRR", 
+        "name": "Regnskap og revisjon", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Reliability, Availability, Maintainability and Safety (RAMS) (Mastergrad 2 \u00e5r) MSRAMS", 
+        "id": "MSRAMS", 
+        "name": "Reliability, Availability, Maintainability and Safety (RAMS)", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Religionsvitenskap (Mastergrad 2 \u00e5r) MRVI", 
+        "id": "MRVI", 
+        "name": "Religionsvitenskap", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Religionsvitenskap (\u00c5rsstudium) \u00c5RVI", 
+        "id": "\u00c5RVI", 
+        "name": "Religionsvitenskap", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Religionsvitenskap (Bachelor) BRVI", 
+        "id": "BRVI", 
+        "name": "Religionsvitenskap", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Renewable Energy in the Marine Environment (Mastergrad 2 \u00e5r) MSREM", 
+        "id": "MSREM", 
+        "name": "Renewable Energy in the Marine Environment", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "R\u00e5dgivning for barn og ungdom (Erfaringsbasert master) MR\u00c5DBU", 
+        "id": "MR\u00c5DBU", 
+        "name": "R\u00e5dgivning for barn og ungdom", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "R\u00e5dgivning og voksnes l\u00e6ring (Bachelor) BRVL", 
+        "id": "BRVL", 
+        "name": "R\u00e5dgivning og voksnes l\u00e6ring", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "R\u00e5dgivningsvitenskap (Mastergrad 2 \u00e5r) MR\u00c5DG", 
+        "id": "MR\u00c5DG", 
+        "name": "R\u00e5dgivningsvitenskap", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Samfunns- og idrettsvitenskap (Bachelor) BSAMIDR", 
+        "id": "BSAMIDR", 
+        "name": "Samfunns- og idrettsvitenskap", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Samfunnsfagdidaktikk (Mastergrad 2 \u00e5r) MDID-SAMFUNNSFAG", 
+        "id": "MDID-SAMFUNNSFAG", 
+        "name": "Samfunnsfagdidaktikk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Samfunnsvitenskap (Ph.d.) PHSV", 
+        "id": "PHSV", 
+        "name": "Samfunnsvitenskap", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Samfunns\u00f8konomi (Bachelor) BS\u00d8K", 
+        "id": "BS\u00d8K", 
+        "name": "Samfunns\u00f8konomi", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Samfunns\u00f8konomi (Master - 5 \u00e5r) MS\u00d8K/5", 
+        "id": "MS\u00d8K/5", 
+        "name": "Samfunns\u00f8konomi", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Samfunns\u00f8konomi (\u00c5rsstudium) \u00c5S\u00d8K", 
+        "id": "\u00c5S\u00d8K", 
+        "name": "Samfunns\u00f8konomi", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Samfunns\u00f8konomi (Mastergrad 2 \u00e5r) MS\u00d8K", 
+        "id": "MS\u00d8K", 
+        "name": "Samfunns\u00f8konomi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Security and Cloud Computing (Mastergrad 2 \u00e5r) MSSECCLO", 
+        "id": "MSSECCLO", 
+        "name": "Security and Cloud Computing", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Shipping management (Bachelor) 432SM", 
+        "id": "432SM", 
+        "name": "Shipping management", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Skipsdesign, ingeni\u00f8r (Bachelor) 699SD", 
+        "id": "699SD", 
+        "name": "Skipsdesign, ingeni\u00f8r", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Skoleutvikling og utdanningsledelse (Erfaringsbasert master) MSKOLUT", 
+        "id": "MSKOLUT", 
+        "name": "Skoleutvikling og utdanningsledelse", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "Smerte og palliasjon (Mastergrad 2 \u00e5r) MKLIHELSP", 
+        "id": "MKLIHELSP", 
+        "name": "Smerte og palliasjon", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Sosialantropologi (Mastergrad 2 \u00e5r) MSANT", 
+        "id": "MSANT", 
+        "name": "Sosialantropologi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Sosialantropologi (Bachelor) BSANT", 
+        "id": "BSANT", 
+        "name": "Sosialantropologi", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Sosialantropologi (\u00c5rsstudium) \u00c5SANT", 
+        "id": "\u00c5SANT", 
+        "name": "Sosialantropologi", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Sosialt arbeid (Mastergrad 2 \u00e5r) MSARB", 
+        "id": "MSARB", 
+        "name": "Sosialt arbeid", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Sosialt arbeid (sosionom) (Bachelor) HSGSOB", 
+        "id": "HSGSOB", 
+        "name": "Sosialt arbeid (sosionom)", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Sosiologi (Bachelor) BSOS", 
+        "id": "BSOS", 
+        "name": "Sosiologi", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Sosiologi (Mastergrad 2 \u00e5r) MSOS", 
+        "id": "MSOS", 
+        "name": "Sosiologi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Sosiologi (\u00c5rsstudium) \u00c5SOS", 
+        "id": "\u00c5SOS", 
+        "name": "Sosiologi", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Spansk (Bachelor) BSPANSK", 
+        "id": "BSPANSK", 
+        "name": "Spansk", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Spansk (\u00c5rsstudium) \u00c5SPANSK", 
+        "id": "\u00c5SPANSK", 
+        "name": "Spansk", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Spesialpedagogikk (Mastergrad 2 \u00e5r) MSPED", 
+        "id": "MSPED", 
+        "name": "Spesialpedagogikk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Spesialpedagogikk (Erfaringsbasert master) MPRSPED", 
+        "id": "MPRSPED", 
+        "name": "Spesialpedagogikk", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "Spr\u00e5kvitenskap (Ph.d.) PHSPR\u00c5K", 
+        "id": "PHSPR\u00c5K", 
+        "name": "Spr\u00e5kvitenskap", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Statsvitenskap (Bachelor) BPOL", 
+        "id": "BPOL", 
+        "name": "Statsvitenskap", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Statsvitenskap (Mastergrad 2 \u00e5r) MPOL", 
+        "id": "MPOL", 
+        "name": "Statsvitenskap", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Statsvitenskap (\u00c5rsstudium) \u00c5POL", 
+        "id": "\u00c5POL", 
+        "name": "Statsvitenskap", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Sustainable Architecture (Mastergrad 2 \u00e5r) MSSUSARC", 
+        "id": "MSSUSARC", 
+        "name": "Sustainable Architecture", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Sustainable Chemistry and Biochemical Engineering (Mastergrad 2 \u00e5r) MSCHEMBI", 
+        "id": "MSCHEMBI", 
+        "name": "Sustainable Chemistry and Biochemical Engineering", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Sustainable Energy (Mastergrad 2 \u00e5r) MSSE", 
+        "id": "MSSE", 
+        "name": "Sustainable Energy", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Sustainable Manufacturing (Mastergrad 2 \u00e5r) MSUMA", 
+        "id": "MSUMA", 
+        "name": "Sustainable Manufacturing", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Sykepleie (Bachelor) BSPL", 
+        "id": "BSPL", 
+        "name": "Sykepleie", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Sykepleie (Bachelor) BSPLD", 
+        "id": "BSPLD", 
+        "name": "Sykepleie", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Technology Management (Erfaringsbasert master) MTS", 
+        "id": "MTS", 
+        "name": "Technology Management", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "Tegnspr\u00e5k (\u00c5rsstudium) LTTEGN", 
+        "id": "LTTEGN", 
+        "name": "Tegnspr\u00e5k", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Teknisk kybernetikk (Ph.d.) PHTK", 
+        "id": "PHTK", 
+        "name": "Teknisk kybernetikk", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Tekniske geofag (Master - 5 \u00e5r) MTTEKGEO", 
+        "id": "MTTEKGEO", 
+        "name": "Tekniske geofag", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "Teknologiledelse og digital omstilling (Erfaringsbasert master) MTDO", 
+        "id": "MTDO", 
+        "name": "Teknologiledelse og digital omstilling", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "Tradisjonelt bygghandverk (Bachelor) FTTRADBYGG", 
+        "id": "FTTRADBYGG", 
+        "name": "Tradisjonelt bygghandverk", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Tverrfaglige kulturstudier (Ph.d.) PHKULT", 
+        "id": "PHKULT", 
+        "name": "Tverrfaglige kulturstudier", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Tysk (Mastergrad 2 \u00e5r) MTYSK", 
+        "id": "MTYSK", 
+        "name": "Tysk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Tysk (\u00c5rsstudium) \u00c5TYSK", 
+        "id": "\u00c5TYSK", 
+        "name": "Tysk", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Tysk (Bachelor) BTYSK", 
+        "id": "BTYSK", 
+        "name": "Tysk", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Undervannsteknologi (Mastergrad 2 \u00e5r) MIUVT", 
+        "id": "MIUVT", 
+        "name": "Undervannsteknologi", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Urban Ecological Planning (Mastergrad 2 \u00e5r) MSA1", 
+        "id": "MSA1", 
+        "name": "Urban Ecological Planning", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Utdanning og oppvekst (Mastergrad 2 \u00e5r) MUTDANNOPP", 
+        "id": "MUTDANNOPP", 
+        "name": "Utdanning og oppvekst", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Utdanningsvitenskap (Ph.d.) PHUV", 
+        "id": "PHUV", 
+        "name": "Utdanningsvitenskap", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "Veg og jernbane (Erfaringsbasert master) MVEGJERNB", 
+        "id": "MVEGJERNB", 
+        "name": "Veg og jernbane", 
+        "studylevel": "Erfaringsbasert master"
+    }, 
+    {
+        "disp_name": "Vernepleie (Bachelor) HSGVEB", 
+        "id": "HSGVEB", 
+        "name": "Vernepleie", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Videreutdanning i magnetisk resonans deltid (Videreutdanning h\u00f8yere grad) MTVMRDEL", 
+        "id": "MTVMRDEL", 
+        "name": "Videreutdanning i magnetisk resonans deltid", 
+        "studylevel": "Videreutdanning h\u00f8yere grad"
+    }, 
+    {
+        "disp_name": "Videreutdanning i ultralyd av hjerte og kar (Videreutdanning h\u00f8yere grad) FTVIDULTRA", 
+        "id": "FTVIDULTRA", 
+        "name": "Videreutdanning i ultralyd av hjerte og kar", 
+        "studylevel": "Videreutdanning h\u00f8yere grad"
+    }, 
+    {
+        "disp_name": "Webdesign (\u00c5rsstudium) \u00c5RWEB", 
+        "id": "\u00c5RWEB", 
+        "name": "Webdesign", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "Webutvikling (Bachelor) BWU", 
+        "id": "BWU", 
+        "name": "Webutvikling", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "Wind Energy (Mastergrad 2 \u00e5r) MSWIND", 
+        "id": "MSWIND", 
+        "name": "Wind Energy", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Yrkesdidaktikk (Mastergrad 2 \u00e5r) MDID-YRKE", 
+        "id": "MDID-YRKE", 
+        "name": "Yrkesdidaktikk", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "Yrkesfagl\u00e6rerutdanning (Bachelor) BYRK", 
+        "id": "BYRK", 
+        "name": "Yrkesfagl\u00e6rerutdanning", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "\u00c5rsstudium i medisinsk og biologisk kjemi (\u00c5rsstudium) \u00c5MEDBIO", 
+        "id": "\u00c5MEDBIO", 
+        "name": "\u00c5rsstudium i medisinsk og biologisk kjemi", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "\u00d8konomi og administrasjon (Bachelor) B\u00d8A", 
+        "id": "B\u00d8A", 
+        "name": "\u00d8konomi og administrasjon", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "\u00d8konomi og administrasjon (\u00c5rsstudium) \u00c5R\u00d8KLED", 
+        "id": "\u00c5R\u00d8KLED", 
+        "name": "\u00d8konomi og administrasjon", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "\u00d8konomi og administrasjon (Master - 5 \u00e5r) MSIV\u00d8K5", 
+        "id": "MSIV\u00d8K5", 
+        "name": "\u00d8konomi og administrasjon", 
+        "studylevel": "Master - 5 \u00e5r"
+    }, 
+    {
+        "disp_name": "\u00d8konomi og administrasjon (\u00c5rsstudium) \u00c5\u00d8KADM", 
+        "id": "\u00c5\u00d8KADM", 
+        "name": "\u00d8konomi og administrasjon", 
+        "studylevel": "\u00c5rsstudium"
+    }, 
+    {
+        "disp_name": "\u00d8konomi og administrasjon (Mastergrad 2 \u00e5r) \u00d8AMSC", 
+        "id": "\u00d8AMSC", 
+        "name": "\u00d8konomi og administrasjon", 
+        "studylevel": "Mastergrad 2 \u00e5r"
+    }, 
+    {
+        "disp_name": "\u00d8konomi og administrasjon, deltid (Bachelor) B\u00d8KLED-F", 
+        "id": "B\u00d8KLED-F", 
+        "name": "\u00d8konomi og administrasjon, deltid", 
+        "studylevel": "Bachelor"
+    }, 
+    {
+        "disp_name": "\u00d8konomi og ledelse (Ph.d.) PHOL", 
+        "id": "PHOL", 
+        "name": "\u00d8konomi og ledelse", 
+        "studylevel": "Ph.d."
+    }, 
+    {
+        "disp_name": "\u00d8konomi og ledelse (\u00c5rsstudium) 162AL", 
+        "id": "162AL", 
+        "name": "\u00d8konomi og ledelse", 
+        "studylevel": "\u00c5rsstudium"
+    }
+]
