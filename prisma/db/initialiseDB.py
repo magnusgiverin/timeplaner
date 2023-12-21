@@ -1,111 +1,178 @@
-import sqlite3
+import requests
 import json 
+import sqlite3
 
-# Connect to the SQLite database (creates a new one if it doesn't exist)
-conn = sqlite3.connect('prisma/db.sqlite')
+def updatePrograms():
+    data_dict = {"en": {}, "no": {}}
+    
+    # URL for the English cURL request
+    url_en = "https://www.ntnu.edu/web/studies/allstudies?p_p_id=studyprogrammelistportlet_WAR_studyprogrammelistportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=searchStudies&p_p_cacheability=cacheLevelPage"
+    
+    # Perform cURL request for English
+    response_en = requests.get(url_en)
 
-# Create a cursor object to execute SQL queries
-cursor = conn.cursor()
+    if response_en.status_code == 200:
+        data_dict["en"] = response_en.json()
+        print("English data saved to 'programs.json'")
+    else:
+        print(f"Failed to fetch English data. Status code: {response_en.status_code}")
 
-# Clear the Program table
-cursor.execute('DELETE FROM Program')
+    # URL for the Norwegian cURL request
+    url_no = "https://www.ntnu.no/web/studier/alle?p_p_id=studyprogrammelistportlet_WAR_studyprogrammelistportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=searchStudies&p_p_cacheability=cacheLevelPage"
+    
+    # Perform cURL request for Norwegian
+    response_no = requests.get(url_no)
+    
+    # Check if the request was successful (status code 200)
+    if response_no.status_code == 200:
+        data_dict["no"] = response_no.json()
+        print("Norwegian data saved to 'programs.json'")
+    else:
+        print(f"Failed to fetch Norwegian data. Status code: {response_no.status_code}")
 
-# Open the JSON file for reading
-with open('prisma/db/programs.json', 'r') as json_file:
-    # Load the JSON data from the file
-    programs = json.load(json_file)
+    # Save the response content to a JSON file
+    with open("prisma/db/programs.json", "w", encoding="utf-8") as file:
+        json.dump(data_dict, file, indent=2, ensure_ascii=False)
 
-for program in programs:
-    # Insert the data into the Program table
-    cursor.execute('''
-        INSERT INTO Program (programId, disp_name, name, study_level)
-        VALUES (:id, :disp_name, :name, :studylevel)
-    ''', program)
+def initialisePrograms():
+    # Connect to the SQLite database (creates a new one if it doesn't exist)
+    conn = sqlite3.connect('prisma/db.sqlite')
 
-# Commit the changes for the Program table
-conn.commit()
-# Clear the Course table
-cursor.execute('DELETE FROM Course')
+    # Create a cursor object to execute SQL queries
+    cursor = conn.cursor()
 
-# Open the JSON file for reading
-with open('prisma/db/courses.json', 'r') as json_file:
-    # Load the JSON data from the file
-    courses = json.load(json_file)
+    # Clear the Program table
+    cursor.execute('DELETE FROM Program')
 
-for course in courses:
-    # Check if the course already exists
-    cursor.execute("SELECT COUNT(*) FROM Course WHERE courseId = :id", {"id": course["id"]})
-    existing_count = cursor.fetchone()[0]
+    # Open the JSON file for reading
+    with open('prisma/db/programs.json', 'r') as json_file:
+        # Load the JSON data from the file
+        programs = json.load(json_file)
 
-    if existing_count == 0:
-        # Insert the data into the Course table
-        cursor.execute('''
-            INSERT INTO Course (
-                courseId,
-                name,
-                ownerid,
-                showtype,
-                detailtype,
-                name_en,
-                name_nn,
-                coursetype,
-                tpsort,
-                showdiscipline,
-                campusid,
-                yearfrom_und,
-                seasonfrom_und,
-                yearto_und,
-                seasonto_und,
-                yearfrom_ex,
-                seasonfrom_ex,
-                yearto_ex,
-                seasonto_ex,
-                departmentid_secondary,
-                create_activity_zoom,
-                authorized_netgroups,
-                tpn_copy_daytime,
-                nofterms,
-                terminnr,
-                fullname,
-                fullname_en,
-                fullname_nn,
-                idtermin
-            )
-            VALUES (
-                :id,
-                :name,
-                :ownerid,
-                :showtype,
-                :detailtype,
-                :name_en,
-                :name_nn,
-                :coursetype,
-                :tpsort,
-                :showdiscipline,
-                :campusid,
-                :yearfrom_und,
-                :seasonfrom_und,
-                :yearto_und,
-                :seasonto_und,
-                :yearfrom_ex,
-                :seasonfrom_ex,
-                :yearto_ex,
-                :seasonto_ex,
-                :departmentid_secondary,
-                :create_activity_zoom,
-                :authorized_netgroups,
-                :tpn_copy_daytime,
-                :nofterms,
-                :terminnr,
-                :fullname,
-                :fullname_en,
-                :fullname_nn,
-                :idtermin
-            )
-        ''', course)
+    for language in programs:
+        for program in programs[language]["docs"]:
+            # Insert the data into the Program table
+            cursor.execute('''
+                INSERT INTO Program (
+                    programId,
+                    title,
+                    studyprogCode,
+                    studyprogName,
+                    studyprogStudyLevel,
+                    studyprogStudyLevelCode
+                )
+                VALUES (
+                    :id,
+                    :title,
+                    :studyprogCode,
+                    :studyprogName,
+                    :studyprogStudyLevel,
+                    :studyprogStudyLevelCode
+                )
+            ''', program)
 
-# Commit the changes for the Course table
-conn.commit()
+    # Commit the changes
+    conn.commit()
 
-# Close the connection
-conn.close()
+    # Close the connection
+    conn.close()
+
+def initialiseCourses():
+    # Connect to the SQLite database (creates a new one if it doesn't exist)
+    conn = sqlite3.connect('prisma/db.sqlite')
+
+    # Create a cursor object to execute SQL queries
+    cursor = conn.cursor()
+
+    # Clear the Program table
+    cursor.execute('DELETE FROM Course')
+    
+    # Open the JSON file for reading
+    with open('prisma/db/courses.json', 'r') as json_file:
+        # Load the JSON data from the file
+        courses = json.load(json_file)
+
+    for course in courses:
+        # Check if the course already exists
+        cursor.execute("SELECT COUNT(*) FROM Course WHERE courseId = :id", {"id": course["id"]})
+        existing_count = cursor.fetchone()[0]
+
+        if existing_count == 0:
+            # Insert the data into the Course table
+            cursor.execute('''
+                INSERT INTO Course (
+                    courseId,
+                    name,
+                    ownerid,
+                    showtype,
+                    detailtype,
+                    name_en,
+                    name_nn,
+                    coursetype,
+                    tpsort,
+                    showdiscipline,
+                    campusid,
+                    yearfrom_und,
+                    seasonfrom_und,
+                    yearto_und,
+                    seasonto_und,
+                    yearfrom_ex,
+                    seasonfrom_ex,
+                    yearto_ex,
+                    seasonto_ex,
+                    departmentid_secondary,
+                    create_activity_zoom,
+                    authorized_netgroups,
+                    tpn_copy_daytime,
+                    nofterms,
+                    terminnr,
+                    fullname,
+                    fullname_en,
+                    fullname_nn,
+                    idtermin
+                )
+                VALUES (
+                    :id,
+                    :name,
+                    :ownerid,
+                    :showtype,
+                    :detailtype,
+                    :name_en,
+                    :name_nn,
+                    :coursetype,
+                    :tpsort,
+                    :showdiscipline,
+                    :campusid,
+                    :yearfrom_und,
+                    :seasonfrom_und,
+                    :yearto_und,
+                    :seasonto_und,
+                    :yearfrom_ex,
+                    :seasonfrom_ex,
+                    :yearto_ex,
+                    :seasonto_ex,
+                    :departmentid_secondary,
+                    :create_activity_zoom,
+                    :authorized_netgroups,
+                    :tpn_copy_daytime,
+                    :nofterms,
+                    :terminnr,
+                    :fullname,
+                    :fullname_en,
+                    :fullname_nn,
+                    :idtermin
+                )
+            ''', course)
+
+    # Commit the changes for the Course table
+    conn.commit()
+
+    # Close the connection
+    conn.close()
+
+def main():
+    updatePrograms()
+    initialisePrograms()
+    initialiseCourses()
+
+main()

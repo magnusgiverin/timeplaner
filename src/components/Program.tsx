@@ -1,35 +1,48 @@
-// components/Program.
-import React from 'react';
-import { Program as ProgramType } from "~/interfaces/Program";
+// components/Program.tsx
+import React, { useState } from 'react';
+import { Program as ProgramType } from "~/interfaces/ProgramData";
 
-// Define the type for the selectedCourse object
 interface ProgramProps {
   selectedProgram: ProgramType;
+  onButtonIndexChange: (index: number) => void; // Callback function type
 }
 
-const Program: React.FC<ProgramProps> = ({ selectedProgram }) => {
-  // Determine the number of buttons based on the "study_level" attribute
+const Program: React.FC<ProgramProps> = ({ selectedProgram, onButtonIndexChange }) => {
   const numberOfButtons =
-    selectedProgram.study_level === 'Mastergrad 2 år' ? 2 :
-    selectedProgram.study_level === 'Bachelor' ? 3 :
-    selectedProgram.study_level === 'Master - 5 år' ? 5 :
+    selectedProgram.studyprogStudyLevelCode === 580.0 ? 2 :
+    selectedProgram.studyprogStudyLevelCode === 390.0 ? 3 :
+    selectedProgram.studyprogStudyLevelCode === 590.0 ? 5 :
     1;
 
-  // Create an array of button elements based on the determined number
+  const [selectedButtonIndex, setSelectedButtonIndex] = useState<number>(0);
+
+  const handleButtonClick = (index: number) => {
+    setSelectedButtonIndex(index);
+    onButtonIndexChange(index); // Invoke the callback function
+    // Add more logic as needed when a button is clicked
+  };
+
   const buttons = Array.from({ length: numberOfButtons }, (_, index) => (
-    <button key={index} className="bg-blue-500 text-white px-10 py-3 m-5 rounded-xl">
+    <button
+      key={index}
+      className={`px-6 py-3 m-2 rounded-xl ${
+        selectedButtonIndex === index ? 'bg-blue-700 text-white' : 'bg-blue-500 text-white'
+      }`}
+      onClick={() => handleButtonClick(index)}
+    >
       Year {index + 1}
     </button>
   ));
-
+  
   return (
     <div>
-      <h2 className="flex font-bold text-5xl">{selectedProgram.programId}</h2>
-      {/* Render the buttons */}
-      <div className="flex">{buttons}</div>
-      {/* Add more properties as needed */}
+      <h2 className="flex justify-center mt-10">{selectedProgram.studyprogCode}</h2>
+      <div className="flex-wrap">
+        {buttons}
+      </div>
     </div>
   );
-};
+}
 
 export default Program;
+  

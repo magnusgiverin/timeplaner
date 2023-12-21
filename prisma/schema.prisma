@@ -10,20 +10,13 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    @@index([name])
-}
-
 model Program {
-    programId   String  @id
-    disp_name   String
-    name        String
-    study_level String 
+    programId               String         @id
+    title                   String
+    studyprogCode           String
+    studyprogName           String
+    studyprogStudyLevel     String     
+    studyprogStudyLevelCode Float      
 
     @@index([programId])
 }
@@ -60,4 +53,11 @@ model Course {
     idtermin                String?
 
     @@index([courseId])
+}
+
+model StudyPlan {
+    studyPlanId     String  @id
+    json_data       String
+
+    @@index([studyPlanId])
 }

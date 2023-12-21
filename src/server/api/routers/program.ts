@@ -1,4 +1,4 @@
-import { Program } from "~/interfaces/Program";
+import { Program } from "~/interfaces/ProgramData";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export const programRouter = createTRPCRouter({
@@ -21,5 +21,21 @@ export const programRouter = createTRPCRouter({
     }
 
     return program;
-  })
-});
+  }),
+
+  programListByLang: publicProcedure.input(String).query(async (opts) => {
+    if (!opts.input) {
+      throw new Error("Input is missing.");
+    }
+  
+    const programs = await opts.ctx.db.program.findMany({
+      where: { programId: { endsWith: opts.input } },
+    });
+  
+    if (!programs || programs.length === 0) {
+      throw new Error("Programs not found");
+    }
+  
+    return programs;
+  })  
+})
