@@ -3,7 +3,48 @@ export interface StudyPlan {
     json_data: string;
 }
 
-export interface Subject {
+export interface JsonData {
+    publisedYears: number[];
+    settings: Settings;
+    studyplan: EmbeddedStudyPlan;
+    directions: DirectionList[];
+}
+
+interface DirectionList {
+    code: string;
+    directionList: CourseInStudyPlan[];
+    name: string;
+    period: number;
+    studyDirection: string;
+    studyDirectionDesignationCode: string;
+    studyDirectionDesignationName: string;
+}
+
+interface Settings {
+    programCode: string;
+    year: string;
+}
+
+interface EmbeddedStudyPlan {
+    code: string;
+    name: string;
+    startTerm: string;
+    studyPeriods: StudyPeriod[];
+}
+
+export interface StudyPeriod {
+    direction: StudyDirection;
+    periodNumber: number;
+}
+
+export interface StudyDirection {
+    code: string;
+    courseGroups: CourseGroup[];
+    name: string;
+    studyWaypoints: StudyWayPoint[]; 
+}
+
+export interface CourseInStudyPlan {
     code: string;
     credit: string;
     name: string;
@@ -17,13 +58,20 @@ export interface StudyChoice {
     name: string;
 }
 
-export interface StudyDirection {
+export interface CourseGroup {
     code: string;
-    courseGroups: CourseGroup[];
+    courses: CourseInStudyPlan[];
     name: string;
 }
 
-export interface CourseGroup {
+export interface CourseCollection {
     code: string;
-    courses: Subject[];
+    courses: CourseInStudyPlan[];
+    name: string;
+}
+
+export interface StudyWayPoint {
+    code: string;
+    name: string;
+    studyDirections: StudyDirection[];
 }

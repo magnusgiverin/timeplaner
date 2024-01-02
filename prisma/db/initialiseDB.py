@@ -7,7 +7,6 @@ def updatePrograms():
     
     # URL for the English cURL request
     url_en = "https://www.ntnu.edu/web/studies/allstudies?p_p_id=studyprogrammelistportlet_WAR_studyprogrammelistportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=searchStudies&p_p_cacheability=cacheLevelPage"
-    
     # Perform cURL request for English
     response_en = requests.get(url_en)
 
@@ -33,6 +32,34 @@ def updatePrograms():
     # Save the response content to a JSON file
     with open("prisma/db/programs.json", "w", encoding="utf-8") as file:
         json.dump(data_dict, file, indent=2, ensure_ascii=False)
+
+def updateCourses():
+    import requests
+    import re
+    import json
+
+    url = "https://tp.educloud.no/ntnu/timeplan/emner.php"
+
+    # Make a GET request
+    response = requests.get(url)
+
+    # Parse the "courses" variable from the response content using regular expressions
+    matches = re.search(r'var courses = (\[.*?\]);', response.text, re.DOTALL)
+
+    if matches:
+        # Extracted content of the "courses" variable
+        courses_data = matches.group(1)
+
+        # Convert the string to a Python object (list of dictionaries)
+        courses_list = json.loads(courses_data)
+
+        # Save the JSON data to a file
+        with open("prisma/courses.json", "w") as json_file:
+            json.dump(courses_list, json_file, indent=2)
+
+        print("Courses Data saved to 'courses.json'")
+    else:
+        print("No matches found")
 
 def initialisePrograms():
     # Connect to the SQLite database (creates a new one if it doesn't exist)
@@ -171,6 +198,7 @@ def initialiseCourses():
     conn.close()
 
 def main():
+    updateCourses()
     updatePrograms()
     initialisePrograms()
     initialiseCourses()

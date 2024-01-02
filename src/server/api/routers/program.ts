@@ -12,8 +12,8 @@ export const programRouter = createTRPCRouter({
       throw new Error("Input is missing.");
     }
 
-    const program = await opts.ctx.db.program.findUnique({
-      where: { programId: opts.input },
+    const program = await opts.ctx.db.program.findFirst({
+      where: { studyprogCode: opts.input },
     }) as Program | null;
 
     if (!program) {

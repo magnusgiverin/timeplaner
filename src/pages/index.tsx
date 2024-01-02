@@ -1,5 +1,5 @@
 
-import Layout from "~/components/Layout";
+import Layout from "~/components/General/Layout";
 import Welcome from "~/views/WelcomeView";
 import Search from "~/views/SearchView";
 
