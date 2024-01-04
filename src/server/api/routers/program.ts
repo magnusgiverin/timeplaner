@@ -31,7 +31,9 @@ export const programRouter = createTRPCRouter({
     const programs = await opts.ctx.db.program.findMany({
       where: { programId: { endsWith: opts.input } },
     });
-  
+    
+    console.log(programs);
+    
     if (!programs || programs.length === 0) {
       throw new Error("Programs not found");
     }

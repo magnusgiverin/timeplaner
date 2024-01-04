@@ -3,13 +3,14 @@ import GreenButton from '../General/GreenButton';
 import { api } from '~/utils/api';
 import { Course } from '~/interfaces/CourseData';
 import Select, { ActionMeta, PropsValue, SingleValue } from 'react-select';
+import { DetailedCourse } from '../SelectPage/DisplayCourses';
 
 interface ToolboxProps {
     onConfirm: () => void;
     onSearch: (course: Course) => void; // Add the course parameter
     onToggleShowAll: () => void;
     season: string;
-    exclude: string[];
+    exclude: Array<Course | DetailedCourse>;
     state: string;
     allSelected: boolean;
 }
@@ -28,11 +29,10 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
     useEffect(() => {
         // Check if data is available before setting the state
         if (result.data) {
-            // Filter courses based on the selected season
+            // Filter courses based on the selected
             const filteredCourses = result.data.filter((course: Course) => {
-                // Assuming you have a property named 'season' in the Course object
                 return (
-                    !exclude.includes(course.courseId) // Check if courseId is in the exclude list
+                    !exclude.includes(course) // Check if courseId is in the exclude list
                 );
             });
 
@@ -47,7 +47,7 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
 
             setCourses(sortedCourses);
         }
-    }, [result.data, season, exclude]); // Include selectedSeason in the dependency array
+    }, [result.data, exclude]); // Include selectedSeason in the dependency array
 
     // useEffect to handle no input
     useEffect(() => {
@@ -59,7 +59,6 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
 
     const handleSelectChange = (
         selectedOption: SingleValue<{ value: string; label: string }>,
-        actionMeta: ActionMeta<{ value: string; label: string }>
       ) => {
         // Use the selectedOption to get the course details
         if (selectedOption && selectedOption.value) {
@@ -78,13 +77,7 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
         setSearchQuery(inputValue); // Update searchQuery state
 
         // Use the inputValue to filter the options and update the state
-        const filteredCourses = courses.filter((course: Course) => {
-            // Assuming you have a property named 'season' in the Course object
-            return (
-                course.seasonfrom_ex === season.toUpperCase() ||
-                course.seasonfrom_und === season.toUpperCase()
-            );
-        }).filter((course) =>
+        const filteredCourses = courses.filter((course) =>
             course.courseId.toLowerCase().includes(inputValue.toLowerCase()) ||
             course.name.toLowerCase().includes(inputValue.toLowerCase())
         );

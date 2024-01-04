@@ -24,7 +24,7 @@ model Program {
 model Course {
     courseId                String  @id
     name                    String
-    ownerid                 Int?
+    ownerId                 Int?
     showtype                Int?
     detailtype              String?
     name_en                 String?

@@ -13,7 +13,7 @@ import { Course } from '~/interfaces/CourseData';
 const ModifyPage = () => {
     const router = useRouter();
     const [shownCourses, setShownCourses] = useState<DetailedCourse[]>([]);
-    const [courseList, setCourseList] = useState<string[]>([]);
+    const [courseList, setCourseList] = useState<Array<Course | DetailedCourse>>([]); // Updated type
     const [selectedFromToolbox, setSelectedFromToolbox] = useState<Course[]>([]);
     const [showMoreMap, setShowMoreMap] = useState<{ [group: string]: boolean }>({});
     const [initialCourses, setInitialCourses] = useState<DetailedCourse[]>([]);
@@ -35,21 +35,21 @@ const ModifyPage = () => {
 
             setInitialCourses(parsedCourses);
             setShownCourses(parsedCourses);
-            setCourseList(initiallyChosenCourses.map((course) => course.code));
+            setCourseList(initiallyChosenCourses);
         }
     }, [router.query.selectedCourses]);
 
     // Function to toggle the selection of a subject
-    const toggleSelection = (courseCode: string) => {
+    const toggleSelection = (course: Course | DetailedCourse) => {
         setCourseList((prevCourseList) => {
-            const isCourseSelected = prevCourseList.includes(courseCode);
+            const isCourseSelected = prevCourseList.includes(course);
 
             if (isCourseSelected) {
                 // Remove the course from courseList
-                return prevCourseList.filter((code) => code !== courseCode);
+                return prevCourseList.filter((courseInLisst) => courseInLisst !== course);
             } else {
                 // Add the course to courseList
-                return [...prevCourseList, courseCode];
+                return [...prevCourseList, course];
             }
         });
     };
@@ -65,8 +65,8 @@ const ModifyPage = () => {
     });
 
     // Function to determine if a subject is selected based on its presence in chosenCourses
-    const isCourseSelected = (courseCode: string) => {
-        return courseList.includes(courseCode);
+    const isCourseSelected = (course: Course | DetailedCourse) => {
+        return courseList.includes(course);
     }
 
     // Function to toggle showMore for a specific group
@@ -78,7 +78,7 @@ const ModifyPage = () => {
         if (displayMode === 'selected') {
             setShownCourses(() => {
                 // Filter initialCourses based on whether their codes are in courseList
-                const updatedShownCourses = initialCourses.filter((course) => courseList.includes(course.code));
+                const updatedShownCourses = initialCourses.filter((course) => courseList.includes(course));
                 return updatedShownCourses;
             });
         };
@@ -114,6 +114,9 @@ const ModifyPage = () => {
 
         const queryParams = {
             chosenCourses: encodeURIComponent(coursesString),
+            year: encodeURIComponent(selectedYear),
+            semester: encodeURIComponent(selectedSeason),
+            studyCode: encodeURIComponent(selectedProgramCode),
         };
 
         router.push({
@@ -141,13 +144,13 @@ const ModifyPage = () => {
                             }
                         }
 
-                        if (!courseList.some(course => course === selectedCourse.courseId)) {
+                        if (!courseList.some(course => course === selectedCourse)) {
                             // Update the courseList
-                            setCourseList((prevCourseList) => [...prevCourseList, selectedCourse.courseId])
+                            setCourseList((prevCourseList) => [...prevCourseList, selectedCourse])
                         };
 
                         if (!selectedFromToolbox.some(course => course === selectedCourse)
-                            && !courseList.some(course => course === selectedCourse.courseId)) {
+                            && !courseList.some(course => course === selectedCourse)) {
                             // Add the selected course from toolbox to state
                             setSelectedFromToolbox((prevSelected) => [
                                 ...prevSelected, selectedCourse
@@ -159,7 +162,7 @@ const ModifyPage = () => {
                             if (displayMode === 'non-selected') {
                                 setDisplayMode('selected');
                                 // Filter out courses that are not in courseList
-                                const updatedShownCourses = prevShownCourses.filter((course) => courseList.includes(course.code));
+                                const updatedShownCourses = prevShownCourses.filter((course) => courseList.includes(course));
                                 return updatedShownCourses;
                             } else {
                                 setDisplayMode('non-selected');
@@ -170,7 +173,7 @@ const ModifyPage = () => {
                     }}
                     season={selectedSeason}
                     state={displayMode}
-                    allSelected={initialCourses.every(course => courseList.includes(course.code))}
+                    allSelected={initialCourses.every(course => courseList.includes(course))}
                 />
             </div>
         );
@@ -208,9 +211,9 @@ const ModifyPage = () => {
                                         type="checkbox"
                                         id={course.courseId}
                                         name={`subjectGroup_${"search"}_${course.courseId}`}
-                                        checked={isCourseSelected(course.courseId)}
+                                        checked={isCourseSelected(course)}
                                         onChange={() => {
-                                            toggleSelection(course.courseId);
+                                            toggleSelection(course);
                                             setSelectedFromToolbox((prevSelectedFromToolbox) => {
                                                 return prevSelectedFromToolbox.filter((selected) => selected.courseId !== course.courseId);
                                             });

@@ -11,10 +11,15 @@ interface AppContextType {
     setSubjectsStructure: React.Dispatch<React.SetStateAction<any[]>>; // Adjust the type accordingly
 }
 
+const isAutumnSeason = () => {
+  const currentMonth = new Date().getMonth() + 1; // Months are zero-indexed
+  return currentMonth >= 9 && currentMonth <= 12;
+};
+
 const defaultValue: AppContextType = {
     year: new Date().getFullYear(), // Set the initial year to the current year
     setYear: () => {},
-    season: 'Spring',
+    season: isAutumnSeason() ? 'Autumn' : 'Spring',
     setSeason: () => {},
     index: -1,
     setIndex: () => {},
