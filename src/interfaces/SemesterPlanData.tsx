@@ -36,16 +36,11 @@ export interface Event {
     summary: string;
     status_plenary: boolean;
     studentgroups: string[];
-    tags: any[];
     room?: Room[];
     terminnr: number;
     aid: string;
     active: boolean;
     compulsory: boolean;
-    discipline: any[];
-    disciplineobj: any[];
-    resources: any[];
-    alerts: any[];
     coursetype: string;
     editurl: string;
     curr: null;
@@ -83,9 +78,7 @@ interface TimetableData {
     events: Event[];
 }
 
-export interface SemesterPlan {
-    timeTable: TimetableData;
-}
+export type SemesterPlan = TimetableData;
 
 export interface MazemapResponse {
     result: Result[]
@@ -110,10 +103,8 @@ interface Result {
     };
     identifier: string;
     identifierId: number | null;
-    images: any[]; // Assuming images could be of any type
     infoUrl: string | null;
     infoUrlText: string | null;
-    infos: any[]; // Assuming infos could be of any type
     kind: string;
     nodeId: number | null;
     peopleCapacity: number | null;
@@ -130,7 +121,6 @@ interface Result {
     title: string;
     typeIds: number[];
     typeNames: string[];
-    types: any[]; // Assuming types could be of any type
     z: number | null;
     zName: string;
     zValue?: number;

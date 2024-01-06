@@ -4,19 +4,20 @@ import CalendarDisplay from '~/views/Calendar/CalendarDisplay';
 import BackButton from '~/components/General/BackButton';
 import BreakLine from '~/components/General/BreakLine';
 import Layout from '~/components/General/Layout';
-import { DetailedCourse } from '~/components/SelectPage/DisplayCourses';
-import { Course } from '~/interfaces/CourseData';
-import { generateColor } from '~/views/Calendar/IcsCalendar';
+import type { Course } from '~/interfaces/CourseData';
+import { generateColor } from '~/views/Calendar/Colors';
+import type { DetailedCourse } from '~/interfaces/StudyPlanData';
 
 const Calendar: React.FC = () => {
     const router = useRouter();
     const [selectedCourses, setSelectedCourses] = useState<Array<Course | DetailedCourse>>([]);
+    const [courseColors, setCourseColors] = useState<Record<string, string>>();
 
     useEffect(() => {
         // Use the query parameter directly from useRouter
         const courseListString = router.query.chosenCourses as string;
 
-        if(router.isReady) {
+        if (router.isReady) {
             const courseList = JSON.parse(decodeURIComponent(courseListString)) as Array<Course | DetailedCourse>;
             // Check if courseList is not undefined before setting the state
             if (courseList) {
@@ -25,6 +26,12 @@ const Calendar: React.FC = () => {
         }
 
     }, [router.query.chosenCourses]);
+
+    useEffect(() => {
+        const eventColors = generateColor(selectedCourses.length);
+        setCourseColors(eventColors);
+    }, [selectedCourses]);
+
 
     const selectedYear = router.query.year as string;
     const selectedProgramCode = router.query.studyCode as string;
@@ -41,21 +48,26 @@ const Calendar: React.FC = () => {
             <BreakLine />
             <div>
                 <h2>Selected Courses:</h2>
-                <ul>
+                <p>Click on the course to modify the events shown</p>
+                <ul className="flex flex-wrap list-none p-0">
                     {Array.isArray(selectedCourses) ? (
                         selectedCourses.map((course, index) => (
-                            <li key={index}>
+                            <li
+                                key={index}
+                                className="w-full md:w-1/2 p-2" // Set full width on small screens and half width on medium screens
+                            >
                                 <div className="flex items-center">
                                     <div
                                         className="bg-blue-500 text-white p-2 mt-2 mb-2 rounded-md mr-2"
-                                        style={{ backgroundColor: generateColor(
-                                                'courseId' in course
-                                                ? course.courseId + ' - ' + course.name
-                                                : course.code + ' - ' + course.name
-                                        ),}}
+                                        style={{
+                                            ...(courseColors && {
+                                                backgroundColor: courseColors[index],
+                                                border: '2px solid white', // Add this line for the white border
+                                            }),
+                                        }}
                                     />
                                     <a
-                                        href={`https://www.ntnu.no/studier/emner/${('courseId' in course) ? course.courseId : course.code}#tab=omEmnet`}
+                                        href={`https://www.ntnu.no/studier/emner/${'courseId' in course ? course.courseId : course.code}#tab=omEmnet`}
                                         className="inline-block bg-blue-500 text-white p-2 mt-2 mb-2 rounded-md text-decoration-none"
                                         target="_blank"
                                         rel="noopener noreferrer"

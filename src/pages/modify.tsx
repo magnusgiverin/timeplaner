@@ -3,19 +3,18 @@ import { useEffect, useState } from 'react';
 import BackButton from '~/components/General/BackButton';
 import BreakLine from '~/components/General/BreakLine';
 import CourseList from '~/components/ModifyPage/CourseList';
-import GreenButton from '~/components/General/GreenButton';
 import Layout from '~/components/General/Layout';
 import SubjectDetails from '~/components/General/SubjectDetails';
 import Toolbox from '~/components/ModifyPage/Toolbox';
-import { DetailedCourse } from '~/components/SelectPage/DisplayCourses';
-import { Course } from '~/interfaces/CourseData';
+import type { Course } from '~/interfaces/CourseData';
+import type { DetailedCourse } from '~/interfaces/StudyPlanData';
 
 const ModifyPage = () => {
     const router = useRouter();
     const [shownCourses, setShownCourses] = useState<DetailedCourse[]>([]);
     const [courseList, setCourseList] = useState<Array<Course | DetailedCourse>>([]); // Updated type
     const [selectedFromToolbox, setSelectedFromToolbox] = useState<Course[]>([]);
-    const [showMoreMap, setShowMoreMap] = useState<{ [group: string]: boolean }>({});
+    const [showMoreMap, setShowMoreMap] = useState<Record<string, boolean>>({});
     const [initialCourses, setInitialCourses] = useState<DetailedCourse[]>([]);
     const [displayMode, setDisplayMode] = useState('non-selected'); // 'selected' or 'non-selected'
 
@@ -55,9 +54,9 @@ const ModifyPage = () => {
     };
 
     // Group selectedCourses by courseGroupName
-    const groupedCoursesByGroup: { [group: string]: DetailedCourse[] } = {};
+    const groupedCoursesByGroup: Record<string, DetailedCourse[]> = {};
     shownCourses.forEach((course) => {
-        const groupName = course.courseGroupName || 'Other'; // Use 'Other' if courseGroupName is falsy
+        const groupName = course.courseGroupName ?? 'Other'; // Use 'Other' if courseGroupName is falsy
         if (!groupedCoursesByGroup[groupName]) {
             groupedCoursesByGroup[groupName] = [];
         }
@@ -87,7 +86,7 @@ const ModifyPage = () => {
 
     const renderSymbolExplanation = () => {
         if (shownCourses.length > 0) {
-            const studyChoices: { [code: string]: string } = {};
+            const studyChoices: Record<string, string> = {};
             shownCourses.forEach((course) => {
                 studyChoices[course.studyChoice.code] = course.studyChoice.name;
             });
@@ -119,7 +118,7 @@ const ModifyPage = () => {
             studyCode: encodeURIComponent(selectedProgramCode),
         };
 
-        router.push({
+        void router.push({
             pathname: '/calendar',
             query: queryParams,
         });
@@ -171,7 +170,6 @@ const ModifyPage = () => {
                             }
                         });
                     }}
-                    season={selectedSeason}
                     state={displayMode}
                     allSelected={initialCourses.every(course => courseList.includes(course))}
                 />

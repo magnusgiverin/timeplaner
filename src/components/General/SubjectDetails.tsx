@@ -1,6 +1,6 @@
 import React from 'react';
-import { DetailedCourse } from '../SelectPage/DisplayCourses';
-import { Course } from '~/interfaces/CourseData';
+import type { Course } from '~/interfaces/CourseData';
+import type { DetailedCourse } from '~/interfaces/StudyPlanData';
 
 interface SubjectDetailsProps {
     subject: DetailedCourse | Course;
@@ -8,7 +8,7 @@ interface SubjectDetailsProps {
 
 const SubjectDetails: React.FC<SubjectDetailsProps> = ({ subject }) => {
     // Check the type of the subject prop
-    if ('studyChoice' in subject && 'courseGroupName' in subject) {
+    if ('studyChoice' in subject) {
         // DetailedCourse type
         return (
             <a

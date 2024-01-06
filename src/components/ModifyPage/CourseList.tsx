@@ -1,8 +1,8 @@
 import React from 'react';
 import GreenButton from '../General/GreenButton';
 import SubjectDetails from '../General/SubjectDetails';
-import { DetailedCourse } from '../SelectPage/DisplayCourses';
-import { Course } from '~/interfaces/CourseData';
+import type{ Course } from '~/interfaces/CourseData';
+import type { DetailedCourse } from '~/interfaces/StudyPlanData';
 
 type CourseListProps = {
   courses: DetailedCourse[];

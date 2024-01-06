@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { SemesterPlan } from "~/interfaces/SemesterPlanData";
+import type { SemesterPlan } from "~/interfaces/SemesterPlanData";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export const semesterPlanRouter = createTRPCRouter({
@@ -30,12 +30,8 @@ export const semesterPlanRouter = createTRPCRouter({
                     }),
                 });
 
-                const jsonData = await response.json();
-
                 // Structure the result according to the SemesterPlan interface
-                const semesterPlan: SemesterPlan = {
-                    timeTable: jsonData,
-                };
+                const semesterPlan: SemesterPlan = await response.json() as SemesterPlan;
         
                 // Push the result to the array
                 resultArray.push(semesterPlan);

@@ -1,13 +1,14 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import Layout from "~/components/General/Layout";
 import { api } from "~/utils/api";
 import { useRouter } from 'next/router';
 import YearSelect from '~/components/SelectPage/YearSelect';
 import BackButton from '~/components/General/BackButton';
 import CourseLogic from '~/components/SelectPage/CourseLogic';
-import Display, { DetailedCourse } from '~/components/SelectPage/DisplayCourses';
+import Display from '~/components/SelectPage/DisplayCourses';
 import BreakLine from '~/components/General/BreakLine';
 import { useAppContext } from '~/contexts/appContext';
+import type { DetailedCourse, SubjectStructure } from '~/interfaces/StudyPlanData';
 
 const ProgramPage = () => {
     const router = useRouter();
@@ -25,7 +26,7 @@ const ProgramPage = () => {
         setIndex(newIndex);
     };
 
-    const handleSubjectsStructureChange = (newSubjectStructure: any) => {
+    const handleSubjectsStructureChange = (newSubjectStructure: SubjectStructure) => {
         setSubjectsStructure(newSubjectStructure);
     };
 
@@ -39,7 +40,7 @@ const ProgramPage = () => {
             studyCode: encodeURIComponent(program ? program.studyprogCode : "N/A"),
         };
 
-        router.push({
+        void router.push({
             pathname: '/modify',
             query: queryParams,
         });

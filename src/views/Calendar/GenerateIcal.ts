@@ -1,4 +1,6 @@
-import { SemesterPlan, Event } from '~/interfaces/SemesterPlanData';
+import type { SemesterPlan, Event } from '~/interfaces/SemesterPlanData';
+import * as ics from 'ics';
+import type { EventAttributes } from 'ics';
 
 function downloadICal(content: string, filename: string) {
     const blob = new Blob([content], { type: 'text/calendar' });
@@ -24,10 +26,10 @@ function parseDate(dateString: string): Date {
 
     const [hours, minutes] = time.split(':');
     const offsetHours = parseInt(offset);
-    
+
     if (!hours || !minutes || isNaN(offsetHours)) {
         throw new Error('Invalid date string format');
-    }   
+    }
 
     // Adjust date and time based on the offset
     const adjustedDate = new Date(Date.UTC(
@@ -37,19 +39,18 @@ function parseDate(dateString: string): Date {
         parseInt(hours),
         parseInt(minutes)
     ));
-    
+
     // Adjust the date based on the offset
     adjustedDate.setHours(adjustedDate.getHours() + offsetHours);
-    
+
     // Get the timezone abbreviation for the offset
     const offsetTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    
+
     // Create a new date in the timezone for the offset
     const adjustedDateInTimezone = new Date(adjustedDate.toLocaleString('en-US', { timeZone: offsetTimezone }));
-    
+
     return adjustedDateInTimezone;
 }
-
 
 function generateDescription(event: Event, title: string): string {
     const staffDetails = event.staffs?.map(staff => `${staff.shortname} (${staff.id}@ntnu.no)`).join(', ');
@@ -59,22 +60,21 @@ function generateDescription(event: Event, title: string): string {
     return [title, summary, staffInfo].filter(Boolean).join('\n\n');
 }
 
- function generateICal(semesterPlans: SemesterPlan[]): string {
-    const ics = require('ics');
+function generateICal(semesterPlans: SemesterPlan[]): string {
+    const icalEvents: EventAttributes[] = [];  // Rename to avoid conflict with the duplicate declaration
 
-    const events: any[] = [];
-
-    for (const { timeTable } of semesterPlans) {
-        for (const event of timeTable.events) {
+    for (const semesterPlan of semesterPlans) {
+        for (const event of semesterPlan.events) {
             const startDate = parseDate(event.dtstart);
             const endDate = parseDate(event.dtend);
-            
-            const roomName = event.room?.[0]?.roomname || '';
-            const roomUrl = event.room?.[0]?.roomurl || '';
-            
-            const title = `Title: ${timeTable.courseid} - ${timeTable.coursename}`;
 
-            events.push({
+            const roomName = event.room?.[0]?.roomname ?? '';
+            const roomUrl = event.room?.[0]?.roomurl ?? '';
+            const isUrlValid = /^https?:\/\/\S+$/.test(roomUrl);
+
+            const title = `${semesterPlan.courseid} - ${semesterPlan.coursename}`;
+
+            icalEvents.push({
                 start: [startDate.getFullYear(), startDate.getMonth() + 1, startDate.getDate(), startDate.getHours(), startDate.getMinutes()],
                 end: [endDate.getFullYear(), endDate.getMonth() + 1, endDate.getDate(), endDate.getHours(), endDate.getMinutes()],
                 title: title,
@@ -83,19 +83,19 @@ function generateDescription(event: Event, title: string): string {
                 status: 'CONFIRMED',
                 busyStatus: 'BUSY',
                 ...(roomName !== '' ? { location: roomName } : {}),
-                ...(roomUrl !== '' ? { url: roomUrl } : {}),
+                ...(isUrlValid ? { url: roomUrl } : {}),
             });
         }
     }
 
-    const { error, value } = ics.createEvents(events);
+    const { error, value } = ics.createEvents(icalEvents);
 
     if (error) {
         console.error('Error generating iCalendar events:', error);
         return "";
     }
 
-    return value;
+    return value ?? "";;
 }
 
 export { generateICal, downloadICal };

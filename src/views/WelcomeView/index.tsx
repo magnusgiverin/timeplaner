@@ -4,7 +4,7 @@ const Welcome = () => {
     return (
       <div className="mt-20">
         <h2 className="flex justify-center font-bold text-5xl my-4 pt-10">
-          Welcome to CalOne!
+          Welcome to TimePlaner!
         </h2>
         <BreakLine />
         <h1 className="justify-center font text-xl text-align-left mt-10">

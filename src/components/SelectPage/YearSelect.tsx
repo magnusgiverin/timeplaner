@@ -1,7 +1,6 @@
 // components/Program.tsx
 import React, { useEffect, useState } from 'react';
-import { Program, } from "~/interfaces/ProgramData";
-import BreakLine from '../General/BreakLine';
+import type { Program, } from "~/interfaces/ProgramData";
 
 interface YearSelectProps {
   setIndex: (index: number) => void;

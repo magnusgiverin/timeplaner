@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import GreenButton from '../General/GreenButton';
 import { api } from '~/utils/api';
-import { Course } from '~/interfaces/CourseData';
-import Select, { ActionMeta, PropsValue, SingleValue } from 'react-select';
-import { DetailedCourse } from '../SelectPage/DisplayCourses';
+import type { Course } from '~/interfaces/CourseData';
+import Select from 'react-select';
+import type { PropsValue, SingleValue } from 'react-select';
+import type { DetailedCourse } from '~/interfaces/StudyPlanData';
 
 interface ToolboxProps {
     onConfirm: () => void;
     onSearch: (course: Course) => void; // Add the course parameter
     onToggleShowAll: () => void;
-    season: string;
     exclude: Array<Course | DetailedCourse>;
     state: string;
     allSelected: boolean;
 }
 
-const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll, season, exclude, state, allSelected }) => {
+const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,  exclude, state, allSelected }) => {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [courses, setCourses] = useState<Course[]>([]);
     const [options, setOptions] = useState<{ value: string; label: string }[]>([]);
@@ -61,7 +61,7 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
         selectedOption: SingleValue<{ value: string; label: string }>,
       ) => {
         // Use the selectedOption to get the course details
-        if (selectedOption && selectedOption.value) {
+        if (selectedOption?.value) {
             const selectedCourse = courses.find((course) => course.courseId === selectedOption.value);
 
             if (selectedCourse) {

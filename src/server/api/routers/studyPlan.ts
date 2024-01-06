@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { StudyPlan } from "~/interfaces/StudyPlanData";
+import type { StudyPlan } from "~/interfaces/StudyPlanData";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export const studyPlanRouter = createTRPCRouter({
@@ -27,7 +27,7 @@ export const studyPlanRouter = createTRPCRouter({
 
             // Make the API call to get the study plan data
             const response = await fetch(apiUrl);
-            const jsonData = await response.json();
+            const jsonData = await response.json() as JSON;
 
             // Convert the JSON data to a string before storing it in the database
             const jsonString = JSON.stringify(jsonData);

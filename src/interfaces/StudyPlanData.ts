@@ -75,3 +75,20 @@ export interface StudyWayPoint {
     name: string;
     studyDirections: StudyDirection[];
 }
+
+export interface ChosenSubjectsData {
+    code: string;
+    name: string;
+    courses: DetailedCourse[] | ChosenSubjectsData[];
+}
+
+export interface DetailedCourse {
+    code: string;
+    credit: string;
+    name: string;
+    planelement: string;
+    studyChoice: StudyChoice;
+    courseGroupName: string;
+}
+
+export type SubjectStructure = Array<ChosenSubjectsData>

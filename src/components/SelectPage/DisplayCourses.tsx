@@ -1,23 +1,7 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { StudyChoice } from "~/interfaces/StudyPlanData";
 import SubjectDetails from "../General/SubjectDetails";
 import GreenButton from "../General/GreenButton";
-
-interface ChosenSubjectsData {
-    code: string;
-    name: string;
-    courses: DetailedCourse[] | ChosenSubjectsData[];
-}
-
-export interface DetailedCourse {
-    code: string;
-    credit: string;
-    name: string;
-    planelement: string;
-    studyChoice: StudyChoice;
-    courseGroupName: string;
-}
+import type { ChosenSubjectsData, DetailedCourse } from "~/interfaces/StudyPlanData";
 
 interface DisplayProps {
     chosenSubjects: ChosenSubjectsData[];
@@ -29,7 +13,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
     const [selectedCourses, setSelectedCourses] = useState<DetailedCourse[]>([]);
 
     // State to track showMore for each group
-    const [showMoreMap, setShowMoreMap] = useState<{ [key: string]: boolean }>({});
+    const [showMoreMap, setShowMoreMap] = useState<Record<string, boolean>>({});
 
     useEffect(() => {
         resetSelectedSubjects();
@@ -86,7 +70,6 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
                         name={`radio_${parentIndex}_${index}`}
                         value={subject.name}
                         checked={selectedPath[level] === subject.name}
-                        onChange={() => { }} // Add a dummy onChange to satisfy the warning
                         onClick={handleClick}
                         className="w-3 h-3 flex-shrink-0"
                     />
@@ -101,7 +84,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
 
     const renderNextButtons = () => {
         if (selectedCourses.length > 0) {
-            const studyChoices: { [code: string]: string } = {};
+            const studyChoices: Record<string, string> = {};
             selectedCourses.forEach((course) => {
                 studyChoices[course.studyChoice.code] = course.studyChoice.name;
             });
@@ -135,7 +118,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
         }
 
         // Group subjects by studyChoice.code
-        const groupedSubjects: { [key: string]: (DetailedCourse | ChosenSubjectsData)[] } = {};
+        const groupedSubjects: Record<string, (DetailedCourse | ChosenSubjectsData)[]> = {} 
 
         subjects.forEach((subject) => {
             const key =
@@ -146,6 +129,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
             if (!groupedSubjects[key]) {
                 groupedSubjects[key] = [];
             }
+            
             groupedSubjects[key]?.push(subject);
         });
 
@@ -168,10 +152,10 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
                                 <div key={subIndex}>
                                     {isRadioInput
                                         ? renderRadioInput(subject, parentIndex, subIndex, level)
-                                        : <SubjectDetails subject={subject as DetailedCourse} />}
+                                        : <SubjectDetails subject={subject} />}
                                 </div>
                             );
-                        }).slice(0, (showMoreMap[group] || groupSubjects.some(subject => 'courses' in subject)) ? groupSubjects.length : 5)}
+                        }).slice(0, (showMoreMap[group] ?? groupSubjects.some(subject => 'courses' in subject)) ? groupSubjects.length : 5)}
                         {groupSubjects.length > 5 && !groupSubjects.some(subject => 'courses' in subject) && (
                             <GreenButton
                                 text={showMoreMap[group] ? 'Show Less' : 'Show More'}

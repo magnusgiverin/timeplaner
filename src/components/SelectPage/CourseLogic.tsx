@@ -1,15 +1,14 @@
-import { CourseInStudyPlan, CourseGroup, JsonData, StudyDirection, StudyPeriod, StudyWayPoint } from "~/interfaces/StudyPlanData";
-import BackButton from "../General/BackButton";
-import { StudyPlan } from "@prisma/client";
+import type { CourseInStudyPlan, CourseGroup, JsonData, StudyDirection, StudyPeriod, StudyWayPoint, SubjectStructure, ChosenSubjectsData } from "~/interfaces/StudyPlanData";
+import type { StudyPlan } from "@prisma/client";
 import { api } from "~/utils/api";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface CourseLogicProps {
     year: number;
     programCode: string;
     season: string;
-    onSubjectsStructureChange: (subjectsStructure: any) => void;
-  }
+    onSubjectsStructureChange: (subjectStructure: SubjectStructure) => void;
+}
 
 const isAutumnSeason = () => {
     const currentMonth = new Date().getMonth() + 1;
@@ -28,7 +27,7 @@ const getStudyPlanJson = (year: number, programCode: string) => {
     const { data: studyPlan, isLoading: isStudyPlanLoading, refetch: refetchStudyPlan } =
         api.studyPlan.getStudyPlanById.useQuery<StudyPlan>(String(studyPlanId));
 
-    const studyPlanJson: JsonData = studyPlan ? JSON.parse(studyPlan?.json_data) : null
+    const studyPlanJson: JsonData | null = studyPlan ? (JSON.parse(studyPlan?.json_data) as JsonData) : null;
 
     return {
         studyPlanJson,
@@ -38,8 +37,8 @@ const getStudyPlanJson = (year: number, programCode: string) => {
 }
 
 // Function to get all subjects from StudyDirection
-const getSubjectsFromDirection = (direction: StudyDirection): CourseInStudyPlan[] => {
-    const subjects: CourseInStudyPlan[] = [];
+const getSubjectsFromDirection = (direction: StudyDirection): ChosenSubjectsData[] => {
+    const subjects: SubjectStructure = [];
     const courseGroups: CourseGroup[] = [];
 
     if (direction.courseGroups) {
@@ -82,22 +81,22 @@ const getSubjectsFromWaypoint = (waypoint: StudyWayPoint): CourseInStudyPlan[] =
         }));
 
         // Add the subjects to a group with the waypoint name
-        const groupedSubjects: CourseGroup | null =  subjectsWithWaypointInfo.length !== 0 ? 
-        {
-            code: direction.code,
-            courses: [...subjectsWithWaypointInfo], // Create a new array for each direction
-            name: waypointName,
-        } : null;
+        const groupedSubjects: CourseGroup | null = subjectsWithWaypointInfo.length !== 0 ?
+            {
+                code: direction.code,
+                courses: [...subjectsWithWaypointInfo], // Create a new array for each direction
+                name: waypointName,
+            } : null;
 
         // Push groupedSubjects into subjects after casting it to Course
-        if(groupedSubjects) {subjects.push(groupedSubjects as unknown as CourseInStudyPlan)};
+        if (groupedSubjects) { subjects.push(groupedSubjects as unknown as CourseInStudyPlan) };
     });
 
     return subjects;
 };
 
 // Function to get all subjects from StudyPeriod
-const getSubjectsFromPeriod = (period: StudyPeriod | undefined): CourseInStudyPlan[] => {
+const getSubjectsFromPeriod = (period: StudyPeriod | undefined): ChosenSubjectsData[] => {
     if (!period) {
         return [];
     }
@@ -105,8 +104,8 @@ const getSubjectsFromPeriod = (period: StudyPeriod | undefined): CourseInStudyPl
 };
 
 // Function to get all subjects from JsonData for a specific semester
-const getAllSubjects = (jsonData: JsonData, semester: number): any => {
-    const subjectsData: any = [];
+const getAllSubjects = (jsonData: JsonData, semester: number): SubjectStructure => {
+    const subjectsData: SubjectStructure = [];
 
     // Check if the specified semester is within the available study periods
     const period = jsonData.studyplan?.studyPeriods[semester];
@@ -117,7 +116,7 @@ const getAllSubjects = (jsonData: JsonData, semester: number): any => {
     return subjectsData;
 };
 
-const CourseLogic: React.FC<CourseLogicProps> = ({ year, programCode, season, onSubjectsStructureChange }) => {    
+const CourseLogic: React.FC<CourseLogicProps> = ({ year, programCode, season, onSubjectsStructureChange }) => {
     const studyPlanQuery = getStudyPlanJson(year, programCode);
     const { studyPlanJson, isStudyPlanLoading, refetchStudyPlan } = studyPlanQuery;
     const semester = season === 'Autumn' ? year * 2 - 2 : year * 2 - 1;
@@ -138,7 +137,7 @@ const CourseLogic: React.FC<CourseLogicProps> = ({ year, programCode, season, on
                         },
                         {
                             onSuccess: () => {
-                                isMounted && refetchStudyPlan();
+                                void ((isMounted && refetchStudyPlan()));
                             },
                         }
                     );
@@ -148,21 +147,23 @@ const CourseLogic: React.FC<CourseLogicProps> = ({ year, programCode, season, on
             }
 
         };
-    
-        fetchData();
-        
+
+        void fetchData();
+
         return () => {
             isMounted = false;
         };
     }, [year, season, isStudyPlanLoading, studyPlanJson, refetchStudyPlan]);
-    
+
     if (studyPlanJson !== null) {
-        const subjectsStructure = getAllSubjects(studyPlanJson, semester);
+        const subjectStructure = getAllSubjects(studyPlanJson, semester);
         // Invoke the callback to send subjectsStructure back to the caller
-        onSubjectsStructureChange(subjectsStructure)
+        onSubjectsStructureChange(subjectStructure)
     }
 
     return null;
 }
 
 export default CourseLogic;
+
+// Subjectstructure is an array of either groups or courses, groups contain either groups or courses - defined previously?

@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
-import Select, { SingleValue } from 'react-select';
-import { Program } from '~/interfaces/ProgramData';
+import Select, { type SingleValue } from 'react-select';
+import type { Program } from '~/interfaces/ProgramData';
 import { api } from "~/utils/api";
 import { useRouter } from 'next/router';
 
@@ -30,18 +31,23 @@ const Search = () => {
         label: program.title + " - " + program.studyprogCode + " (" + program.studyprogStudyLevel + ")",
     }));
 
-    const handleSelectChange = (
+    const handleSelectChange = async (
         selectedOption: SingleValue<{ value: string; label: string }>,
     ) => {
         // Use the selectedOption to get the course details
-        if (selectedOption && selectedOption.value) {
+        if (selectedOption?.value) {
             const selectedProgram = programs.find((program) => program.programId === selectedOption.value);
 
             if (selectedProgram) {
-                router.push({
+                try {
+                  await router.push({
                     pathname: `/program/${selectedProgram.studyprogCode}`,
-                });
-            }
+                  });
+                } catch (error) {
+                  // Handle the error if needed
+                  console.error('Error navigating:', error);
+                }
+              }
         }
     };
 

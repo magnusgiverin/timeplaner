@@ -1,4 +1,4 @@
-import { Program } from "~/interfaces/ProgramData";
+import type { Program } from "~/interfaces/ProgramData";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export const programRouter = createTRPCRouter({

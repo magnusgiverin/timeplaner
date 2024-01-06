@@ -1,4 +1,4 @@
-import { Course } from "~/interfaces/CourseData";
+import type { Course } from "~/interfaces/CourseData";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export const courseRouter = createTRPCRouter({

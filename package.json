@@ -1,5 +1,5 @@
 {
-  "name": "calone",
+  "name": "timeplaner",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -22,7 +22,9 @@
     "@trpc/next": "^10.43.6",
     "@trpc/react-query": "^10.43.6",
     "@trpc/server": "^10.43.6",
+    "@types/ical": "^0.8.3",
     "axios": "^1.6.3",
+    "cal-parser": "^1.0.2",
     "d3-color": "^3.1.0",
     "fs": "^0.0.1-security",
     "ical": "^0.8.0",
@@ -35,6 +37,7 @@
     "react-dom": "18.2.0",
     "react-router-dom": "^6.21.0",
     "react-select": "^5.8.0",
+    "rrule": "^2.8.1",
     "superjson": "^2.2.1",
     "zod": "^3.22.4"
   },
@@ -49,7 +52,7 @@
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
     "autoprefixer": "^10.4.14",
-    "eslint": "^8.54.0",
+    "eslint": "^8.56.0",
     "postcss": "^8.4.31",
     "prettier": "^3.1.0",
     "prettier-plugin-tailwindcss": "^0.5.7",
