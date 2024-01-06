@@ -13,6 +13,7 @@ const Search = () => {
     const router = useRouter();
     
     console.log("HERE");
+    console.log(language)
     // Use useQuery directly within the functional component
     const result = api.program.programListByLang.useQuery(language);
     console.log(result)
