@@ -32,8 +32,6 @@ export const programRouter = createTRPCRouter({
       where: { programId: { endsWith: opts.input } },
     });
     
-    console.log(programs);
-    
     if (!programs || programs.length === 0) {
       throw new Error("Programs not found");
     }

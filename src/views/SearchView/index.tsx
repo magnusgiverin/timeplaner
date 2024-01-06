@@ -12,8 +12,10 @@ const Search = () => {
     const [showAll, setShowAll] = useState<boolean>(false); // Show all programs or only the first 20
     const router = useRouter();
     
+    console.log("HERE");
     // Use useQuery directly within the functional component
     const result = api.program.programListByLang.useQuery(language);
+    console.log(result)
 
     // useEffect to handle side effects
     useEffect(() => {
