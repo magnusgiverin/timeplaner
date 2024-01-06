@@ -79,7 +79,7 @@ export interface StudyWayPoint {
 export interface ChosenSubjectsData {
     code: string;
     name: string;
-    courses: DetailedCourse[] | ChosenSubjectsData[];
+    courses?: Array<DetailedCourse | ChosenSubjectsData>;
 }
 
 export interface DetailedCourse {

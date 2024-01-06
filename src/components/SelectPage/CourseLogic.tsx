@@ -1,4 +1,4 @@
-import type { CourseInStudyPlan, CourseGroup, JsonData, StudyDirection, StudyPeriod, StudyWayPoint, SubjectStructure, ChosenSubjectsData } from "~/interfaces/StudyPlanData";
+import type { CourseGroup, JsonData, StudyDirection, StudyPeriod, StudyWayPoint, SubjectStructure, ChosenSubjectsData } from "~/interfaces/StudyPlanData";
 import type { StudyPlan } from "@prisma/client";
 import { api } from "~/utils/api";
 import { useEffect } from "react";
@@ -38,38 +38,43 @@ const getStudyPlanJson = (year: number, programCode: string) => {
 
 // Function to get all subjects from StudyDirection
 const getSubjectsFromDirection = (direction: StudyDirection): ChosenSubjectsData[] => {
-    const subjects: SubjectStructure = [];
+    const subjects: ChosenSubjectsData[] = [];
     const courseGroups: CourseGroup[] = [];
 
     if (direction.courseGroups) {
         direction.courseGroups.forEach((group) => {
             const coursesWithCode = group.courses.map(course => ({
+                code: course.code,
+                name: course.name,
+                credit: course.credit,
+                planelement: course.planelement,
+                studyChoice: course.studyChoice,
                 courseGroupName: group.name,
-                ...course,
             }));
 
-            if (coursesWithCode.length > 0) { // Add CourseGroup only if courses is not empty
+            if (coursesWithCode.length > 0) {
+                // Add CourseGroup only if courses is not empty
                 courseGroups.push({ code: group.code, courses: coursesWithCode, name: group.name });
             }
         });
 
-        courseGroups.forEach(group => {
-            subjects.push(...group.courses);
-        });
+        // Push both groups and individual courses into the subjects array
+        subjects.push(...courseGroups.flatMap(group => group.courses));
     }
 
     direction.studyWaypoints.forEach((waypoint) => {
         if (waypoint) {
-            subjects.push(...getSubjectsFromWaypoint(waypoint)); // Pass direction name
+            subjects.push(...getSubjectsFromWaypoint(waypoint));
         }
     });
 
     return subjects;
 };
 
+
 // Function to get all subjects from StudyWayPoint
-const getSubjectsFromWaypoint = (waypoint: StudyWayPoint): CourseInStudyPlan[] => {
-    const subjects: CourseInStudyPlan[] = [];
+const getSubjectsFromWaypoint = (waypoint: StudyWayPoint): ChosenSubjectsData[] => {
+    const subjects: ChosenSubjectsData[] = [];
 
     waypoint.studyDirections.forEach((direction) => {
         const waypointName = `${direction.name}`; // Combine direction name and waypoint name
@@ -81,15 +86,14 @@ const getSubjectsFromWaypoint = (waypoint: StudyWayPoint): CourseInStudyPlan[] =
         }));
 
         // Add the subjects to a group with the waypoint name
-        const groupedSubjects: CourseGroup | null = subjectsWithWaypointInfo.length !== 0 ?
-            {
-                code: direction.code,
-                courses: [...subjectsWithWaypointInfo], // Create a new array for each direction
-                name: waypointName,
-            } : null;
+        const groupedSubjects: ChosenSubjectsData | null = subjectsWithWaypointInfo.length !== 0 ? {
+            code: direction.code,
+            courses: [...subjectsWithWaypointInfo], // Create a new array for each direction
+            name: waypointName,
+        } : null;
 
         // Push groupedSubjects into subjects after casting it to Course
-        if (groupedSubjects) { subjects.push(groupedSubjects as unknown as CourseInStudyPlan) };
+        if (groupedSubjects) { subjects.push(groupedSubjects) };
     });
 
     return subjects;
@@ -115,6 +119,7 @@ const getAllSubjects = (jsonData: JsonData, semester: number): SubjectStructure 
 
     return subjectsData;
 };
+
 
 const CourseLogic: React.FC<CourseLogicProps> = ({ year, programCode, season, onSubjectsStructureChange }) => {
     const studyPlanQuery = getStudyPlanJson(year, programCode);

@@ -118,11 +118,11 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
         }
 
         // Group subjects by studyChoice.code
-        const groupedSubjects: Record<string, (DetailedCourse | ChosenSubjectsData)[]> = {} 
+        const groupedSubjects: Record<string, (DetailedCourse)[]> = {} 
 
         subjects.forEach((subject) => {
             const key =
-                'courses' in subject && !Object.values(groupedSubjects).flat().includes(subject)
+                'courses' in subject && !Object.values(groupedSubjects).flat().includes(subject as DetailedCourse)
                     ? 'Uncategorized'
                     : (subject as DetailedCourse).courseGroupName;
 
@@ -130,7 +130,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
                 groupedSubjects[key] = [];
             }
             
-            groupedSubjects[key]?.push(subject);
+            groupedSubjects[key]?.push(subject as DetailedCourse);
         });
 
         // Function to toggle showMore for a specific group

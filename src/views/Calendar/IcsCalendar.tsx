@@ -22,7 +22,7 @@ export const hashString = (str: string) => {
   return hash;
 };
 
-// Helper function to parse ICS date format
+/// Helper function to parse ICS date format
 function parseIcsDate(icsDate: string) {
   const year = parseInt(icsDate.slice(0, 4));
   const month = parseInt(icsDate.slice(4, 6)) - 1; // Months are 0-indexed in JavaScript
@@ -30,7 +30,12 @@ function parseIcsDate(icsDate: string) {
   const hours = parseInt(icsDate.slice(9, 11));
   const minutes = parseInt(icsDate.slice(11, 13));
 
-  return new Date(year, month, day, hours, minutes);
+  // Use the Norwegian time zone (+01:00)
+  const date = new Date(year, month, day, hours, minutes);
+  const offset = 60; // Offset in minutes
+  date.setMinutes(date.getMinutes() + offset);
+
+  return date;
 }
 
 interface ParsedEvent {
@@ -94,7 +99,6 @@ const IcsCalendar: React.FC<IcsCalendarProps> = ({ icsFileContent, indexes }) =>
   moment.tz.setDefault('America/Godthab');
   const localizer = momentLocalizer(moment);
   const parsedEvents = parseIcsFileContent(icsFileContent, indexes);
-
   const today = new Date();
   const defaultDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 8, 15);
 
