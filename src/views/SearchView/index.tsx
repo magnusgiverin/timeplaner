@@ -11,7 +11,7 @@ const Search = () => {
     const [language, setLanguage] = useState<string>('no'); // Default language is English
     const [showAll, setShowAll] = useState<boolean>(false); // Show all programs or only the first 20
     const router = useRouter();
-
+    
     // Use useQuery directly within the functional component
     const result = api.program.programListByLang.useQuery(language);
 
