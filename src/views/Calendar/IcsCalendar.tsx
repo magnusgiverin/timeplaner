@@ -30,12 +30,7 @@ function parseIcsDate(icsDate: string) {
   const hours = parseInt(icsDate.slice(9, 11));
   const minutes = parseInt(icsDate.slice(11, 13));
 
-  // Use the Norwegian time zone (+01:00)
-  const date = new Date(year, month, day, hours, minutes);
-  const offset = 60; // Offset in minutes
-  date.setMinutes(date.getMinutes() + offset);
-
-  return date;
+  return new Date(year, month, day, hours, minutes);
 }
 
 interface ParsedEvent {
@@ -96,17 +91,22 @@ function parseIcsFileContent(icsFileContent: string, indexes: Record<string, num
 }
 
 const IcsCalendar: React.FC<IcsCalendarProps> = ({ icsFileContent, indexes }) => {
-  moment.tz.setDefault('America/Godthab');
+  const timezone = moment.tz.guess();
+  moment.tz.setDefault(timezone);
+
   const localizer = momentLocalizer(moment);
   const parsedEvents = parseIcsFileContent(icsFileContent, indexes);
   const today = new Date();
   const defaultDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 8, 15);
+  const timeZoneOffset = new Date().toLocaleString("en-US", { timeZoneName: "short", timeZone: timezone }) ?? '+00:00';
 
   const workWeekStart = new Date();
-  workWeekStart.setHours(9, 0, 0, 0);
+  workWeekStart.setHours(7, 0, 0, 0);
+  workWeekStart.setHours(workWeekStart.getHours() - parseInt(timeZoneOffset.split(":")[0] ?? "0"));
 
   const workWeekEnd = new Date();
-  workWeekEnd.setHours(23, 0, 0, 0);
+  workWeekEnd.setHours(19, 0, 0, 0);
+  workWeekEnd.setHours(workWeekEnd.getHours() - parseInt(timeZoneOffset.split(":")[0] ?? "0"));
 
   const uniqueEventTitles = [...new Set(parsedEvents.map(event => event.id))];
   const eventColors = generateColor(uniqueEventTitles.length);

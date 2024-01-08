@@ -1,6 +1,7 @@
 import type { SemesterPlan, Event } from '~/interfaces/SemesterPlanData';
 import * as ics from 'ics';
 import type { EventAttributes } from 'ics';
+import moment from 'moment';
 
 function downloadICal(content: string, filename: string) {
     const blob = new Blob([content], { type: 'text/calendar' });
@@ -18,38 +19,23 @@ function parseDate(dateString: string): Date {
     }
 
     const [year, month, day] = datePart.split('-');
-    const [time, offset] = timeWithOffset.split('+');
-
+    const [time, offset] = timeWithOffset.split(/[-+]/); // Split the date and offset using either + or -
+    
     if (!year || !month || !day || !time || !offset) {
         throw new Error('Invalid date string format');
     }
 
     const [hours, minutes] = time.split(':');
-    const offsetHours = parseInt(offset);
+    const offsetHours = timeWithOffset.includes('-') ? -parseInt(offset) : parseInt(offset);
 
     if (!hours || !minutes || isNaN(offsetHours)) {
         throw new Error('Invalid date string format');
     }
 
     // Adjust date and time based on the offset
-    const adjustedDate = new Date(Date.UTC(
-        parseInt(year),
-        parseInt(month) - 1, // Months are 0-indexed
-        parseInt(day),
-        parseInt(hours),
-        parseInt(minutes)
-    ));
+    const date = moment.tz(dateString, 'Europe/Oslo').toDate();
 
-    // Adjust the date based on the offset
-    adjustedDate.setHours(adjustedDate.getHours() + offsetHours);
-
-    // Get the timezone abbreviation for the offset
-    const offsetTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-    // Create a new date in the timezone for the offset
-    const adjustedDateInTimezone = new Date(adjustedDate.toLocaleString('en-US', { timeZone: offsetTimezone }));
-
-    return adjustedDateInTimezone;
+    return date;
 }
 
 function generateDescription(event: Event, title: string): string {

@@ -32,7 +32,6 @@ const Calendar: React.FC = () => {
         setCourseColors(eventColors);
     }, [selectedCourses]);
 
-
     const selectedYear = router.query.year as string;
     const selectedProgramCode = router.query.studyCode as string;
     const selectedSeason = router.query.semester as string;

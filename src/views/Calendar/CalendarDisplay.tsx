@@ -58,6 +58,7 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({ subjectList }) => {
 
   useEffect(() => {
     const iCalContent = generateICal(semesterPlans);
+    // teaching-method has a code for what it is it would seem
     setIcal(iCalContent);
 
   }, [semesterPlans]);
@@ -69,7 +70,7 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({ subjectList }) => {
   return (
     <div>
       <GreenButton onClick={handleDownload} text={'Download ICS'}/>
-      {/* <GreenButton onClick={handleDownload} text={''} className='ml-2'/>  */}
+      <GreenButton className='ml-4' onClick={handleDownload} text={'Save'}/>
       <div className='flex-column flex-row flex-shrink mt-2 mb-2 justify-center mx-auto '>
         {ical && <IcsCalendar icsFileContent={ical} indexes={indexes} />}
       </div>
