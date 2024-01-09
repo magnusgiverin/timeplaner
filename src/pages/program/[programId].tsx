@@ -70,10 +70,11 @@ const ProgramPage = () => {
     ), [program, index, season]);
 
     const displayCoursesComponent = useMemo(() => (
-        subjectsStructure.length !== 0 && index !== -1 && (
+        subjectsStructure.length !== 0 && index !== -1 && program && (
             <Display 
                 chosenSubjects={subjectsStructure} 
-                handleRedirect={handleRedirect}
+                handleModifyRedirect={handleRedirect}
+                programCode={program.studyprogcode}
             />
         )
     ), [subjectsStructure, index]);

@@ -3,13 +3,16 @@ import SubjectDetails from "../General/SubjectDetails";
 import GreenButton from "../General/GreenButton";
 import type { ChosenSubjectsData, DetailedCourse } from "~/interfaces/StudyPlanData";
 import { useLanguageContext } from "~/contexts/languageContext";
+import { useAppContext } from "~/contexts/appContext";
+import { useRouter} from "next/router";
 
 interface DisplayProps {
     chosenSubjects: ChosenSubjectsData[];
-    handleRedirect: (selectedCourses: DetailedCourse[]) => void;
+    handleModifyRedirect: (selectedCourses: DetailedCourse[]) => void;
+    programCode: string;
 }
 
-const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => {
+const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect, programCode }) => {
     const [selectedPath, setSelectedPath] = useState<(string | null)[]>(Array(chosenSubjects.length).fill(null));
     const [selectedCourses, setSelectedCourses] = useState<DetailedCourse[]>([]);
 
@@ -17,6 +20,9 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
     const [showMoreMap, setShowMoreMap] = useState<Record<string, boolean>>({});
 
     const { language } = useLanguageContext();
+    const { index, season } = useAppContext();
+
+    const router = useRouter();
 
     useEffect(() => {
         resetSelectedSubjects();
@@ -86,6 +92,24 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
         );
     };
 
+    const handleCalendarRedirect = (courseList: DetailedCourse[]) => {
+        const coursesString = JSON.stringify(courseList);
+
+        console.log(index + 1)
+
+        const queryParams = {
+            chosenCourses: encodeURIComponent(coursesString),
+            year: encodeURIComponent(index + 1),
+            semester: encodeURIComponent(season),
+            studyCode: encodeURIComponent(programCode),
+        };
+
+        void router.push({
+            pathname: '/calendar',
+            query: queryParams,
+        });
+    };
+
     const renderNextButtons = () => {
         if (selectedCourses.length > 0) {
             const studyChoices: Record<string, string> = {};
@@ -97,8 +121,9 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
                 .map(([code, name]) => `${code}: ${name}`)
                 .join('\n');
 
-            const explainLabel = language === "no" ? "Symbolforklaring" : "Symbol Explanation"
-            const modifyLabel = language === "no" ? "Rediger emner" : "Modify courses"
+            const explainLabel = language === "no" ? "Symbolforklaring" : "Symbol Explanation";
+            const modifyLabel = language === "no" ? "Rediger emner" : "Modify courses";
+            const calendarLabel = language === "no" ? "Gå til kalender" : "Go to calendar";
 
             return (
                 <div>
@@ -108,7 +133,12 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
                     />
                     <GreenButton
                         text={modifyLabel}
-                        onClick={() => handleRedirect(selectedCourses)}
+                        onClick={() => handleModifyRedirect(selectedCourses)}
+                        className="ml-2"
+                    />
+                    <GreenButton
+                        text={calendarLabel}
+                        onClick={() => handleCalendarRedirect(selectedCourses)}
                         className="ml-2"
                     />
                 </div>
