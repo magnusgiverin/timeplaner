@@ -3,6 +3,7 @@ import React from "react";
 import BreakLine from "~/components/General/BreakLine";
 import GreenButton from "~/components/General/GreenButton";
 import Layout from "~/components/General/Layout";
+import { useLanguageContext } from "~/contexts/languageContext";
 
 const About = () => {
     const router = useRouter();
@@ -12,16 +13,26 @@ const About = () => {
         void router.push("/");
     };
     
+    const getButtonLabel = (language: string) => {
+        return language === "no" ? "Gå tilbake" : "Go back"
+    }
+
+    const { language } = useLanguageContext();
+    
+    const getTextHeader = (language: string) => {
+        return language === "no" ? "Kontaktinformasjon kommer" : "Contact information will come";
+      };
+
     return (
         <Layout>
             <div className="mt-20">                
                 <h2 className="flex justify-center font-bold text-5xl my-4 pt-10">
-                    Contact information will come
+                    {getTextHeader(language)}
                 </h2>
             </div>
             <BreakLine />
             <div className="flex flex-col items-center justify-center">
-                <GreenButton text={"Go back"} onClick={handleExploreClick}/>
+                <GreenButton text={getButtonLabel(language)} onClick={handleExploreClick}/>
             </div>
         </Layout>
     );

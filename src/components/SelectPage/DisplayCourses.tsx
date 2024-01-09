@@ -117,8 +117,6 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
     };
 
     const renderSubjects = (subjects: (DetailedCourse | ChosenSubjectsData)[] | undefined, parentIndex: number, level: number) => {
-        console.log(subjects)
-        
         // Check if subjects is undefined or empty
         if (!subjects || subjects.length === 0) {
             return (
