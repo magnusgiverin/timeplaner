@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import SubjectDetails from "../General/SubjectDetails";
 import GreenButton from "../General/GreenButton";
 import type { ChosenSubjectsData, DetailedCourse } from "~/interfaces/StudyPlanData";
+import { useLanguageContext } from "~/contexts/languageContext";
 
 interface DisplayProps {
     chosenSubjects: ChosenSubjectsData[];
@@ -14,6 +15,8 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
 
     // State to track showMore for each group
     const [showMoreMap, setShowMoreMap] = useState<Record<string, boolean>>({});
+
+    const { language } = useLanguageContext();
 
     useEffect(() => {
         resetSelectedSubjects();
@@ -72,6 +75,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
                         checked={selectedPath[level] === subject.name}
                         onClick={handleClick}
                         className="w-3 h-3 flex-shrink-0"
+                        style={{ marginRight: '8px', transform: 'scale(1.5)' }} // Add this style for larger checkboxes
                     />
                     <span className="text-lg">{subject.name}</span>
                 </label>
@@ -93,14 +97,17 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
                 .map(([code, name]) => `${code}: ${name}`)
                 .join('\n');
 
+            const explainLabel = language === "no" ? "Symbolforklaring" : "Symbol Explanation"
+            const modifyLabel = language === "no" ? "Rediger emner" : "Modify courses"
+
             return (
                 <div>
                     <GreenButton
-                        text={'Symbol Explanation'}
+                        text={explainLabel}
                         onClick={() => alert(explanationText)}
                     />
                     <GreenButton
-                        text={'Modify Courses'}
+                        text={modifyLabel}
                         onClick={() => handleRedirect(selectedCourses)}
                         className="ml-2"
                     />
@@ -110,6 +117,8 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleRedirect }) => 
     };
 
     const renderSubjects = (subjects: (DetailedCourse | ChosenSubjectsData)[] | undefined, parentIndex: number, level: number) => {
+        console.log(subjects)
+        
         // Check if subjects is undefined or empty
         if (!subjects || subjects.length === 0) {
             return (

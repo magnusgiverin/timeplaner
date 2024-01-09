@@ -4,12 +4,15 @@ import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
 import { AppContextProvider } from "../contexts/appContext";
+import { LanguageProvider } from "~/contexts/languageContext";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <AppContextProvider>
-      <Component {...pageProps} />
-    </AppContextProvider>
+    <LanguageProvider>
+      <AppContextProvider>
+        <Component {...pageProps} />
+      </AppContextProvider>
+    </LanguageProvider>
   );
 };
 

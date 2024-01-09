@@ -8,6 +8,7 @@ import SubjectDetails from '~/components/General/SubjectDetails';
 import Toolbox from '~/components/ModifyPage/Toolbox';
 import type { Course } from '~/interfaces/CourseData';
 import type { DetailedCourse } from '~/interfaces/StudyPlanData';
+import { useLanguageContext } from '~/contexts/languageContext';
 
 const ModifyPage = () => {
     const router = useRouter();
@@ -21,6 +22,8 @@ const ModifyPage = () => {
     const selectedYear = router.query.year as string;
     const selectedProgramCode = router.query.studyCode as string;
     const selectedSeason = router.query.semester as string;
+
+    const { language } = useLanguageContext();
 
     useEffect(() => {
         // Retrieve the selectedCourses parameter from the URL
@@ -177,11 +180,23 @@ const ModifyPage = () => {
         );
     }
 
+    const getHeaderLabel = (language: string) => {
+        if(language === "no") {
+            const translatedSeason = selectedSeason === 'Spring' ? 'Vår' : 'Høst';
+            const norwegianLabels = ['Første', 'Andre', 'Tredje', 'Fjerde', 'Femte'];
+            return `${selectedProgramCode}, ${norwegianLabels[Number(selectedYear) - 1]}, ${translatedSeason}`
+        } else {
+            return `${selectedProgramCode}, Year ${selectedYear}, ${selectedSeason}`
+        }
+    }
+
+    const backButtonLabel = language === "no" ? "< Velg år" : "< Select year"
+
     return (
         <Layout>
-            <BackButton buttonText="< Select year" />
+            <BackButton buttonText={backButtonLabel}/>
             <div className="flex flex-col items-center justify-center mt-20">
-                <h2>{`${selectedProgramCode}, Year ${selectedYear}, ${selectedSeason}`}</h2>
+                <h2>{getHeaderLabel(language) }</h2>
             </div>
             <div>
                 {renderToolbox()}

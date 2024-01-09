@@ -5,6 +5,7 @@ import { api } from '~/utils/api';
 import { generateICal, downloadICal } from './GenerateIcal';
 import GreenButton from '../../components/General/GreenButton';
 import IcsCalendar from './IcsCalendar';
+import { useLanguageContext } from '~/contexts/languageContext';
 
 interface CalendarDisplayProps {
   subjectList: Array<string | undefined>;
@@ -17,6 +18,7 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({ subjectList }) => {
   const [indexes, setIndexes] = useState<Record<string, number>>({}); // Add this line
 
   const mutation = api.semesterPlan.getSemesterPlan.useMutation();
+  const { language } = useLanguageContext();
 
   useEffect(() => {
     let isMounted = true;
@@ -67,10 +69,18 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({ subjectList }) => {
     downloadICal(ical, 'calendar.ics');
   };  
   
+  const getDownloadLabel = (language: string) => {
+    return language === "no" ? "Last ned ICS" : "Download ICS"
+  }
+
+  const getSaveLabel = (language: string) => {
+    return language === "no" ? "Lagre på siden" : "Save on site"
+  }
+
   return (
     <div>
-      <GreenButton onClick={handleDownload} text={'Download ICS'}/>
-      <GreenButton className='ml-4' onClick={handleDownload} text={'Save'}/>
+      <GreenButton onClick={handleDownload} text={getDownloadLabel(language)}/>
+      <GreenButton className='ml-4' onClick={handleDownload} text={getSaveLabel(language)}/>
       <div className='flex-column flex-row flex-shrink mt-2 mb-2 justify-center mx-auto '>
         {ical && <IcsCalendar icsFileContent={ical} indexes={indexes} />}
       </div>

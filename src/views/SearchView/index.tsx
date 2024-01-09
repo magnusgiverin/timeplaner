@@ -4,14 +4,15 @@ import Select, { type SingleValue } from 'react-select';
 import type { Program } from '~/interfaces/ProgramData';
 import { api } from "~/utils/api";
 import { useRouter } from 'next/router';
+import { useLanguageContext } from '~/contexts/languageContext';
 
 const Search = () => {
     const [programs, setPrograms] = useState<Program[]>([]);
     const [filteredPrograms, setFilteredPrograms] = useState<Program[]>([]);
-    const [language, setLanguage] = useState<string>('no'); // Default language is English
     const [showAll, setShowAll] = useState<boolean>(false); // Show all programs or only the first 20
     const router = useRouter();
-    
+    const { language } = useLanguageContext();
+
     // Use useQuery directly within the functional component
     const result = api.program.programListByLang.useQuery(language);
 
@@ -51,10 +52,6 @@ const Search = () => {
         }
     };
 
-    const handleLanguageToggle = () => {
-        setLanguage((prevLanguage) => (prevLanguage === 'en' ? 'no' : 'en'));
-    };
-
     const handleInputChange = (inputValue: string) => {
         // If something is typed, show all programs
         if (inputValue.trim() !== '') {
@@ -67,25 +64,17 @@ const Search = () => {
         }
     };
 
+    const titleText = language == "no" ? "Søk studieprogram" : "Search study programs"
+    const placeHolderText = language == "no" ? "Skriv her" : "Type here"
+
     return (
         <div>
-            <h2 className="mb-4">Search Programs</h2>
-            <div className="mb-3">
-                <label className="mr-2">
-                    Language Toggle:
-                </label>
-                <input
-                    type="checkbox"
-                    checked={language === 'no'}
-                    onChange={handleLanguageToggle}
-                />
-                <span className="ml-2">Norwegian</span>
-            </div>
+            <h2 className="mb-4">{titleText}</h2>
             <Select
                 className="text-black rounded-md"
                 options={options}
                 isSearchable
-                placeholder="Select a program"
+                placeholder={placeHolderText}
                 onChange={handleSelectChange}
                 onInputChange={handleInputChange}
                 menuIsOpen={showAll}

@@ -7,6 +7,7 @@ import Layout from '~/components/General/Layout';
 import type { Course } from '~/interfaces/CourseData';
 import { generateColor } from '~/views/Calendar/Colors';
 import type { DetailedCourse } from '~/interfaces/StudyPlanData';
+import { useLanguageContext } from '~/contexts/languageContext';
 
 const Calendar: React.FC = () => {
     const router = useRouter();
@@ -36,18 +37,38 @@ const Calendar: React.FC = () => {
     const selectedProgramCode = router.query.studyCode as string;
     const selectedSeason = router.query.semester as string;
 
+    const { language } = useLanguageContext();
+
+    const getHeaderLabel = (language: string) => {
+        if(language === "no") {
+            const translatedSeason = selectedSeason === 'Spring' ? 'Vår' : 'Høst';
+            const norwegianLabels = ['Første', 'Andre', 'Tredje', 'Fjerde', 'Femte'];
+            return `${selectedProgramCode}, ${norwegianLabels[Number(selectedYear) - 1]}, ${translatedSeason}`
+        } else {
+            return `${selectedProgramCode}, Year ${selectedYear}, ${selectedSeason}`
+        }
+    }  
+
+    const getSelectedHeaderLabel = (language: string) => {
+        return language === "no" ? "Valgte emner" : "Selected Courses:"
+    }
+
+    const getSelectedExplainationLabel = (language: string) => {
+        return language === "no" ? "Trykk på et emne for å redigere timene" : "Click on a course to modify the events shown"
+    }
+
     return (
         <Layout>
             <BackButton />
             <div className="flex flex-col items-center justify-center mt-20">
-                <h2>{`${selectedProgramCode}, Year ${selectedYear}, ${selectedSeason}`}</h2>
+                <h2>{getHeaderLabel(language)}</h2>
             </div>
             <BreakLine />
             <CalendarDisplay subjectList={selectedCourses.map((course) => "courseid" in course ? course.courseid : course.code)} />
             <BreakLine />
             <div>
-                <h2>Selected Courses:</h2>
-                <p>Click on the course to modify the events shown</p>
+                <h2>{getSelectedHeaderLabel(language)}</h2>
+                <p>{getSelectedExplainationLabel(language)}</p>
                 <ul className="flex flex-wrap list-none p-0">
                     {Array.isArray(selectedCourses) ? (
                         selectedCourses.map((course, index) => (

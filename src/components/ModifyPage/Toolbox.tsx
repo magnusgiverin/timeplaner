@@ -5,6 +5,7 @@ import type { Course } from '~/interfaces/CourseData';
 import Select from 'react-select';
 import type { PropsValue, SingleValue } from 'react-select';
 import type { DetailedCourse } from '~/interfaces/StudyPlanData';
+import { useLanguageContext } from '~/contexts/languageContext';
 
 interface ToolboxProps {
     onConfirm: () => void;
@@ -96,19 +97,37 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
         }
     };
 
+    const getShowAllLabel = (state: string, language: string) => {
+        if(language === "no") {
+            return state === "non-selected" ? "Vis bare valgte" : "Vis alle"
+        }else {
+            return state === "non-selected" ? "Show selected only" : "Show all"
+        }
+    }
+
+    const getConfirmLabel = (language: string) => {
+        return language === "no" ? "Gå videre" : "Confirm"
+    }
+
+    const getPlaceholderLabel = (language: string) => {
+        return language === "no" ? "Legg til et fag i studieplanen" : "Add a program to your plan"
+    }
+
+    const { language } = useLanguageContext();
+
     return (
         <div>
             <div className="flex w-min-max">
                 {!allSelected && (
                     <GreenButton
                         onClick={onToggleShowAll}
-                        text={state === "non-selected" ? "Show selected only" : "Show all"}
+                        text={getShowAllLabel(state, language)}
                         className='mr-2 w-60'
                     />
                 )}
                 <GreenButton
                     onClick={onConfirm}
-                    text="Confirm"
+                    text={getConfirmLabel(language)}
                     className='mr-2'
                 />
             </div>
@@ -117,7 +136,7 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
                     className="text-black rounded-md mt-2 w-100"
                     options={options}
                     isSearchable
-                    placeholder="Add a program to your plan"
+                    placeholder={getPlaceholderLabel(language)}
                     onChange={handleSelectChange}
                     onInputChange={handleInputChange}
                     menuIsOpen={showAll}

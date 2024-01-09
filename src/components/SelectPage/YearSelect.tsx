@@ -1,5 +1,6 @@
 // components/Program.tsx
 import React, { useEffect, useState } from 'react';
+import { useLanguageContext } from '~/contexts/languageContext';
 import type { Program, } from "~/interfaces/ProgramData";
 
 interface YearSelectProps {
@@ -17,6 +18,8 @@ const YearSelect: React.FC<YearSelectProps> = ({
   selectedSeason,
   selectedIndex,
 }) => {
+  const { language } = useLanguageContext();
+
   const numberOfButtons =
     selectedProgram.studyprogstudylevelcode === 580.0 ? 2
       : selectedProgram.studyprogstudylevelcode === 390.0 ? 3
@@ -37,6 +40,18 @@ const YearSelect: React.FC<YearSelectProps> = ({
     setSelectedButtonIndex(selectedIndex);
   }, [selectedIndex]);
 
+  const getYearLabel = (language: string, index: number) => {
+    if (language === 'no') {
+      const norwegianLabels = ['Første', 'Andre', 'Tredje', 'Fjerde', 'Femte'];
+      return `${norwegianLabels[index]}`;
+    } else {
+      return `Year ${index + 1}`;
+    }
+  };
+
+  const seasonLabel = language === 'no' ? 'Årstid' : 'Season';
+  const translatedSeason = selectedSeason === 'Spring' ? 'Vår' : 'Høst';
+
   const buttons = Array.from({ length: numberOfButtons }, (_, index) => (
     <button
       key={index}
@@ -45,7 +60,7 @@ const YearSelect: React.FC<YearSelectProps> = ({
       }`}
       onClick={() => handleButtonClick(index)}
     >
-      Year {index + 1}
+      {getYearLabel(language, index)}
     </button>
   ));
 
@@ -57,7 +72,7 @@ const YearSelect: React.FC<YearSelectProps> = ({
         onClick={() => setSeason(selectedSeason === 'Spring' ? 'Autumn' : 'Spring')}
         className="bg-blue-500 text-white px-4 py-2 rounded-md mt-4"
       >
-        Chosen Season: {selectedSeason}
+      {seasonLabel}: {language === 'no' ? translatedSeason : selectedSeason}
       </button>
     </div>
   );
