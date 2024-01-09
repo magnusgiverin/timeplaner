@@ -8,8 +8,8 @@ export const studyPlanRouter = createTRPCRouter({
             throw new Error("Input is missing.");
         }
 
-        const studyPlan = await opts.ctx.db.studyPlan.findUnique({
-            where: { studyPlanId: opts.input },
+        const studyPlan = await opts.ctx.db.studyplan.findUnique({
+            where: { studyplanid: opts.input },
         }) as StudyPlan | null;
 
         if (!studyPlan) {
@@ -36,9 +36,9 @@ export const studyPlanRouter = createTRPCRouter({
             const studyPlanId = `${input.studyProgCode}-${input.year}-${new Date().getFullYear()}`;
             
             // Save the study plan in the database
-            await ctx.db.studyPlan.create({
+            await ctx.db.studyplan.create({
                 data: {
-                    studyPlanId: studyPlanId,
+                    studyplanid: studyPlanId,
                     json_data: jsonString,
                 },
             });

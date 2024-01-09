@@ -27,8 +27,8 @@ const Search = () => {
     }, [result.data, language]);
 
     const options = filteredPrograms.map((program) => ({
-        value: program.programId,
-        label: program.title + " - " + program.studyprogCode + " (" + program.studyprogStudyLevel + ")",
+        value: program.programid,
+        label: program.title + " - " + program.studyprogcode + " (" + program.studyprogstudylevel + ")",
     }));
 
     const handleSelectChange = async (
@@ -36,12 +36,12 @@ const Search = () => {
     ) => {
         // Use the selectedOption to get the course details
         if (selectedOption?.value) {
-            const selectedProgram = programs.find((program) => program.programId === selectedOption.value);
+            const selectedProgram = programs.find((program) => program.programid === selectedOption.value);
 
             if (selectedProgram) {
                 try {
                   await router.push({
-                    pathname: `/program/${selectedProgram.studyprogCode}`,
+                    pathname: `/program/${selectedProgram.studyprogcode}`,
                   });
                 } catch (error) {
                   // Handle the error if needed

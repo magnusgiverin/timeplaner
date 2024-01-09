@@ -24,7 +24,7 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
 
     // Use useQuery directly within the functional component
     const result = api.course.courseList.useQuery();
-
+    
     // useEffect to handle side effects
     useEffect(() => {
         // Check if data is available before setting the state
@@ -39,8 +39,8 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
             // Sort the filtered courses array based on courseId
             const sortedCourses = filteredCourses.sort((a: Course, b: Course) => {
                 // Ensure that courseId is available before comparing
-                if (a.courseId && b.courseId) {
-                    return a.courseId.localeCompare(b.courseId);
+                if (a.courseid && b.courseid) {
+                    return a.courseid.localeCompare(b.courseid);
                 }
                 return 0; // Default return if courseId is not available
             });
@@ -62,7 +62,7 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
       ) => {
         // Use the selectedOption to get the course details
         if (selectedOption?.value) {
-            const selectedCourse = courses.find((course) => course.courseId === selectedOption.value);
+            const selectedCourse = courses.find((course) => course.courseid === selectedOption.value);
 
             if (selectedCourse) {
                 // Callback to the onSearch
@@ -78,13 +78,13 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
 
         // Use the inputValue to filter the options and update the state
         const filteredCourses = courses.filter((course) =>
-            course.courseId.toLowerCase().includes(inputValue.toLowerCase()) ||
+            course.courseid.toLowerCase().includes(inputValue.toLowerCase()) ||
             course.name.toLowerCase().includes(inputValue.toLowerCase())
         );
 
         const updatedOptions = filteredCourses.slice(0, 20).map((course) => ({
-            value: course.courseId,
-            label: course.courseId + ' - ' + course.name,
+            value: course.courseid,
+            label: course.courseid + ' - ' + course.name,
         }));
 
         if (inputValue.trim() !== '') {

@@ -27,14 +27,14 @@ const SubjectDetails: React.FC<SubjectDetailsProps> = ({ subject }) => {
         // Course type
         return (
             <a
-                key={subject.courseId}
-                href={`https://www.ntnu.no/studier/emner/${subject.courseId}#tab=omEmnet`}
+                key={subject.courseid}
+                href={`https://www.ntnu.no/studier/emner/${subject.courseid}#tab=omEmnet`}
                 className="inline-block bg-blue-500 text-white p-2 mt-2 mb-2 rounded-md text-decoration-none"
                 target="_blank"
                 rel="noopener noreferrer"
             >
                 <div>
-                    {`${subject.courseId}: ${subject.name}`}
+                    {`${subject.courseid}: ${subject.name}`}
                 </div>
             </a>
         );

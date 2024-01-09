@@ -18,9 +18,9 @@ const YearSelect: React.FC<YearSelectProps> = ({
   selectedIndex,
 }) => {
   const numberOfButtons =
-    selectedProgram.studyprogStudyLevelCode === 580.0 ? 2
-      : selectedProgram.studyprogStudyLevelCode === 390.0 ? 3
-      : selectedProgram.studyprogStudyLevelCode === 590.0? 5
+    selectedProgram.studyprogstudylevelcode === 580.0 ? 2
+      : selectedProgram.studyprogstudylevelcode === 390.0 ? 3
+      : selectedProgram.studyprogstudylevelcode === 590.0? 5
       : 1;
 
   const [selectedButtonIndex, setSelectedButtonIndex] = useState<number>(selectedIndex);
@@ -51,7 +51,7 @@ const YearSelect: React.FC<YearSelectProps> = ({
 
   return (
     <div className="text-center">
-      <h2 className="flex justify-center mt-10">{selectedProgram.studyprogCode}</h2>
+      <h2 className="flex justify-center mt-10">{selectedProgram.studyprogcode}</h2>
       <div className="flex-wrap">{buttons}</div>
       <button
         onClick={() => setSeason(selectedSeason === 'Spring' ? 'Autumn' : 'Spring')}

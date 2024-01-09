@@ -1,5 +1,4 @@
-import type { CourseGroup, JsonData, StudyDirection, StudyPeriod, StudyWayPoint, SubjectStructure, ChosenSubjectsData } from "~/interfaces/StudyPlanData";
-import type { StudyPlan } from "@prisma/client";
+import type { CourseGroup, JsonData, StudyDirection, StudyPeriod, StudyWayPoint, SubjectStructure, ChosenSubjectsData, StudyPlan } from "~/interfaces/StudyPlanData";
 import { api } from "~/utils/api";
 import { useEffect } from "react";
 

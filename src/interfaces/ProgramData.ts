@@ -1,8 +1,8 @@
 export interface Program {
-  programId: string;
+  programid: string;
   title: string;
-  studyprogCode: string;
-  studyprogName: string;
-  studyprogStudyLevel: string;
-  studyprogStudyLevelCode: number;
+  studyprogcode: string;
+  studyprogname: string;
+  studyprogstudylevel: string;
+  studyprogstudylevelcode: number;
 }

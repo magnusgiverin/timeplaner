@@ -43,7 +43,7 @@ const Calendar: React.FC = () => {
                 <h2>{`${selectedProgramCode}, Year ${selectedYear}, ${selectedSeason}`}</h2>
             </div>
             <BreakLine />
-            <CalendarDisplay subjectList={selectedCourses.map((course) => "courseId" in course ? course.courseId : course.code)} />
+            <CalendarDisplay subjectList={selectedCourses.map((course) => "courseid" in course ? course.courseid : course.code)} />
             <BreakLine />
             <div>
                 <h2>Selected Courses:</h2>
@@ -66,7 +66,7 @@ const Calendar: React.FC = () => {
                                         }}
                                     />
                                     <a
-                                        href={`https://www.ntnu.no/studier/emner/${'courseId' in course ? course.courseId : course.code}#tab=omEmnet`}
+                                        href={`https://www.ntnu.no/studier/emner/${'courseid' in course ? course.courseid : course.code}#tab=omEmnet`}
                                         className="inline-block bg-blue-500 text-white p-2 mt-2 mb-2 rounded-md text-decoration-none"
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -75,7 +75,7 @@ const Calendar: React.FC = () => {
                                             {('studyChoice' in course && 'courseGroupName' in course) ? (
                                                 `${course.code}: ${course.name}`
                                             ) : (
-                                                `${course.courseId}: ${course.name}`
+                                                `${course.courseid}: ${course.name}`
                                             )}
                                         </div>
                                     </a>

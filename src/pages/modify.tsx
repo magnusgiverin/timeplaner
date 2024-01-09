@@ -133,11 +133,11 @@ const ModifyPage = () => {
                     onConfirm={handleRedirect}
                     onSearch={(selectedCourse) => {
                         // Find the course with the same code in allCourses
-                        const foundCourse = shownCourses.find(course => course.code === selectedCourse.courseId);
+                        const foundCourse = shownCourses.find(course => course.code === selectedCourse.courseid);
 
                         if (foundCourse) {
                             // Check if the course is not already in shownCourses
-                            if (!shownCourses.some(course => course.code === selectedCourse.courseId)) {
+                            if (!shownCourses.some(course => course.code === selectedCourse.courseid)) {
                                 // Append the found course to shownCourses
                                 setShownCourses((prevShownCourses) => [...prevShownCourses, foundCourse]);
                             }
@@ -207,13 +207,13 @@ const ModifyPage = () => {
                                 <li key={index}>
                                     <input
                                         type="checkbox"
-                                        id={course.courseId}
-                                        name={`subjectGroup_${"search"}_${course.courseId}`}
+                                        id={course.courseid}
+                                        name={`subjectGroup_${"search"}_${course.courseid}`}
                                         checked={isCourseSelected(course)}
                                         onChange={() => {
                                             toggleSelection(course);
                                             setSelectedFromToolbox((prevSelectedFromToolbox) => {
-                                                return prevSelectedFromToolbox.filter((selected) => selected.courseId !== course.courseId);
+                                                return prevSelectedFromToolbox.filter((selected) => selected.courseid !== course.courseid);
                                             });
                                         }}
                                         style={{ marginRight: '8px', transform: 'scale(1.5)' }} // Add this style for larger checkboxes

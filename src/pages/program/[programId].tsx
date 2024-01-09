@@ -37,7 +37,7 @@ const ProgramPage = () => {
             selectedCourses: encodeURIComponent(coursesString),
             year: encodeURIComponent(index + 1),
             semester: encodeURIComponent(season),
-            studyCode: encodeURIComponent(program ? program.studyprogCode : "N/A"),
+            studyCode: encodeURIComponent(program ? program.studyprogcode : "N/A"),
         };
 
         void router.push({
@@ -62,7 +62,7 @@ const ProgramPage = () => {
         program && index !== -1 && (
             <CourseLogic
                 year={index + 1}
-                programCode={program?.studyprogCode}
+                programCode={program?.studyprogcode}
                 season={season}
                 onSubjectsStructureChange={handleSubjectsStructureChange}
             />

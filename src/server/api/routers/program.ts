@@ -13,7 +13,7 @@ export const programRouter = createTRPCRouter({
     }
 
     const program = await opts.ctx.db.program.findFirst({
-      where: { studyprogCode: opts.input },
+      where: { studyprogcode: opts.input },
     }) as Program | null;
 
     if (!program) {
@@ -29,8 +29,8 @@ export const programRouter = createTRPCRouter({
     }
   
     const programs = await opts.ctx.db.program.findMany({
-      where: { programId: { endsWith: opts.input } },
-    });
+      where: { programid: { endsWith: opts.input } },
+    }) as Program[];
     
     if (!programs || programs.length === 0) {
       throw new Error("Programs not found");
