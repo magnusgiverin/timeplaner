@@ -34,7 +34,7 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({ subjectList }) => {
       try {
         const response = await query.refetch();
 
-        if (isMounted && response && response.data) {
+        if (isMounted && response?.data) {          
           setSemesterPlans(response.data);
 
           // Generate indexes based on subjectList

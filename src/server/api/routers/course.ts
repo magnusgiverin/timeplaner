@@ -1,7 +1,19 @@
 import type { Course } from "~/interfaces/CourseData";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { useAppContext } from "~/contexts/appContext";
 import { z } from "zod";
+
+interface CourseData {
+  id: string;
+  name: string;
+  create_activity_zoom: boolean | null;
+  authorized_netgroups: string;
+  nofterms?: number | null;
+  terminnr?: number | null;
+  fullname: string;
+  fullname_en?: string | null;
+  fullname_nn?: string | null;
+  idtermin?: string | null;
+}
 
 export const courseRouter = createTRPCRouter({
   courseList: publicProcedure
@@ -9,27 +21,22 @@ export const courseRouter = createTRPCRouter({
       semesterCode: z.string(),
     }))
     .query(async ({ input }) => {
-
       const { semesterCode } = input;
 
       const url = 'https://tp.educloud.no/ntnu/timeplan/emner.php?sem=' + semesterCode;
 
       try {
-        const response = await fetch(url)
+        const response = await fetch(url);
 
         if (response.ok) {
           const rawData = await response.text();
           const matches = /var courses = (\[.*?\]);/s.exec(rawData);
 
           if (matches) {
-            // Extracted content of the "courses" variable
-            const coursesData = matches[1];
+            const coursesData: string | null = matches[1] ?? null;
+            const coursesList = coursesData !== null ? JSON.parse(coursesData) as CourseData[] : [];
 
-            // Convert the string to a TypeScript object (array of objects)
-            const coursesList = coursesData ? JSON.parse(coursesData) : [];
-
-            // Assuming coursesList is an array of Course objects or can be mapped to Course
-            const courses: Course[] = coursesList.map((courseData: any) => ({
+            const courses: Course[] = coursesList.map((courseData: CourseData) => ({
               courseid: courseData.id,
               name: courseData.name,
               create_activity_zoom: courseData.create_activity_zoom,
@@ -48,17 +55,14 @@ export const courseRouter = createTRPCRouter({
 
             return courses;
           } else {
-            // Handle the case when the "courses" variable is not found in the response
             throw new Error('Variable "courses" not found in the response');
           }
         } else {
-          // Handle non-OK response
           throw new Error(`Failed to fetch courses. Status code: ${response.status}`);
         }
       } catch (error) {
-        // Handle fetch error
         console.error('Error fetching courses:', error);
         throw new Error('Error fetching courses');
       }
-    })
+    }),
 });

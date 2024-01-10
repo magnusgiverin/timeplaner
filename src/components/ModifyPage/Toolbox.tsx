@@ -7,6 +7,7 @@ import type { PropsValue, SingleValue } from 'react-select';
 import type { DetailedCourse } from '~/interfaces/StudyPlanData';
 import { useLanguageContext } from '~/contexts/languageContext';
 import { useAppContext } from '~/contexts/appContext';
+import BreakLine from '../General/BreakLine';
 
 interface ToolboxProps {
     onConfirm: () => void;
@@ -138,22 +139,21 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
     return (
         <div>
             <div className="flex w-min-max">
-                {!allSelected && (
-                    <GreenButton
-                        onClick={onToggleShowAll}
-                        text={getShowAllLabel(state, language)}
-                        className='mr-2 w-60'
-                    />
-                )}
                 <GreenButton
                     onClick={onConfirm}
                     text={getConfirmLabel(language)}
                     className='mr-2'
                 />
+                {!allSelected && (
+                    <GreenButton
+                        onClick={onToggleShowAll}
+                        text={getShowAllLabel(state, language)}
+                    />
+                )}
             </div>
             <div>
                 <Select
-                    className="text-black rounded-md mt-2 w-100"
+                    className="text-black rounded-full mt-2 w-1/3"
                     options={options}
                     isSearchable
                     placeholder={getPlaceholderLabel(language)}
@@ -163,6 +163,7 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
                     value={selectedValue} // Set the value prop to control the selected value
                 />
             </div>
+            <BreakLine/>
         </div>
     );
 };

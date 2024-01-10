@@ -1,6 +1,6 @@
+import { useEffect } from "react";
 import type { CourseGroup, StudyDirection, StudyPeriod, StudyWayPoint, SubjectStructure, ChosenSubjectsData, StudyPlan } from "~/interfaces/StudyPlanData";
 import { api } from "~/utils/api";
-import { useEffect, useState } from "react";
 
 interface CourseLogicProps {
     year: number;
@@ -101,33 +101,11 @@ const getAllSubjects = (jsonData: StudyPlan, semester: number): SubjectStructure
     return subjectsData;
 };
 
-const fetchData = async (programCode: string, studyYear: number, semester: number, onSubjectsStructureChange: (subjectStructure: SubjectStructure) => void) => {
-  const query = api.studyPlan.getStudyPlan.useQuery({
-    studyProgCode: programCode,
-    year: studyYear,
-  });
-
-  const { data: studyPlan } = query;
-
-  try {
-    await query.refetch();
-
-    if (studyPlan) {
-      const subjectStructure = getAllSubjects(studyPlan.studyPlanData, semester);
-      onSubjectsStructureChange(subjectStructure);
-    }
-  } catch (error) {
-    console.error('Error refetching study plan:', error);
-  }
-};
-
 const CourseLogic: React.FC<CourseLogicProps> = ({ year, programCode, season, onSubjectsStructureChange }) => {
   const semester = season === 'Autumn' ? year * 2 - 2 : year * 2 - 1;
   const autumnSeason = isAutumnSeason();
   const studyYear = autumnSeason ? getCurrentYear() - year + 1 : getCurrentYear() - year;
 
-  console.log(programCode, year, season)
-
   const query = api.studyPlan.getStudyPlan.useQuery({
     studyProgCode: programCode,
     year: studyYear,
@@ -135,34 +113,26 @@ const CourseLogic: React.FC<CourseLogicProps> = ({ year, programCode, season, on
 
   const { data: studyPlan } = query;
 
-  // Define the fetchData function outside useEffect
-  const fetchData = async () => {
-    try {
-      await query.refetch();
-
-      // Handle the response if needed
-      if (studyPlan) {
-        // Fetch additional data or update state if necessary
-        // Example: setSemesterPlans(response);
-        const subjectStructure = getAllSubjects(studyPlan.studyPlanData, semester);
-        onSubjectsStructureChange(subjectStructure);
-      }
-    } catch (error) {
-      console.error('Error refetching study plan:', error);
-    }
-  };
-
+  // Move the refetch logic directly into the useEffect
   useEffect(() => {
-    let isMounted = true;
+    const fetchData = async () => {
+      try {
+        await query.refetch();
 
-    // Call the fetchData function inside useEffect
-    void fetchData();
-
-    return () => {
-      isMounted = false;
+        // Handle the response if needed
+        if (studyPlan) {
+          // Fetch additional data or update state if necessary
+          // Example: setSemesterPlans(response);
+          const subjectStructure = getAllSubjects(studyPlan.studyPlanData, semester);
+          onSubjectsStructureChange(subjectStructure);
+        }
+      } catch (error) {
+        console.error('Error refetching study plan:', error);
+      }
     };
-  }, [year, programCode, semester, studyPlan]);
 
+    void fetchData(); // Invoke the fetchData function within useEffect
+  }, [query.refetch, studyPlan, semester, onSubjectsStructureChange]);
 
   return null;
 };

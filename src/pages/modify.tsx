@@ -103,7 +103,6 @@ const ModifyPage = () => {
                     <BreakLine />
                     <h3>Symbol Explanation</h3>
                     <p>{explanationText}</p>
-                    <BreakLine />
                 </div>
             );
         }
@@ -201,7 +200,6 @@ const ModifyPage = () => {
             </div>
             <div>
                 {renderToolbox()}
-                {renderSymbolExplanation()}
                 {Object.entries(groupedCoursesByGroup).map(([group, coursesInGroup]) => (
                     <div key={group}>
                         <h3 className='text-2xl font-bold mt-2 mb-2'>{group}</h3>
@@ -240,6 +238,7 @@ const ModifyPage = () => {
                         </ul>
                     </div>
                 )}
+                {renderSymbolExplanation()}
             </div>
         </Layout>
     );

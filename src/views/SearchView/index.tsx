@@ -21,24 +21,30 @@ const Search = () => {
 
   // useEffect to handle side effects
   useEffect(() => {
-    // Check if data is already available
-    if (!query.isLoading && query.data) {
-      // Access the data and handle loading/error states as needed
-      const { data: response } = query;
-
-      // Sort the programs array based on title
-      const sortedPrograms = response.sort((a: Program, b: Program) => a.title.localeCompare(b.title));
-      setPrograms(sortedPrograms);
-      setFilteredPrograms(sortedPrograms.slice(0, 20));
-    } else {
-      // Fetch data using the query
-      query.refetch();
-    }
-
-    return () => {
-      // Cleanup or handle any necessary actions on component unmount
+    const fetchData = async () => {
+      try {
+        // Check if data is already available
+        if (!query.isLoading && query.data) {
+          // Access the data and handle loading/error states as needed
+          const { data: response } = query;
+  
+          // Sort the programs array based on title
+          const sortedPrograms = response.sort((a: Program, b: Program) => a.title.localeCompare(b.title));
+          setPrograms(sortedPrograms);
+          setFilteredPrograms(sortedPrograms.slice(0, 20));
+        } else {
+          // Fetch data using the query
+          await query.refetch();
+        }
+      } catch (error) {
+        // Handle error
+        console.error('Error fetching data:', error);
+      }
     };
+  
+    void fetchData();
   }, [language, query.isLoading, query.data]);
+  
 
   const options = filteredPrograms.map((program) => ({
     value: program.programid,
