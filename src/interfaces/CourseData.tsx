@@ -1,24 +1,6 @@
 export interface Course {
     courseid: string;
     name: string;
-    ownerid?: number | null;
-    showtype?: boolean | null;
-    detailtype?: string | null;
-    name_en?: string | null;
-    name_nn?: string | null;
-    coursetype?: string | null;
-    tpsort?: string | null;
-    showdiscipline?: boolean | null;
-    campusid?: string | null;
-    yearfrom_und?: number | null;
-    seasonfrom_und?: string | null;
-    yearto_und?: string | null;
-    seasonto_und?: string | null;
-    yearfrom_ex?: number | null;
-    seasonfrom_ex?: string | null;
-    yearto_ex?: string | null;
-    seasonto_ex?: string | null;
-    departmentid_secondary?: number | null;
     create_activity_zoom?: boolean | null;
     authorized_netgroups?: string | null;
     nofterms?: number | null;

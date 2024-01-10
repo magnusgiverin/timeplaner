@@ -6,6 +6,7 @@ import Select from 'react-select';
 import type { PropsValue, SingleValue } from 'react-select';
 import type { DetailedCourse } from '~/interfaces/StudyPlanData';
 import { useLanguageContext } from '~/contexts/languageContext';
+import { useAppContext } from '~/contexts/appContext';
 
 interface ToolboxProps {
     onConfirm: () => void;
@@ -16,25 +17,43 @@ interface ToolboxProps {
     allSelected: boolean;
 }
 
-const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,  exclude, state, allSelected }) => {
+const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll, exclude, state, allSelected }) => {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [courses, setCourses] = useState<Course[]>([]);
     const [options, setOptions] = useState<{ value: string; label: string }[]>([]);
     const [selectedValue, setSelectedValue] = useState<PropsValue<{ value: string; label: string; }> | null>(null);
     const [showAll, setShowAll] = useState<boolean>(false); // Show all programs or only the first 20
 
+    const { season } = useAppContext();
+
+    const getCurrentYear = () => new Date().getFullYear();
+    const getCurrentMonth = () => new Date().getMonth() + 1; // Month is zero-indexed, so add 1
+
+    // Determine the semester code based on the current season and month
+    const getSemesterCode = () => {
+        const currentYear = getCurrentYear() % 100; // Get the last two digits of the current year
+        const currentMonth = getCurrentMonth();
+
+        // Determine the semester code based on the season and month
+        if (season === 'Spring' || (season === 'Autumn' && currentMonth >= 1 && currentMonth <= 6)) {
+            return `${currentYear}v`;
+        } else {
+            return `${currentYear}h`;
+        }
+    };
+
     // Use useQuery directly within the functional component
-    const result = api.course.courseList.useQuery();
-    
+    const query = api.course.courseList.useQuery({
+        semesterCode: getSemesterCode(),
+    });
+
     // useEffect to handle side effects
     useEffect(() => {
         // Check if data is available before setting the state
-        if (result.data) {
+        if (query.data) {
             // Filter courses based on the selected
-            const filteredCourses = result.data.filter((course: Course) => {
-                return (
-                    !exclude.includes(course) // Check if courseId is in the exclude list
-                );
+            const filteredCourses = query.data.filter((course: Course) => {
+                return !exclude.includes(course); // Check if courseId is in the exclude list
             });
 
             // Sort the filtered courses array based on courseId
@@ -48,7 +67,8 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
 
             setCourses(sortedCourses);
         }
-    }, [result.data, exclude]); // Include selectedSeason in the dependency array
+    }, [query.data, exclude]); // Include exclude in the dependency array
+
 
     // useEffect to handle no input
     useEffect(() => {
@@ -60,7 +80,7 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
 
     const handleSelectChange = (
         selectedOption: SingleValue<{ value: string; label: string }>,
-      ) => {
+    ) => {
         // Use the selectedOption to get the course details
         if (selectedOption?.value) {
             const selectedCourse = courses.find((course) => course.courseid === selectedOption.value);
@@ -98,15 +118,15 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
     };
 
     const getShowAllLabel = (state: string, language: string) => {
-        if(language === "no") {
+        if (language === "no") {
             return state === "non-selected" ? "Vis bare valgte" : "Vis alle"
-        }else {
+        } else {
             return state === "non-selected" ? "Show selected only" : "Show all"
         }
     }
 
     const getConfirmLabel = (language: string) => {
-        return language === "no" ? "Gå videre" : "Confirm"
+        return language === "no" ? "Gå til kalender" : "Go to calendar";
     }
 
     const getPlaceholderLabel = (language: string) => {

@@ -21,7 +21,7 @@ const ModifyPage = () => {
 
     const selectedYear = router.query.year as string;
     const selectedProgramCode = router.query.studyCode as string;
-    const selectedSeason = router.query.semester as string;
+    const selectedSeason = router.query.season as string;
 
     const { language } = useLanguageContext();
 
@@ -191,6 +191,7 @@ const ModifyPage = () => {
     }
 
     const backButtonLabel = language === "no" ? "< Velg år" : "< Select year"
+    const addedFromToolboxLabel = language === "no" ? "Emner lagt til via søk" : "Added Courses from Search"
 
     return (
         <Layout>
@@ -216,7 +217,7 @@ const ModifyPage = () => {
                 {/* Display selected courses from the toolbox */}
                 {selectedFromToolbox.length !== 0 && (
                     <div>
-                        <h3 className='text-2xl font-bold mt-2 mb-2'>Added Courses from Search</h3>
+                        <h3 className='text-2xl font-bold mt-2 mb-2'>{addedFromToolboxLabel}</h3>
                         <ul>
                             {selectedFromToolbox.map((course, index) => (
                                 <li key={index}>

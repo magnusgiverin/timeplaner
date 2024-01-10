@@ -95,8 +95,6 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
     const handleCalendarRedirect = (courseList: DetailedCourse[]) => {
         const coursesString = JSON.stringify(courseList);
 
-        console.log(index + 1)
-
         const queryParams = {
             chosenCourses: encodeURIComponent(coursesString),
             year: encodeURIComponent(index + 1),
@@ -147,10 +145,12 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
     };
 
     const renderSubjects = (subjects: (DetailedCourse | ChosenSubjectsData)[] | undefined, parentIndex: number, level: number) => {
+        const messageLabel = language === "no" ? "Ingen fag funnet for dette kurset." : "No subjects found for this course."
+        
         // Check if subjects is undefined or empty
         if (!subjects || subjects.length === 0) {
             return (
-                <p className="text-red-500">No subjects found for this course.</p>
+                <p className="text-red-500">{messageLabel}</p>
             ); // Display a message when there are no subjects
         }
 

@@ -1,9 +1,4 @@
 export interface StudyPlan {
-    studyPlanId: string;
-    json_data: string;
-}
-
-export interface JsonData {
     publisedYears: number[];
     settings: Settings;
     studyplan: EmbeddedStudyPlan;

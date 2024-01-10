@@ -1,41 +1,52 @@
+import { z } from "zod";
 import type { Program } from "~/interfaces/ProgramData";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export const programRouter = createTRPCRouter({
-  programList: publicProcedure.query(async ({ ctx }) => {
-    const programs = await ctx.db.program.findMany() as Program[];
-    return programs;
-  }),
+  getProgramListByLang: publicProcedure
+    .input(z.object({
+      language: z.string(),
+    }))
+    .query(async ({ input }) => {
+      // Destructure the input
+      const { language } = input;
 
-  getProgramById: publicProcedure.input(String).query(async (opts) => {
-    if (!opts.input) {
-      throw new Error("Input is missing.");
-    }
+      // Create an array to store the results
+      const resultArray: Program[] = [];
 
-    const program = await opts.ctx.db.program.findFirst({
-      where: { studyprogcode: opts.input },
-    }) as Program | null;
+      const apiUrl = language === 'en'
+        ? "https://www.ntnu.edu/web/studies/allstudies?p_p_id=studyprogrammelistportlet_WAR_studyprogrammelistportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=searchStudies&p_p_cacheability=cacheLevelPage"
+        : "https://www.ntnu.no/web/studier/alle?p_p_id=studyprogrammelistportlet_WAR_studyprogrammelistportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=searchStudies&p_p_cacheability=cacheLevelPage";
 
-    if (!program) {
-      throw new Error("Program not found");
-    }
+      try {
+        const response = await fetch(apiUrl);
 
-    return program;
-  }),
+      if (response.ok) {
+        // Parse and map the result to the Program interface
+        const data = await response.json();
+        if (data.docs && Array.isArray(data.docs)) {
+          resultArray.push(
+            ...data.docs.map((programData: any) => ({
+              programid: programData.studyprogCode,
+              title: programData.title,
+              studyprogcode: programData.studyprogCode,
+              studyprogname: programData.studyprogName,
+              studyprogstudylevel: programData.studyprogStudyLevel,
+              studyprogstudylevelcode: programData.studyprogStudyLevelCode,
+            }))
+          );
+        }
+        return resultArray;
 
-  programListByLang: publicProcedure.input(String).query(async (opts) => {
-    if (!opts.input) {
-      throw new Error("Input is missing.");
-    }
-  
-    const programs = await opts.ctx.db.program.findMany({
-      where: { programid: { endsWith: opts.input } },
-    }) as Program[];
-    
-    if (!programs || programs.length === 0) {
-      throw new Error("Programs not found");
-    }
-  
-    return programs;
-  })  
+      } else {
+          // Handle non-OK response
+          throw new Error(`Failed to fetch program list. Status code: ${response.status}`);
+        }
+
+      } catch (error) {
+        // Handle fetch error
+        console.error('Error fetching program list:', error);
+        throw new Error('Error fetching program list');
+      }
+    })
 })

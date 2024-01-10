@@ -1,4 +1,5 @@
-import React, { FC, ReactNode, createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
+import type { FC, ReactNode} from 'react';
 
 interface LanguageContextType {
   language: string;

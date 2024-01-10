@@ -8,7 +8,7 @@ export const semesterPlanRouter = createTRPCRouter({
             subjectCodes: z.array(z.string()),
             semester: z.string(),
         }))
-        .mutation(async ({ input }) => {
+        .query(async ({ input }) => {
             // Destructure the input
             const { subjectCodes, semester } = input;
 

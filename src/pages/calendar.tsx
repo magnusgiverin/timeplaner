@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import CalendarDisplay from '~/views/Calendar/CalendarDisplay';
 import BackButton from '~/components/General/BackButton';
 import BreakLine from '~/components/General/BreakLine';
 import Layout from '~/components/General/Layout';
 import type { Course } from '~/interfaces/CourseData';
-import { generateColor } from '~/views/Calendar/Colors';
 import type { DetailedCourse } from '~/interfaces/StudyPlanData';
 import { useLanguageContext } from '~/contexts/languageContext';
+import { generateColor } from '~/components/Calendar/Colors';
+import CalendarDisplay from '~/components/Calendar/CalendarDisplay';
 
 const Calendar: React.FC = () => {
     const router = useRouter();

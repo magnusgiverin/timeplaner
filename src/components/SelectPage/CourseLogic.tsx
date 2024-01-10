@@ -1,6 +1,6 @@
-import type { CourseGroup, JsonData, StudyDirection, StudyPeriod, StudyWayPoint, SubjectStructure, ChosenSubjectsData, StudyPlan } from "~/interfaces/StudyPlanData";
+import type { CourseGroup, StudyDirection, StudyPeriod, StudyWayPoint, SubjectStructure, ChosenSubjectsData, StudyPlan } from "~/interfaces/StudyPlanData";
 import { api } from "~/utils/api";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface CourseLogicProps {
     year: number;
@@ -16,24 +16,6 @@ const isAutumnSeason = () => {
 };
 
 const getCurrentYear = () => new Date().getFullYear();
-
-const getStudyPlanJson = (year: number, programCode: string) => {
-    const autumnSeason = isAutumnSeason();
-    const studyYear = autumnSeason ? getCurrentYear() - year + 1 : getCurrentYear() - year;
-    const studyPlanId = `${programCode}-${studyYear}-${getCurrentYear()}`;
-
-    // Assuming api.studyPlan.getStudyPlanById.useQuery returns an object with data property
-    const { data: studyPlan, isLoading: isStudyPlanLoading, refetch: refetchStudyPlan } =
-        api.studyPlan.getStudyPlanById.useQuery<StudyPlan>(String(studyPlanId));
-
-    const studyPlanJson: JsonData | null = studyPlan ? (JSON.parse(studyPlan?.json_data) as JsonData) : null;
-
-    return {
-        studyPlanJson,
-        isStudyPlanLoading,
-        refetchStudyPlan,
-    };
-}
 
 // Function to get all subjects from StudyDirection
 const getSubjectsFromDirection = (direction: StudyDirection): ChosenSubjectsData[] => {
@@ -107,7 +89,7 @@ const getSubjectsFromPeriod = (period: StudyPeriod | undefined): ChosenSubjectsD
 };
 
 // Function to get all subjects from JsonData for a specific semester
-const getAllSubjects = (jsonData: JsonData, semester: number): SubjectStructure => {
+const getAllSubjects = (jsonData: StudyPlan, semester: number): SubjectStructure => {
     const subjectsData: SubjectStructure = [];
 
     // Check if the specified semester is within the available study periods
@@ -119,55 +101,70 @@ const getAllSubjects = (jsonData: JsonData, semester: number): SubjectStructure 
     return subjectsData;
 };
 
+const fetchData = async (programCode: string, studyYear: number, semester: number, onSubjectsStructureChange: (subjectStructure: SubjectStructure) => void) => {
+  const query = api.studyPlan.getStudyPlan.useQuery({
+    studyProgCode: programCode,
+    year: studyYear,
+  });
+
+  const { data: studyPlan } = query;
+
+  try {
+    await query.refetch();
+
+    if (studyPlan) {
+      const subjectStructure = getAllSubjects(studyPlan.studyPlanData, semester);
+      onSubjectsStructureChange(subjectStructure);
+    }
+  } catch (error) {
+    console.error('Error refetching study plan:', error);
+  }
+};
 
 const CourseLogic: React.FC<CourseLogicProps> = ({ year, programCode, season, onSubjectsStructureChange }) => {
-    const studyPlanQuery = getStudyPlanJson(year, programCode);
-    const { studyPlanJson, isStudyPlanLoading, refetchStudyPlan } = studyPlanQuery;
-    const semester = season === 'Autumn' ? year * 2 - 2 : year * 2 - 1;
+  const semester = season === 'Autumn' ? year * 2 - 2 : year * 2 - 1;
+  const autumnSeason = isAutumnSeason();
+  const studyYear = autumnSeason ? getCurrentYear() - year + 1 : getCurrentYear() - year;
 
-    const mutation = api.studyPlan.addStudyPlan.useMutation();
-    const studyYear = isAutumnSeason() ? getCurrentYear() - year + 1 : getCurrentYear() - year;
+  console.log(programCode, year, season)
 
-    useEffect(() => {
-        let isMounted = true;
+  const query = api.studyPlan.getStudyPlan.useQuery({
+    studyProgCode: programCode,
+    year: studyYear,
+  });
 
-        const fetchData = async () => {
-            if ((!studyPlanJson || Object.keys(studyPlanJson).length === 0) && !isStudyPlanLoading && isMounted && !mutation.isLoading) {
-                try {
-                    await mutation.mutateAsync(
-                        {
-                            studyProgCode: programCode,
-                            year: studyYear,
-                        },
-                        {
-                            onSuccess: () => {
-                                void ((isMounted && refetchStudyPlan()));
-                            },
-                        }
-                    );
-                } catch (error) {
-                    console.error('Error invoking addStudyPlan mutation:', error);
-                }
-            }
+  const { data: studyPlan } = query;
 
-        };
+  // Define the fetchData function outside useEffect
+  const fetchData = async () => {
+    try {
+      await query.refetch();
 
-        void fetchData();
-
-        return () => {
-            isMounted = false;
-        };
-    }, [year, season, isStudyPlanLoading, studyPlanJson, refetchStudyPlan]);
-
-    if (studyPlanJson !== null) {
-        const subjectStructure = getAllSubjects(studyPlanJson, semester);
-        // Invoke the callback to send subjectsStructure back to the caller
-        onSubjectsStructureChange(subjectStructure)
+      // Handle the response if needed
+      if (studyPlan) {
+        // Fetch additional data or update state if necessary
+        // Example: setSemesterPlans(response);
+        const subjectStructure = getAllSubjects(studyPlan.studyPlanData, semester);
+        onSubjectsStructureChange(subjectStructure);
+      }
+    } catch (error) {
+      console.error('Error refetching study plan:', error);
     }
+  };
 
-    return null;
-}
+  useEffect(() => {
+    let isMounted = true;
+
+    // Call the fetchData function inside useEffect
+    void fetchData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [year, programCode, semester, studyPlan]);
+
+
+  return null;
+};
 
 export default CourseLogic;
-
-// Subjectstructure is an array of either groups or courses, groups contain either groups or courses - defined previously?

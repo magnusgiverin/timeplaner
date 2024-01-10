@@ -4,7 +4,7 @@ import { useLanguageContext } from '~/contexts/languageContext';
 const Navbar = () => {
   const { language, toggleLanguage } = useLanguageContext();
 
-  const handleLanguageToggle: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+  const handleLanguageToggle: React.MouseEventHandler<HTMLButtonElement> = () => {
     // You can include additional logic here if needed
     toggleLanguage();
   };

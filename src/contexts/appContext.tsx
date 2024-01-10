@@ -1,7 +1,6 @@
 
 import React, { createContext, useContext, useState } from 'react';
 import type { FC, ReactNode } from 'react';
-import type { SubjectStructure } from '~/interfaces/StudyPlanData';
 
 interface AppContextType {
     year: number;
@@ -10,8 +9,6 @@ interface AppContextType {
     setSeason: React.Dispatch<React.SetStateAction<string>>;
     index: number;
     setIndex: React.Dispatch<React.SetStateAction<number>>;
-    subjectsStructure: SubjectStructure;
-    setSubjectsStructure: React.Dispatch<React.SetStateAction<SubjectStructure>>; 
 }
 
 const isAutumnSeason = () => {
@@ -31,11 +28,7 @@ const defaultValue: AppContextType = {
     index: -1,
     setIndex: () => {
         console.log("Setting index")
-    },
-    subjectsStructure: [],
-    setSubjectsStructure: () => {
-        console.log("Setting subject structure")
-    },
+    }
 };
 
 export const AppContext = createContext<AppContextType>(defaultValue);
@@ -48,10 +41,9 @@ export const AppContextProvider: FC<{ children: ReactNode }> = ({ children }) =>
     const [year, setYear] = useState<number>(defaultValue.year);
     const [season, setSeason] = useState<string>(defaultValue.season);
     const [index, setIndex] = useState<number>(defaultValue.index);
-    const [subjectsStructure, setSubjectsStructure] = useState<SubjectStructure>(defaultValue.subjectsStructure); // Adjust the type accordingly
 
     return (
-        <AppContext.Provider value={{ year, setYear, season, setSeason, index, setIndex, subjectsStructure, setSubjectsStructure }}>
+        <AppContext.Provider value={{ year, setYear, season, setSeason, index, setIndex }}>
             {children}
         </AppContext.Provider>
     );
