@@ -13,7 +13,6 @@ const Search = () => {
   const router = useRouter();
   const { language } = useLanguageContext();
 
-
   // Use useQuery directly within the functional component
   const query = api.program.getProgramListByLang.useQuery({
     language: language,
@@ -57,7 +56,6 @@ const Search = () => {
     // Use the selectedOption to get the course details
     if (selectedOption?.value) {
       const selectedProgram = programs.find((program) => program.programid === selectedOption.value);
-
       const jsonString = JSON.stringify(selectedProgram);
 
       const queryParams = {

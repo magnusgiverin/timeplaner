@@ -3,19 +3,28 @@ import { useLanguageContext } from '~/contexts/languageContext';
 
 interface BackButtonProps {
   buttonText?: string;
+  redirect?: () => void;
 }
 
-const BackButton: React.FC<BackButtonProps> = ({ buttonText }) => {
+const BackButton: React.FC<BackButtonProps> = ({ buttonText, redirect }) => {
   const router = useRouter();
   const { language } = useLanguageContext();
 
-  const standardButtonLabel = language === "no" ? "< Gå tilbake" : "< Back"
-  const buttonLabel = buttonText ? buttonText : standardButtonLabel
+  const standardButtonLabel = language === 'no' ? '< Gå tilbake' : '< Back';
+  const buttonLabel = buttonText ? buttonText : standardButtonLabel;
+
+  const handleButtonClick = () => {
+    if (redirect) {
+      redirect()
+    } else {
+      router.back();
+    }
+  };
 
   return (
     <button
-      className='px-6 py-3 m-2 rounded-xl bg-blue-500 text-white'
-      onClick={() => router.back()}
+      className='px-6 py-3 m-2 rounded-full bg-green-500 text-white'
+      onClick={handleButtonClick}
     >
       {buttonLabel}
     </button>
@@ -23,5 +32,3 @@ const BackButton: React.FC<BackButtonProps> = ({ buttonText }) => {
 };
 
 export default BackButton;
-
-

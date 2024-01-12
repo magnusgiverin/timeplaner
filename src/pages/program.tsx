@@ -9,13 +9,17 @@ import BreakLine from '~/components/General/BreakLine';
 import { useAppContext } from '~/contexts/appContext';
 import type { DetailedCourse, SubjectStructure } from '~/interfaces/StudyPlanData';
 import type { Program } from '~/interfaces/ProgramData';
+import { useLanguageContext } from '~/contexts/languageContext';
+import { useCalendarContext } from '~/contexts/calendarContext';
 
 const ProgramPage = () => {
     const router = useRouter();
     const { season, setSeason, index, setIndex } = useAppContext();
+    const { language } = useLanguageContext();
+    const { setInitialCourses, setCurrentCourses } = useCalendarContext();
 
     const [subjectsStructure, setSubjectsStructure] = useState<SubjectStructure>([]);
-    const [program, setProgram] = useState<Program | null>(null);
+    const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
 
     useEffect(() => {
         // Assuming programString is retrieved from the query parameters
@@ -24,7 +28,7 @@ const ProgramPage = () => {
         if (programString) {
             try {
                 const parsedProgram = JSON.parse(decodeURIComponent(programString)) as Program;
-                setProgram(parsedProgram);
+                setSelectedProgram(parsedProgram);
             } catch (error) {
                 console.error('Error parsing programString:', error);
             }
@@ -43,14 +47,16 @@ const ProgramPage = () => {
         setSubjectsStructure(newSubjectStructure);
     };
 
-    const handleRedirect = (selectedCourses: DetailedCourse[]) => {
+    const handleModifyRedirect = (selectedCourses: DetailedCourse[]) => {
+        setInitialCourses(selectedCourses);
         const coursesString = JSON.stringify(selectedCourses);
+        const programString = JSON.stringify(selectedProgram);
 
         const queryParams = {
             selectedCourses: encodeURIComponent(coursesString),
             year: encodeURIComponent(index + 1),
             season: encodeURIComponent(season),
-            studyCode: encodeURIComponent(program ? program.studyprogcode : "N/A"),
+            selectedProgram: encodeURIComponent(programString),
         };
 
         void router.push({
@@ -59,11 +65,37 @@ const ProgramPage = () => {
         });
     };
 
+    const handlePrevRedirect = () => {
+        void router.push({
+            pathname: '/',
+        });
+    };
+
+    const handleCalendarRedirect = (courseList: DetailedCourse[]) => {
+        if (selectedProgram) {
+            const coursesString = JSON.stringify(courseList);
+
+            setCurrentCourses(courseList)
+
+            const queryParams = {
+                chosenCourses: encodeURIComponent(coursesString),
+                year: encodeURIComponent(index + 1),
+                semester: encodeURIComponent(season),
+                studyCode: encodeURIComponent(selectedProgram.studyprogcode),
+            };
+
+            void router.push({
+                pathname: '/calendar',
+                query: queryParams,
+            });
+        }
+    };
+
     const yearSelectComponent = useMemo(() => {
-        if (program) {
+        if (selectedProgram) {
             return (
                 <YearSelect
-                    selectedProgram={program}
+                    selectedProgram={selectedProgram}
                     setIndex={handleButtonIndexChange}
                     selectedIndex={index}
                     setSeason={handleSeasonToggle}
@@ -72,29 +104,30 @@ const ProgramPage = () => {
             );
         }
         return null;
-    }, [program, index, season]);
+    }, [selectedProgram, index, season]);
 
     const courseLogicComponent = useMemo(() => {
-        if (program && index !== -1) {
+        if (selectedProgram && index !== -1) {
             return (
                 <CourseLogic
                     year={index + 1}
-                    programCode={program.studyprogcode}
+                    programCode={selectedProgram.studyprogcode}
                     season={season}
                     onSubjectsStructureChange={handleSubjectsStructureChange}
                 />
             );
         }
         return null;
-    }, [program, index, season]);
+    }, [selectedProgram, index, season]);
 
     const displayCoursesComponent = useMemo(() => {
-        if (subjectsStructure.length !== 0 && index !== -1 && program) {
+        if (subjectsStructure.length !== 0 && index !== -1 && selectedProgram) {
             return (
                 <Display
                     chosenSubjects={subjectsStructure}
-                    handleModifyRedirect={handleRedirect}
-                    programCode={program.studyprogcode}
+                    handleModifyRedirect={handleModifyRedirect}
+                    handleCalendarRedirect={handleCalendarRedirect}
+                    programCode={selectedProgram.studyprogcode}
                 />
             );
         }
@@ -104,31 +137,33 @@ const ProgramPage = () => {
 
     return (
         <Layout>
-          {/* Back button for navigation */}
-          <BackButton />
-      
-          {/* Year selection component */}
-          <div className="flex flex-col items-center justify-center mt-10">
-            {yearSelectComponent}
-          </div>
-      
-          {/* Component handling course logic */}
-          {courseLogicComponent}
-      
-          {/* Horizontal break line */}
-          <BreakLine />
-      
-          {/* Display courses component and another break line if conditions are met */}
-          {subjectsStructure.length !== 0 && index !== -1 && (
-            <>
-              <div className="flex flex-col items-center justify-center mt-10">
-                {displayCoursesComponent}
-              </div>
-              <BreakLine />
-            </>
-          )}
+            <BackButton
+                buttonText={language === "no" ? "< Velg studieprogram" : "< Select study program"}
+                redirect={handlePrevRedirect}
+            />
+
+            {/* Year selection component */}
+            <div className="flex flex-col items-center justify-center mt-10">
+                {yearSelectComponent}
+            </div>
+
+            {/* Component handling course logic */}
+            {courseLogicComponent}
+
+            {/* Horizontal break line */}
+            <BreakLine />
+
+            {/* Display courses component and another break line if conditions are met */}
+            {subjectsStructure.length !== 0 && index !== -1 && (
+                <>
+                    <div className="flex flex-col items-center justify-center mt-10">
+                        {displayCoursesComponent}
+                    </div>
+                    <BreakLine />
+                </>
+            )}
         </Layout>
-      );
+    );
 };
 
 export default ProgramPage;

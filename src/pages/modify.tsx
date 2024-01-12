@@ -9,6 +9,8 @@ import Toolbox from '~/components/ModifyPage/Toolbox';
 import type { Course } from '~/interfaces/CourseData';
 import type { DetailedCourse } from '~/interfaces/StudyPlanData';
 import { useLanguageContext } from '~/contexts/languageContext';
+import { useCalendarContext } from '~/contexts/calendarContext';
+import type { Program } from '~/interfaces/ProgramData';
 
 const ModifyPage = () => {
     const router = useRouter();
@@ -16,31 +18,49 @@ const ModifyPage = () => {
     const [courseList, setCourseList] = useState<Array<Course | DetailedCourse>>([]); // Updated type
     const [selectedFromToolbox, setSelectedFromToolbox] = useState<Course[]>([]);
     const [showMoreMap, setShowMoreMap] = useState<Record<string, boolean>>({});
-    const [initialCourses, setInitialCourses] = useState<DetailedCourse[]>([]);
     const [displayMode, setDisplayMode] = useState('non-selected'); // 'selected' or 'non-selected'
+    const [selectedProgram, setSelectedProgram] = useState<Program>();
 
     const selectedYear = router.query.year as string;
-    const selectedProgramCode = router.query.studyCode as string;
     const selectedSeason = router.query.season as string;
 
     const { language } = useLanguageContext();
+    const { setSemesterPlans, setCurrentCourses, setInitialCourses, initialCourses } = useCalendarContext();
+
+    useEffect(() => {
+        // Combine shownCourses and selectedFromToolbox into a single array
+        setCurrentCourses(courseList);
+    }, [courseList]);
 
     useEffect(() => {
         // Retrieve the selectedCourses parameter from the URL
         const coursesString = router.query.selectedCourses as string;
+        const programString = router.query.selectedProgram as string;
+
         // Parse the string back into an array of Course objects
-        if (coursesString) {
+        if (coursesString && programString) {
             const parsedCourses = JSON.parse(decodeURIComponent(coursesString)) as DetailedCourse[];
+            const parsedProgram = JSON.parse(decodeURIComponent(programString)) as Program;
+
+            setSelectedProgram(parsedProgram)
 
             // Filter out courses with study choice code 'O' initially
             const initiallyChosenCourses = parsedCourses.filter(course => course.studyChoice.code === 'O');
+            
+            resetSemesterPlan();
 
             setInitialCourses(parsedCourses);
             setShownCourses(parsedCourses);
-            setCourseList(initiallyChosenCourses);
+            setCourseList(initiallyChosenCourses)
         }
     }, [router.query.selectedCourses]);
 
+    const selectedProgramCode = selectedProgram?.studyprogcode;
+
+    const resetSemesterPlan = () => {
+        setSemesterPlans([])
+    }
+    
     // Function to toggle the selection of a subject
     const toggleSelection = (course: Course | DetailedCourse) => {
         setCourseList((prevCourseList) => {
@@ -55,7 +75,7 @@ const ModifyPage = () => {
             }
         });
     };
-
+    
     // Group selectedCourses by courseGroupName
     const groupedCoursesByGroup: Record<string, DetailedCourse[]> = {};
     shownCourses.forEach((course) => {
@@ -88,6 +108,7 @@ const ModifyPage = () => {
     }, [courseList]);
 
     const renderSymbolExplanation = () => {
+        const explanationLabel = language === "no" ? "Symbolforklaring" : "Symbol Explanation"
         if (shownCourses.length > 0) {
             const studyChoices: Record<string, string> = {};
             shownCourses.forEach((course) => {
@@ -101,7 +122,7 @@ const ModifyPage = () => {
             return (
                 <div>
                     <BreakLine />
-                    <h3>Symbol Explanation</h3>
+                    <h3>{explanationLabel}</h3>
                     <p>{explanationText}</p>
                 </div>
             );
@@ -111,13 +132,14 @@ const ModifyPage = () => {
     };
 
     const handleRedirect = () => {
-        const coursesString = JSON.stringify(courseList);
+        setCurrentCourses(courseList);
+        const courseListString = JSON.stringify(courseList);
 
         const queryParams = {
-            chosenCourses: encodeURIComponent(coursesString),
+            chosenCourses: encodeURIComponent(courseListString),
             year: encodeURIComponent(selectedYear),
             semester: encodeURIComponent(selectedSeason),
-            studyCode: encodeURIComponent(selectedProgramCode),
+            studyCode: encodeURIComponent(selectedProgram?.studyprogcode ?? ""),
         };
 
         void router.push({
@@ -179,7 +201,7 @@ const ModifyPage = () => {
         );
     }
 
-    const getHeaderLabel = (language: string) => {
+    const getHeaderLabel = () => {
         if(language === "no") {
             const translatedSeason = selectedSeason === 'Spring' ? 'Vår' : 'Høst';
             const norwegianLabels = ['Første', 'Andre', 'Tredje', 'Fjerde', 'Femte'];
@@ -189,14 +211,30 @@ const ModifyPage = () => {
         }
     }
 
+    const handlePrevRedirect = () => {
+        const programString = JSON.stringify(selectedProgram);
+
+        const queryParams = {
+            selectedProgram: encodeURIComponent(programString),
+        };
+
+        void router.push({
+            pathname: '/program',
+            query: queryParams
+        });
+    };
+
     const backButtonLabel = language === "no" ? "< Velg år" : "< Select year"
     const addedFromToolboxLabel = language === "no" ? "Emner lagt til via søk" : "Added Courses from Search"
 
     return (
         <Layout>
-            <BackButton buttonText={backButtonLabel}/>
+            <BackButton 
+                buttonText={backButtonLabel}
+                redirect={handlePrevRedirect}
+            />
             <div className="flex flex-col items-center justify-center mt-20">
-                <h2>{getHeaderLabel(language) }</h2>
+                <h2>{getHeaderLabel() }</h2>
             </div>
             <div>
                 {renderToolbox()}

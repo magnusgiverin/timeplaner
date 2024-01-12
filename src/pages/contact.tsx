@@ -10,16 +10,16 @@ const About = () => {
 
     const handleExploreClick = () => {
         // Redirect to the index page
-        void router.push("/");
+        void router.back()
     };
     
-    const getButtonLabel = (language: string) => {
+    const getButtonLabel = () => {
         return language === "no" ? "Gå tilbake" : "Go back"
     }
 
     const { language } = useLanguageContext();
     
-    const getTextHeader = (language: string) => {
+    const getTextHeader = () => {
         return language === "no" ? "Kontaktinformasjon kommer" : "Contact information will come";
       };
 
@@ -27,12 +27,12 @@ const About = () => {
         <Layout>
             <div className="mt-20">                
                 <h2 className="flex justify-center font-bold text-5xl my-4 pt-10">
-                    {getTextHeader(language)}
+                    {getTextHeader()}
                 </h2>
             </div>
             <BreakLine />
             <div className="flex flex-col items-center justify-center">
-                <GreenButton text={getButtonLabel(language)} onClick={handleExploreClick}/>
+                <GreenButton text={getButtonLabel()} onClick={handleExploreClick}/>
             </div>
         </Layout>
     );

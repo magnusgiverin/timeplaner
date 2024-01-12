@@ -40,7 +40,7 @@ const YearSelect: React.FC<YearSelectProps> = ({
     setSelectedButtonIndex(selectedIndex);
   }, [selectedIndex]);
 
-  const getYearLabel = (language: string, index: number) => {
+  const getYearLabel = (index: number) => {
     if (language === 'no') {
       const norwegianLabels = ['Første', 'Andre', 'Tredje', 'Fjerde', 'Femte'];
       return `${norwegianLabels[index]}`;
@@ -60,7 +60,7 @@ const YearSelect: React.FC<YearSelectProps> = ({
       }`}
       onClick={() => handleButtonClick(index)}
     >
-      {getYearLabel(language, index)}
+      {getYearLabel(index)}
     </button>
   ));
 

@@ -118,7 +118,7 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
         }
     };
 
-    const getShowAllLabel = (state: string, language: string) => {
+    const getShowAllLabel = () => {
         if (language === "no") {
             return state === "non-selected" ? "Vis bare valgte" : "Vis alle"
         } else {
@@ -126,11 +126,11 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
         }
     }
 
-    const getConfirmLabel = (language: string) => {
+    const getConfirmLabel = () => {
         return language === "no" ? "Gå til kalender" : "Go to calendar";
     }
 
-    const getPlaceholderLabel = (language: string) => {
+    const getPlaceholderLabel = () => {
         return language === "no" ? "Legg til et fag i studieplanen" : "Add a program to your plan"
     }
 
@@ -138,29 +138,30 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
 
     return (
         <div>
-            <div className="flex w-min-max">
-                <GreenButton
-                    onClick={onConfirm}
-                    text={getConfirmLabel(language)}
-                    className='mr-2'
-                />
-                {!allSelected && (
-                    <GreenButton
-                        onClick={onToggleShowAll}
-                        text={getShowAllLabel(state, language)}
-                    />
-                )}
-            </div>
             <div>
                 <Select
                     className="text-black rounded-full mt-2 w-1/3"
                     options={options}
                     isSearchable
-                    placeholder={getPlaceholderLabel(language)}
+                    placeholder={getPlaceholderLabel()}
                     onChange={handleSelectChange}
                     onInputChange={handleInputChange}
                     menuIsOpen={showAll}
                     value={selectedValue} // Set the value prop to control the selected value
+                />
+            </div>
+            <div className="flex w-min-max">
+                {!allSelected && (
+                    <GreenButton
+                        onClick={onToggleShowAll}
+                        text={getShowAllLabel()}
+                        className='mr-2 w-40'
+                    />
+                )}
+                <GreenButton
+                    onClick={onConfirm}
+                    text={getConfirmLabel()}
+                    className='bg-red-500'
                 />
             </div>
             <BreakLine/>

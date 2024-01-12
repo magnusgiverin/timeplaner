@@ -1,6 +1,7 @@
 
 import React, { createContext, useContext, useState } from 'react';
 import type { FC, ReactNode } from 'react';
+import type { Program } from '~/interfaces/ProgramData';
 
 interface AppContextType {
     year: number;
@@ -9,6 +10,8 @@ interface AppContextType {
     setSeason: React.Dispatch<React.SetStateAction<string>>;
     index: number;
     setIndex: React.Dispatch<React.SetStateAction<number>>;
+    program: Program | undefined;
+    setProgram: React.Dispatch<React.SetStateAction<Program | undefined>>;
 }
 
 const isAutumnSeason = () => {
@@ -28,6 +31,10 @@ const defaultValue: AppContextType = {
     index: -1,
     setIndex: () => {
         console.log("Setting index")
+    },
+    program: undefined,
+    setProgram: () => {
+        console.log("Setting program")
     }
 };
 
@@ -41,9 +48,15 @@ export const AppContextProvider: FC<{ children: ReactNode }> = ({ children }) =>
     const [year, setYear] = useState<number>(defaultValue.year);
     const [season, setSeason] = useState<string>(defaultValue.season);
     const [index, setIndex] = useState<number>(defaultValue.index);
+    const [program, setProgram] = useState<Program | undefined>(defaultValue.program)
 
     return (
-        <AppContext.Provider value={{ year, setYear, season, setSeason, index, setIndex }}>
+        <AppContext.Provider value={{ 
+            year, setYear, 
+            season, setSeason, 
+            index, setIndex, 
+            program, setProgram
+        }}>
             {children}
         </AppContext.Provider>
     );

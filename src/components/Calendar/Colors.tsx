@@ -75,7 +75,7 @@ export const setContrast = (color: string): string => {
     const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
 
     // Set text color based on brightness
-    const textColour = brightness > 125 ? 'black' : 'white';
+    const textColour = brightness > 160 ? 'black' : 'white';
 
     return textColour;
 };

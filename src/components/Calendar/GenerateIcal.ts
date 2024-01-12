@@ -49,7 +49,6 @@ function generateDescription(event: Event, title: string): string {
 function generateICal(semesterPlans: SemesterPlan[]): string {
     const icalEvents: EventAttributes[] = [];  // Rename to avoid conflict with the duplicate declaration
 
-    console.log(semesterPlans);
     for (const semesterPlan of semesterPlans) {
         for (const event of semesterPlan.events) {
             const startDate = parseDate(event.dtstart);
