@@ -1,10 +1,12 @@
 import type { SemesterPlan } from '~/interfaces/SemesterPlanData';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
+import type { DateLocalizer, Formats } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment-timezone';
 import { setContrast } from './Colors';
 import { useCalendarContext } from '~/contexts/calendarContext';
+import { useMemo } from 'react';
 
 export const hashString = (str: string) => {
   let hash = 0;
@@ -30,21 +32,21 @@ function parseDate(dateString: string): Date {
   const [datePart, timeWithOffset] = dateString.split('T');
 
   if (!datePart || !timeWithOffset) {
-      throw new Error('Invalid date string format');
+    throw new Error('Invalid date string format');
   }
 
   const [year, month, day] = datePart.split('-');
   const [time, offset] = timeWithOffset.split(/[-+]/); // Split the date and offset using either + or -
-  
+
   if (!year || !month || !day || !time || !offset) {
-      throw new Error('Invalid date string format');
+    throw new Error('Invalid date string format');
   }
 
   const [hours, minutes] = time.split(':');
   const offsetHours = timeWithOffset.includes('-') ? -parseInt(offset) : parseInt(offset);
 
   if (!hours || !minutes || isNaN(offsetHours)) {
-      throw new Error('Invalid date string format');
+    throw new Error('Invalid date string format');
   }
 
   // Adjust date and time based on the offset
@@ -53,7 +55,7 @@ function parseDate(dateString: string): Date {
   return date;
 }
 
-function parseSemesterPLans(semesterPlans: SemesterPlan[], indexes:  Record<string, number>): ParsedEvent[] {
+function parseSemesterPLans(semesterPlans: SemesterPlan[], indexes: Record<string, number>): ParsedEvent[] {
   const events: ParsedEvent[] = [];
 
   semesterPlans.map((semesterPlan) => semesterPlan.events.map((event) => {
@@ -114,46 +116,54 @@ const CalendarDisplay: React.FC = () => {
     return {}
   }
 
-  // const slotPropGetter = (date, resourceId) => {
-  //   // Customize slot properties based on the date and resourceId
-  //   const isWeekend = date.getDay() === 0 || date.getDay() === 6; // Check if the date is a weekend
-  
-  //   return {
-  //     style: {
-  //       backgroundColor: isWeekend ? 'lightgray' : 'white', // Example: Set background color for weekends
-  //     },
-  //     onClick: () => {
-  //       // Handle slot click event
-  //       console.log('Clicked on slot:', date, 'Resource ID:', resourceId);
-  //     },
-  //     content: formatTimeIn24HourFormat(date), // Add formatted time as content
-  //   };
-  // };
+  const formats: Formats = {
+    dateFormat: 'dd',
+    dayFormat: (date, culture, localizer) => localizer?.format(date, 'ddd', culture) || '',
+    dayRangeHeaderFormat: ({ start, end }, culture, localizer) => {
+      const formattedStart = localizer?.format(moment(start).toDate(), 'ddd MMM D', culture) || '';
+      const formattedEnd = localizer?.format(moment(end).toDate(), 'ddd MMM D', culture) || '';
 
-  // Try again at a later date
-  
+      return `${formattedStart} — ${formattedEnd}`;
+    },
+    timeGutterFormat: (date, culture, localizer) => localizer?.format(date, 'HH:mm', culture) || '',
+    eventTimeRangeFormat: ({ start, end }, culture, localizer) =>
+      `${localizer?.format(moment(start).toDate(), 'HH:mm', culture) || ''} — ${localizer?.format(moment(end).toDate(), 'HH:mm', culture) || ''}`
+  };
+
   return (
-    <div className='flex-column flex-row flex-shrink mt-2 mb-2 justify-center '>
-      <Calendar
-        defaultView='work_week'
-        defaultDate={defaultDate}
-        localizer={localizer}
-        events={parsedEvents}
-        startAccessor="start"
-        endAccessor="end"
-        views={{
-          month: false,
-          week: true,
-          work_week: true,
-          day: true,
-          agenda: false,
-        }}
-        min={workWeekStart}
-        max={workWeekEnd}
-        className="bg-white text-black border border-gray-300 rounded-md p-2 m-1"
-        eventPropGetter={eventPropGetter}
-        // slotPropGetter={slotPropGetter}
-      />
+    <div className='flex-column flex-row flex-shrink mt-2 mb-2 justify-center'>
+      <div className="h-[60vh]">
+      <style>
+        {`
+          .rbc-allday-cell {
+            display: none;
+          }
+          .rbc-time-view .rbc-header {
+            border-bottom: none;
+          }
+        `}
+      </style>
+        <Calendar
+          formats={formats}
+          defaultView='work_week'
+          defaultDate={defaultDate}
+          localizer={localizer}
+          events={parsedEvents}
+          startAccessor="start"
+          endAccessor="end"
+          views={{
+            month: false,
+            week: true,
+            work_week: true,
+            day: true,
+            agenda: false,
+          }}
+          min={workWeekStart}
+          max={workWeekEnd}
+          className="bg-white text-black border border-gray-300 rounded-md p-2"
+          eventPropGetter={eventPropGetter}
+        />
+      </div>
     </div>
   );
 };

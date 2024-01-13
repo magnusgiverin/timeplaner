@@ -77,7 +77,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
                         checked={selectedPath[level] === subject.name}
                         onClick={handleClick}
                         className="w-3 h-3 flex-shrink-0"
-                        style={{ marginRight: '8px', transform: 'scale(1.5)' }} // Add this style for larger checkboxes
+                        style={{ marginRight: '16px', transform: 'scale(1.5)' }}
                     />
                     <span className="text-lg">{subject.name}</span>
                 </label>
@@ -186,10 +186,26 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
                             );
                         }).slice(0, (showMoreMap[group] ?? groupSubjects.some(subject => 'courses' in subject)) ? groupSubjects.length : 5)}
                         {groupSubjects.length > 5 && !groupSubjects.some(subject => 'courses' in subject) && (
-                            <GreenButton
-                                text={showMoreMap[group] ? 'Show Less' : 'Show More'}
+                            <button
+                                className='flex items-center px-4 py-2 mt-2 rounded-full bg-green-500 text-white hidden sm:inline-flex'
                                 onClick={() => toggleShowMore(group)}
-                            />
+                            >
+                                {showMoreMap[group] ? (language === "no" ? "Vis mindre" : "Show Less") : (language === "no" ? "Vis mer" : "Show More")}
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-6 h-6 ml-2"
+                                >
+                                    {showMoreMap[group] ? (
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
+                                    ) : (
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    )}
+                                </svg>
+                            </button>
                         )}
                     </div>
                 ))}

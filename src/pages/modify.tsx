@@ -46,7 +46,7 @@ const ModifyPage = () => {
 
             // Filter out courses with study choice code 'O' initially
             const initiallyChosenCourses = parsedCourses.filter(course => course.studyChoice.code === 'O');
-            
+
             resetSemesterPlan();
 
             setInitialCourses(parsedCourses);
@@ -61,7 +61,7 @@ const ModifyPage = () => {
         setSelectedSemesterPlans([])
         setSemesterPlans([])
     }
-    
+
     // Function to toggle the selection of a subject
     const toggleSelection = (course: Course | DetailedCourse) => {
         setCourseList((prevCourseList) => {
@@ -76,7 +76,7 @@ const ModifyPage = () => {
             }
         });
     };
-    
+
     // Group selectedCourses by courseGroupName
     const groupedCoursesByGroup: Record<string, DetailedCourse[]> = {};
     shownCourses.forEach((course) => {
@@ -203,7 +203,7 @@ const ModifyPage = () => {
     }
 
     const getHeaderLabel = () => {
-        if(language === "no") {
+        if (language === "no") {
             const translatedSeason = selectedSeason === 'Spring' ? 'Vår' : 'Høst';
             const norwegianLabels = ['Første', 'Andre', 'Tredje', 'Fjerde', 'Femte'];
             return `${selectedProgramCode}, ${norwegianLabels[Number(selectedYear) - 1]}, ${translatedSeason}`
@@ -230,12 +230,12 @@ const ModifyPage = () => {
 
     return (
         <Layout>
-            <BackButton 
+            <BackButton
                 buttonText={backButtonLabel}
                 redirect={handlePrevRedirect}
             />
             <div className="flex flex-col items-center justify-center mt-20">
-                <h2>{getHeaderLabel() }</h2>
+                <h2>{getHeaderLabel()}</h2>
             </div>
             <div>
                 {renderToolbox()}
@@ -248,7 +248,7 @@ const ModifyPage = () => {
                             toggleShowMore={() => toggleShowMore(group)}
                             isCourseSelected={isCourseSelected}
                             toggleSelection={toggleSelection}
-                            />
+                        />
                     </div>
                 ))}
                 {/* Display selected courses from the toolbox */}
@@ -257,7 +257,7 @@ const ModifyPage = () => {
                         <h3 className='text-2xl font-bold mt-2 mb-2'>{addedFromToolboxLabel}</h3>
                         <ul>
                             {selectedFromToolbox.map((course, index) => (
-                                <li key={index}>
+                                <li key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                                     <input
                                         type="checkbox"
                                         id={course.courseid}
@@ -269,7 +269,7 @@ const ModifyPage = () => {
                                                 return prevSelectedFromToolbox.filter((selected) => selected.courseid !== course.courseid);
                                             });
                                         }}
-                                        style={{ marginRight: '8px', transform: 'scale(1.5)' }} // Add this style for larger checkboxes
+                                        style={{ marginRight: '16px', transform: 'scale(1.5)' }}
                                     />
                                     <SubjectDetails subject={course} />
                                 </li>

@@ -88,7 +88,7 @@ const Search = () => {
     }
   };
 
-  const titleText = language == "no" ? "Søk etter ditt studieprogram" : "Search for your study program"
+  const titleText = language == "no" ? "Søk etter studieprogram" : "Search for study programs"
   const placeHolderText = language == "no" ? "Skriv her" : "Type here"
 
   return (
@@ -98,7 +98,7 @@ const Search = () => {
       </div>
       <div className='w-full flex flex-col items-center'>
         <Select
-          className="text-black text-l rounded-full w-1/3"
+          className="text-black text-l rounded-full w-full md:w-3/5 xl:w-2/5"
           options={options}
           isSearchable
           placeholder={placeHolderText}

@@ -140,7 +140,7 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
         <div>
             <div>
                 <Select
-                    className="text-black rounded-full mt-2 w-1/3"
+                    className="text-black text-l rounded-full w-full md:w-3/5 xl:w-2/5"
                     options={options}
                     isSearchable
                     placeholder={getPlaceholderLabel()}

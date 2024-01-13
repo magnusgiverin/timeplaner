@@ -3,6 +3,7 @@ import { useTable, useSortBy } from 'react-table';
 import { useCalendarContext } from '~/contexts/calendarContext';
 import { useLanguageContext } from '~/contexts/languageContext';
 import { setContrast } from './Colors';
+import moment from 'moment';
 
 interface TableProps {
     columns: Column[];
@@ -217,8 +218,9 @@ const ModifyCourses: React.FC = () => {
                     const eventId = event.actid + event.dtstart.split('T')[1]?.split('+')[0];
 
                     if (!eventsGroupedByEventId[eventId]) {
-                        const startDateTime = event.dtstart?.split('T')[1]?.split('+')[0]?.slice(0, -3);
-                        const endDateTime = event.dtend?.split('T')[1]?.split('+')[0]?.slice(0, -3);
+                        const startDateTime = event.dtstart ? moment(event.dtstart).format('HH:mm') : '';
+                        const endDateTime = event.dtend ? moment(event.dtend).format('HH:mm') : '';
+
                         const groups = Array.from(new Set(event.studentgroups.map((group) => group.split('_')[0]))).join(', ');
 
                         eventsGroupedByEventId[eventId] = {

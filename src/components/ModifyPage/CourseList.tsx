@@ -1,7 +1,7 @@
 import React from 'react';
 import GreenButton from '../General/GreenButton';
 import SubjectDetails from '../General/SubjectDetails';
-import type{ Course } from '~/interfaces/CourseData';
+import type { Course } from '~/interfaces/CourseData';
 import type { DetailedCourse } from '~/interfaces/StudyPlanData';
 
 type CourseListProps = {
@@ -17,14 +17,14 @@ const CourseList: React.FC<CourseListProps> = ({ courses, showMore, toggleShowMo
     <div>
       <ul>
         {courses.slice(0, showMore ? courses.length : 5).map((course, index) => (
-          <li key={index}>
+          <li key={index} style={{ display: 'flex', alignItems: 'center' }}>
             <input
               type="checkbox"
               id={course.code}
               name={`subjectGroup_${course.courseGroupName}_${course.code}`}
               checked={isCourseSelected(course)}
               onChange={() => toggleSelection(course)}
-              style={{ marginRight: '8px', transform: 'scale(1.5)' }} // Add this style for larger checkboxes
+              style={{ marginRight: '16px', transform: 'scale(1.5)' }}
             />
             <SubjectDetails subject={course} />
           </li>

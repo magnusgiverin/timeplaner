@@ -15,7 +15,7 @@ const BackButton: React.FC<BackButtonProps> = ({ buttonText, redirect }) => {
 
   const handleButtonClick = () => {
     if (redirect) {
-      redirect()
+      redirect();
     } else {
       router.back();
     }
@@ -23,7 +23,7 @@ const BackButton: React.FC<BackButtonProps> = ({ buttonText, redirect }) => {
 
   return (
     <button
-      className='px-6 py-3 m-2 flex items-center rounded-full bg-green-500 text-white'
+      className='flex items-center px-4 py-2 rounded-full bg-green-500 text-white hidden sm:inline-flex'
       onClick={handleButtonClick}
     >
       <svg
