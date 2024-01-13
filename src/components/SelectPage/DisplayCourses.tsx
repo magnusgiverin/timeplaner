@@ -98,7 +98,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
             const explanationText = Object.entries(studyChoices)
                 .map(([code, name]) => `${code}: ${name}`)
                 .join('\n');
-            
+
             const explainLabel = language === "no" ? "Symbolforklaring" : "Symbol Explanation";
             const modifyLabel = language === "no" ? "Rediger emner" : "Modify courses";
             const calendarLabel = language === "no" ? "Gå til kalender" : "Go to calendar";
@@ -114,11 +114,23 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
                         onClick={() => handleModifyRedirect(selectedCourses)}
                         className="ml-2"
                     />
-                    <GreenButton
-                        text={calendarLabel}
+                    {/* Custom red button with arrow */}
+                    <button
+                        className={`flex items-center text-white rounded-md p-2 mt-2 mb-2 ml-2 bg-red-500`}
                         onClick={() => handleCalendarRedirect(selectedCourses)}
-                        className="ml-2 bg-red-500"
-                    />
+                    >
+                        <span className="mr-2">{calendarLabel}</span>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                        </svg>
+                    </button>
                 </div>
             );
         }
@@ -126,7 +138,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
 
     const renderSubjects = (subjects: (DetailedCourse | ChosenSubjectsData)[] | undefined, parentIndex: number, level: number) => {
         const messageLabel = language === "no" ? "Ingen fag funnet for dette kurset." : "No subjects found for this course."
-        
+
         // Check if subjects is undefined or empty
         if (!subjects || subjects.length === 0) {
             return (
@@ -135,7 +147,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
         }
 
         // Group subjects by studyChoice.code
-        const groupedSubjects: Record<string, (DetailedCourse)[]> = {} 
+        const groupedSubjects: Record<string, (DetailedCourse)[]> = {}
 
         subjects.forEach((subject) => {
             const key =
@@ -146,7 +158,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
             if (!groupedSubjects[key]) {
                 groupedSubjects[key] = [];
             }
-            
+
             groupedSubjects[key]?.push(subject as DetailedCourse);
         });
 

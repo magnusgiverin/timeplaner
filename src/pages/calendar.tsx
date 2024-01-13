@@ -179,7 +179,7 @@ const Calendar: React.FC = () => {
 
     return (
         <Layout>
-            <BackButton buttonText={language === "no" ? "< Rediger emner" : "< Edit subjects"}/>
+            <BackButton buttonText={language === "no" ? "Rediger emner" : "Edit subjects"}/>
             <Header label={getHeaderLabel()} />
             <BreakLine />
             <ActionButtons

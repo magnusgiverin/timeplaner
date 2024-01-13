@@ -138,7 +138,7 @@ const ProgramPage = () => {
     return (
         <Layout>
             <BackButton
-                buttonText={language === "no" ? "< Velg studieprogram" : "< Select study program"}
+                buttonText={language === "no" ? "Velg studieprogram" : "Select study program"}
                 redirect={handlePrevRedirect}
             />
 

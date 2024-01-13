@@ -225,7 +225,7 @@ const ModifyPage = () => {
         });
     };
 
-    const backButtonLabel = language === "no" ? "< Velg år" : "< Select year"
+    const backButtonLabel = language === "no" ? "Velg år" : "Select year"
     const addedFromToolboxLabel = language === "no" ? "Emner lagt til via søk" : "Added Courses from Search"
 
     return (

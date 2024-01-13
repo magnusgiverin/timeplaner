@@ -10,7 +10,7 @@ const BackButton: React.FC<BackButtonProps> = ({ buttonText, redirect }) => {
   const router = useRouter();
   const { language } = useLanguageContext();
 
-  const standardButtonLabel = language === 'no' ? '< Gå tilbake' : '< Back';
+  const standardButtonLabel = language === 'no' ? 'Gå tilbake' : 'Back';
   const buttonLabel = buttonText ? buttonText : standardButtonLabel;
 
   const handleButtonClick = () => {
@@ -23,9 +23,19 @@ const BackButton: React.FC<BackButtonProps> = ({ buttonText, redirect }) => {
 
   return (
     <button
-      className='px-6 py-3 m-2 rounded-full bg-green-500 text-white'
+      className='px-6 py-3 m-2 flex items-center rounded-full bg-green-500 text-white'
       onClick={handleButtonClick}
     >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="w-6 h-6 mr-2"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+      </svg>
       {buttonLabel}
     </button>
   );
