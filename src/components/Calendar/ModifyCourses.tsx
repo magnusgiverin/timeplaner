@@ -4,6 +4,7 @@ import { useCalendarContext } from '~/contexts/calendarContext';
 import { useLanguageContext } from '~/contexts/languageContext';
 import { setContrast } from './Colors';
 import moment from 'moment';
+import type { Event as MyEvent } from '~/interfaces/SemesterPlanData';
 
 interface TableProps {
     columns: Column[];
@@ -26,11 +27,19 @@ interface Row {
     groups: string;
 }
 
+const getUniqueId = (event: MyEvent, language: string) => {
+    const daysOfWeekNames = language === 'no' ? ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] :
+        ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    return event.actid + event.dtstart.split('T')[1]?.split('+')[0] + daysOfWeekNames[event.weekday] ?? "-"
+}
+
 const EventTable: React.FC<TableProps> = ({ columns, data }) => {
     const { selectedSemesterPlans, setSelectedSemesterPlans, semesterPlans } = useCalendarContext();
+    const { language } = useLanguageContext();
 
     const isSelected = (courseId: string, eventId: string) => {
-        return selectedSemesterPlans.find(plan => plan.courseid === courseId)?.events.some((event) => event.actid + event.dtstart.split('T')[1]?.split('+')[0] === eventId)
+        return selectedSemesterPlans.find(plan => plan.courseid === courseId)?.events.some((event) => getUniqueId(event, language) === eventId)
     };
 
     const handleCheckboxChange = (row: { original: { eventId: string; courseId: string } }) => {
@@ -42,8 +51,10 @@ const EventTable: React.FC<TableProps> = ({ columns, data }) => {
                 // Check if the row is selected or not
                 if (isSelected(courseId, eventId)) {
                     // If selected, filter out the event with actid equal to row.original.actid
-                    const updatedEvents = semesterPlan.events.filter((event) => event.actid + event.dtstart.split('T')[1]?.split('+')[0] !== eventId);
+                    const updatedEvents = semesterPlan.events.filter((event) => getUniqueId(event, language) !== eventId);
                     // Return a new object with the updated events array
+                    console.log(eventId)
+                    console.log(semesterPlan.events)
                     return {
                         ...semesterPlan,
                         events: updatedEvents,
@@ -54,7 +65,7 @@ const EventTable: React.FC<TableProps> = ({ columns, data }) => {
                         .flatMap((plan) =>
                             plan.events.filter(
                                 (event) =>
-                                    event.actid + event.dtstart.split('T')[1]?.split('+')[0] === eventId
+                                    getUniqueId(event, language) === eventId
                             )
                         );
 
@@ -215,7 +226,7 @@ const ModifyCourses: React.FC = () => {
                 const eventsGroupedByEventId: Record<string, Row> = {};
 
                 semesterPlan.events.forEach((event) => {
-                    const eventId = event.actid + event.dtstart.split('T')[1]?.split('+')[0];
+                    const eventId = getUniqueId(event, language);
 
                     if (!eventsGroupedByEventId[eventId]) {
                         const startDateTime = event.dtstart ? moment(event.dtstart).format('HH:mm') : '';
@@ -247,21 +258,21 @@ const ModifyCourses: React.FC = () => {
 
                 const formattedWeeks = Object.values(eventsGroupedByEventId).map((event) => {
                     const weeks = event.weeks;
-                
+
                     if (weeks?.length === 1) {
                         return Number(weeks[0]);  // Convert to number
                     }
-                
+
                     if (weeks && weeks.length > 1) {
                         const ranges = [];
-                
+
                         let start = Number(weeks[0]);  // Convert to number
                         let end = Number(weeks[0]);    // Convert to number
-                
+
                         for (let i = 1; i < weeks.length; i++) {
                             const week1 = Number(weeks[i]);
                             const week2 = Number(weeks[i - 1]) ?? 0;
-                
+
                             if (week1 === week2 + 1) {
                                 end = week1;
                             } else {
@@ -269,20 +280,20 @@ const ModifyCourses: React.FC = () => {
                                 start = end = week1;
                             }
                         }
-                
+
                         ranges.push(end !== start ? `${start}-${end}` : start?.toString());
-                        
+
                         return ranges.length > 0 ? ranges : undefined;
                     }
-                
+
                     return undefined;
                 });
-                
+
 
                 function isUseless(eventsGroupedByEventId: Record<string, Row>) {
                     return Object.keys(eventsGroupedByEventId).every((eventId) =>
                         selectedSemesterPlans.find((plan) => plan.courseid === eventsGroupedByEventId[eventId]?.courseId)?.events.every((event) =>
-                            event.actid + (event.dtstart.split('T')[1]?.split('+')[0] ?? '') !== eventId
+                            getUniqueId(event, language) !== eventId
                         )
                     );
                 }
@@ -295,7 +306,7 @@ const ModifyCourses: React.FC = () => {
                     if (dayComparison !== 0) {
                         return dayComparison;
                     }
-                
+
                     // Check if weeks is undefined and handle accordingly
                     if (!a.weeks && !b.weeks) {
                         return 0;  // No difference in weeks, treat as equal
@@ -304,7 +315,7 @@ const ModifyCourses: React.FC = () => {
                     } else if (!b.weeks) {
                         return -1;  // `a` comes before `b` if `b` has undefined weeks
                     }
-                
+
                     // As an example, you can compare the lengths of the arrays
                     return a.weeks.length - b.weeks.length;
                 });
