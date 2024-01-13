@@ -32,7 +32,7 @@ export interface Event {
     lopenr: number;
     'teaching-method': string;
     'teaching-method-name': string;
-    'teaching - title': string;
+    'teaching-title': string;
     summary: string;
     status_plenary: boolean;
     studentgroups: string[];

@@ -219,16 +219,17 @@ const ModifyCourses: React.FC = () => {
                     if (!eventsGroupedByEventId[eventId]) {
                         const startDateTime = event.dtstart?.split('T')[1]?.split('+')[0]?.slice(0, -3);
                         const endDateTime = event.dtend?.split('T')[1]?.split('+')[0]?.slice(0, -3);
+                        const groups = Array.from(new Set(event.studentgroups.map((group) => group.split('_')[0]))).join(', ');
 
                         eventsGroupedByEventId[eventId] = {
                             eventId: eventId,
                             courseId: semesterPlan.courseid,
-                            eventName: event['teaching-method-name'] ?? "", // provide a default value if necessary
+                            eventName: event['teaching-title'] ?? "-", // provide a default value if necessary
                             startDateTime: startDateTime ?? "", // provide a default value if necessary
                             endDateTime: endDateTime ?? "", // provide a default value if necessary
-                            dayOfWeek: daysOfWeekNames[event.weekday] ?? "", // provide a default value if necessary
+                            dayOfWeek: daysOfWeekNames[event.weekday] ?? "-", // provide a default value if necessary
                             weeks: [String(event.weeknr)],
-                            groups: Array.from(new Set(event.studentgroups.map((group) => group.split('_')[0]))).join(', '),
+                            groups: groups || "-", // Display "-----" if groups is empty
                         };
                     } else {
                         const currentWeek = String(event.weeknr);
@@ -373,7 +374,7 @@ const ModifyCourses: React.FC = () => {
                                 Object.keys(eventsGroupedByEventId).length !== 0 ? (
                                     <EventTable columns={columns} data={filteredEvents} />
                                 ) : (
-                                    <div>No events found</div>
+                                    <div>{language === "no" ? "Ingenting funnet" : "No events found"}</div>
                                 )
                             )
                         }
