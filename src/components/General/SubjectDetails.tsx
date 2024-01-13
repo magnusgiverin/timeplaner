@@ -21,6 +21,7 @@ const SubjectDetails: React.FC<SubjectDetailsProps> = ({ subject }) => {
                 <div>
                     {`${subject.code}: ${subject.name} (${subject.studyChoice.code}, ${subject.credit})`}
                 </div>
+                
             </a>
         );
     } else {

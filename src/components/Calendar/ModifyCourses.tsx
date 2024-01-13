@@ -3,7 +3,6 @@ import { useTable, useSortBy } from 'react-table';
 import { useCalendarContext } from '~/contexts/calendarContext';
 import { useLanguageContext } from '~/contexts/languageContext';
 import { setContrast } from './Colors';
-import type { Event as MyEvent } from '~/interfaces/SemesterPlanData';
 
 interface TableProps {
     columns: Column[];
@@ -22,9 +21,8 @@ interface Row {
     startDateTime: string;
     endDateTime: string;
     dayOfWeek: string;
-    weeks: number[] | string | undefined;  // Updated this line
-    event: MyEvent;
-    groups: string[];
+    weeks?: string[];  // Update the type here
+    groups: string;
 }
 
 const EventTable: React.FC<TableProps> = ({ columns, data }) => {
@@ -108,7 +106,7 @@ const EventTable: React.FC<TableProps> = ({ columns, data }) => {
                         prepareRow(row);
                         return (
                             <TableRow
-                                key={row.original.eventId}
+                                key={row.original.courseId + row.id}
                                 row={row}
                                 onCheckboxChange={handleCheckboxChange}
                                 selected={isSelected(row.original.courseId, row.original.eventId)}
@@ -121,26 +119,25 @@ const EventTable: React.FC<TableProps> = ({ columns, data }) => {
     );
 };
 
-interface TableRow {
+interface TableRowStructure {
     cells: {
-        getCellProps: (cellProps?: unknown) => unknown;
-        render: (text: string) => void;
+        getCellProps: (cellProps?: Record<string, unknown>) => React.HTMLProps<HTMLTableCellElement>;
+        render: (text: string) => React.ReactNode; // Adjust the return type based on what your component renders
     }[];
-    getRowProps: (userProps?: unknown) => unknown;
+    getRowProps: (userProps?: Record<string, unknown>) => React.HTMLProps<HTMLTableRowElement>;
     original: Row;
     // Add other properties or methods as needed
-  }
-  
+}
+
 
 interface RowProps {
-    row: TableRow;
-    onCheckboxChange: (row: Row) => void;
-    selected: boolean;
+    row: TableRowStructure;
+    onCheckboxChange: (row: TableRowStructure) => void;
+    selected?: boolean;
 }
 
 const TableRow: React.FC<RowProps> = ({ row, onCheckboxChange, selected }) => {
     const { getRowProps, cells } = row;
-    console.log(row)
     return (
         <tr {...getRowProps()}>
             <td>
@@ -155,7 +152,11 @@ const TableRow: React.FC<RowProps> = ({ row, onCheckboxChange, selected }) => {
             </td>
             {cells.map((cell) => (
                 <td
-                    {...cell.getCellProps()}
+                    {...(cell.getCellProps() as {
+                        key?: React.Key;
+                        onClick?: (event: React.MouseEvent) => void;
+                        // Add other properties as needed based on your use case
+                    })}
                     className="border-t-2 border-gray-500 p-3 whitespace-normal overflow-auto"
                 >
                     {cell.render('Cell')}
@@ -175,7 +176,7 @@ const ModifyCourses: React.FC = () => {
 
     const { language } = useLanguageContext();
 
-    const columns = language === 'no' ? [
+    const columns: Column[] = language === 'no' ? [
         { Header: 'Ukedag', accessor: 'dayOfWeek' },
         { Header: 'Uke', accessor: 'weeks' },
         { Header: 'Starttid', accessor: 'startDateTime' },
@@ -205,8 +206,6 @@ const ModifyCourses: React.FC = () => {
         setVisibleTables((prev) => ({ ...prev, [courseId]: !prev[courseId] }));
     };
 
-
-
     return (
         <div>
             <h3>{labels.selectedHeader}</h3>
@@ -217,88 +216,91 @@ const ModifyCourses: React.FC = () => {
                     const eventId = event.actid + event.dtstart.split('T')[1]?.split('+')[0];
 
                     if (!eventsGroupedByEventId[eventId]) {
+                        const startDateTime = event.dtstart?.split('T')[1]?.split('+')[0]?.slice(0, -3);
+                        const endDateTime = event.dtend?.split('T')[1]?.split('+')[0]?.slice(0, -3);
+
                         eventsGroupedByEventId[eventId] = {
                             eventId: eventId,
                             courseId: semesterPlan.courseid,
-                            eventName: event['teaching-method-name'],
-                            startDateTime: event.dtstart.split('T')[1]?.split('+')[0].slice(0, -3),
-                            endDateTime: event.dtend.split('T')[1]?.split('+')[0].slice(0, -3),
-                            dayOfWeek: daysOfWeekNames[event.weekday],
-                            weeks: [event.weeknr],
+                            eventName: event['teaching-method-name'] ?? "", // provide a default value if necessary
+                            startDateTime: startDateTime ?? "", // provide a default value if necessary
+                            endDateTime: endDateTime ?? "", // provide a default value if necessary
+                            dayOfWeek: daysOfWeekNames[event.weekday] ?? "", // provide a default value if necessary
+                            weeks: [String(event.weeknr)],
                             groups: Array.from(new Set(event.studentgroups.map((group) => group.split('_')[0]))).join(', '),
                         };
                     } else {
-                        const currentWeek = event.weeknr;
-                        const events = eventsGroupedByEventId[eventId]
-                        if(events) {
-                            const weeks = events.weeks;
-                            if(weeks) {
-                                const condition = !weeks.includes(currentWeek)
-                                if (condition) {
-                                    if(Array.isArray(weeks)) {
-                                        weeks.push(currentWeek);
-                                    };
-                                }
+                        const currentWeek = String(event.weeknr);
+                        const events = eventsGroupedByEventId[eventId];
+                        if (events?.weeks) {
+                            const condition = !events.weeks.includes(currentWeek);
+                            if (condition) {
+                                events.weeks.push(currentWeek);
                             }
-                            
                         }
                     }
                 });
 
                 const formattedWeeks = Object.values(eventsGroupedByEventId).map((event) => {
                     const weeks = event.weeks;
-
+                
                     if (weeks?.length === 1) {
-                        return weeks[0]?.toString();
+                        return Number(weeks[0]);  // Convert to number
                     }
-
-                    const ranges = [];
-
+                
                     if (weeks && weeks.length > 1) {
-                        let start = weeks[0];
-                        let end = weeks[0];
-
+                        const ranges = [];
+                
+                        let start = Number(weeks[0]);  // Convert to number
+                        let end = Number(weeks[0]);    // Convert to number
+                
                         for (let i = 1; i < weeks.length; i++) {
-                            if (weeks[i] === weeks[i - 1] + 1) {
-                                end = weeks[i];
+                            const week1 = Number(weeks[i]);
+                            const week2 = Number(weeks[i - 1]) ?? 0;
+                
+                            if (week1 === week2 + 1) {
+                                end = week1;
                             } else {
-                                ranges.push(end !== start ? `${start}-${end}` : start.toString());
-                                start = end = weeks[i];
+                                ranges.push(end !== start ? `${start}-${end}` : start?.toString());
+                                start = end = week1;
                             }
                         }
-
+                
                         ranges.push(end !== start ? `${start}-${end}` : start?.toString());
+                        
+                        return ranges.length > 0 ? ranges : undefined;
                     }
-
-                    return ranges.join(', ');
+                
+                    return undefined;
                 });
+                
 
                 function isUseless(eventsGroupedByEventId: Record<string, Row>) {
                     return Object.keys(eventsGroupedByEventId).every((eventId) =>
                         selectedSemesterPlans.find((plan) => plan.courseid === eventsGroupedByEventId[eventId]?.courseId)?.events.every((event) =>
-                            event.actid + (event.dtstart.split('T')[1]?.split('+')[0] ?? '') === eventId
+                            event.actid + (event.dtstart.split('T')[1]?.split('+')[0] ?? '') !== eventId
                         )
                     );
                 }
 
-                const filteredEvents = Object.values(eventsGroupedByEventId).map((event, index) => ({
+                const filteredEvents: Row[] = Object.values(eventsGroupedByEventId).map((event, index) => ({
                     ...event,
-                    weeks: formattedWeeks[index],
-                })).sort((a: Row, b: Row) => {
+                    weeks: formattedWeeks[index] ? String(formattedWeeks[index]).split(', ') : undefined,
+                })).sort((a, b) => {
                     const dayComparison = daysOfWeekNames.indexOf(a.dayOfWeek) - daysOfWeekNames.indexOf(b.dayOfWeek);
                     if (dayComparison !== 0) {
                         return dayComparison;
                     }
-
+                
                     // Check if weeks is undefined and handle accordingly
-                    if (a.weeks === undefined && b.weeks === undefined) {
+                    if (!a.weeks && !b.weeks) {
                         return 0;  // No difference in weeks, treat as equal
-                    } else if (a.weeks === undefined) {
+                    } else if (!a.weeks) {
                         return 1;  // `a` comes after `b` if `a` has undefined weeks
-                    } else if (b.weeks === undefined) {
+                    } else if (!b.weeks) {
                         return -1;  // `a` comes before `b` if `b` has undefined weeks
                     }
-
+                
                     // As an example, you can compare the lengths of the arrays
                     return a.weeks.length - b.weeks.length;
                 });
@@ -370,7 +372,7 @@ const ModifyCourses: React.FC = () => {
                                 Object.keys(eventsGroupedByEventId).length !== 0 ? (
                                     <EventTable columns={columns} data={filteredEvents} />
                                 ) : (
-                                    <div>No subjects found</div>
+                                    <div>No events found</div>
                                 )
                             )
                         }

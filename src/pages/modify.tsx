@@ -25,7 +25,7 @@ const ModifyPage = () => {
     const selectedSeason = router.query.season as string;
 
     const { language } = useLanguageContext();
-    const { setSemesterPlans, setCurrentCourses, setInitialCourses, initialCourses } = useCalendarContext();
+    const { setSelectedSemesterPlans, setSemesterPlans, setCurrentCourses, setInitialCourses, initialCourses } = useCalendarContext();
 
     useEffect(() => {
         // Combine shownCourses and selectedFromToolbox into a single array
@@ -58,6 +58,7 @@ const ModifyPage = () => {
     const selectedProgramCode = selectedProgram?.studyprogcode;
 
     const resetSemesterPlan = () => {
+        setSelectedSemesterPlans([])
         setSemesterPlans([])
     }
     
