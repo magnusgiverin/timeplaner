@@ -73,13 +73,13 @@ function parseSemesterPLans(semesterPlans: SemesterPlan[], indexes:  Record<stri
 
 const CalendarDisplay: React.FC = () => {
 
-  const { semesterPlans, indexes, courseColors } = useCalendarContext();
+  const { selectedSemesterPlans, indexes, courseColors } = useCalendarContext();
 
   const timezone = moment.tz.guess();
   moment.tz.setDefault(timezone);
 
   const localizer = momentLocalizer(moment);
-  const parsedEvents = parseSemesterPLans(semesterPlans, indexes);
+  const parsedEvents = parseSemesterPLans(selectedSemesterPlans, indexes);
 
   const today = new Date();
   const defaultDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 8, 15);

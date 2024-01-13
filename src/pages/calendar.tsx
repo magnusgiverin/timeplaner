@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import BreakLine from '~/components/General/BreakLine';
 import Layout from '~/components/General/Layout';
 import type { Course } from '~/interfaces/CourseData';
@@ -101,7 +101,16 @@ const Calendar: React.FC = () => {
 
                 if (isMounted && response?.data) {
                     setSemesterPlans(response.data);
-                    setSelectedSemesterPlans(response.data)
+                    setSelectedSemesterPlans(response.data.map((semesterPlan) =>
+                        ({
+                            ...semesterPlan,
+                            events: semesterPlan.events.filter((event) =>
+                                event.studentgroups.some((studentgroup) => 
+                                    studentgroup.split("_")[0] === selectedProgramCode
+                                )
+                            )
+                        })
+                    ));
 
                     // Generate indexes based on subjectList
                     const generatedIndexes: Record<string, number> = {};
