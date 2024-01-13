@@ -188,6 +188,7 @@ const ModifyCourses: React.FC = () => {
         { Header: 'Weeks', accessor: 'weeks' },
         { Header: 'Start Date/Time', accessor: 'startDateTime' },
         { Header: 'End Date/Time', accessor: 'endDateTime' },
+        { Header: 'Description', accessor: 'eventName' },
         { Header: 'Groups', accessor: 'groups' },
     ];
 
