@@ -1,12 +1,11 @@
 import type { SemesterPlan } from '~/interfaces/SemesterPlanData';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
-import type { DateLocalizer, Formats } from 'react-big-calendar';
+import type { Formats } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment-timezone';
 import { setContrast } from './Colors';
 import { useCalendarContext } from '~/contexts/calendarContext';
-import { useMemo } from 'react';
 
 export const hashString = (str: string) => {
   let hash = 0;
@@ -118,16 +117,16 @@ const CalendarDisplay: React.FC = () => {
 
   const formats: Formats = {
     dateFormat: 'dd',
-    dayFormat: (date, culture, localizer) => localizer?.format(date, 'ddd', culture) || '',
+    dayFormat: (date, culture, localizer) => localizer?.format(date, 'ddd', culture) ?? '',
     dayRangeHeaderFormat: ({ start, end }, culture, localizer) => {
-      const formattedStart = localizer?.format(moment(start).toDate(), 'ddd MMM D', culture) || '';
-      const formattedEnd = localizer?.format(moment(end).toDate(), 'ddd MMM D', culture) || '';
+      const formattedStart = localizer?.format(moment(start).toDate(), 'ddd MMM D', culture) ?? '';
+      const formattedEnd = localizer?.format(moment(end).toDate(), 'ddd MMM D', culture) ?? '';
 
       return `${formattedStart} — ${formattedEnd}`;
     },
-    timeGutterFormat: (date, culture, localizer) => localizer?.format(date, 'HH:mm', culture) || '',
+    timeGutterFormat: (date, culture, localizer) => localizer?.format(date, 'HH:mm', culture) ?? '',
     eventTimeRangeFormat: ({ start, end }, culture, localizer) =>
-      `${localizer?.format(moment(start).toDate(), 'HH:mm', culture) || ''} — ${localizer?.format(moment(end).toDate(), 'HH:mm', culture) || ''}`
+      `${localizer?.format(moment(start).toDate(), 'HH:mm', culture) ?? ''} — ${localizer?.format(moment(end).toDate(), 'HH:mm', culture) ?? ''}`
   };
 
   return (
