@@ -7,6 +7,7 @@ import type { DetailedCourse } from '~/interfaces/StudyPlanData';
 import { useLanguageContext } from '~/contexts/languageContext';
 import { generateColor } from '~/components/Calendar/Colors';
 import CalendarDisplay from '~/components/Calendar/CalendarDisplay';
+import GreenButton from '~/components/General/GreenButton';
 import { downloadICal, generateICal } from '~/components/Calendar/GenerateIcal';
 import { api } from '~/utils/api';
 import { useCalendarContext } from '~/contexts/calendarContext';
@@ -208,7 +209,7 @@ const Calendar: React.FC = () => {
             });
         }
 
-
+        
     };
 
     const handleDownload = () => {

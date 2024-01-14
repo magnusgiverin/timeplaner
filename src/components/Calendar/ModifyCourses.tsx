@@ -5,6 +5,7 @@ import { useLanguageContext } from '~/contexts/languageContext';
 import { setContrast } from './Colors';
 import moment from 'moment';
 import type { Event as MyEvent } from '~/interfaces/SemesterPlanData';
+import { useMedia } from 'react-use';
 
 interface TableProps {
     columns: Column[];
@@ -20,16 +21,23 @@ interface Row {
     eventId: string;
     courseId: string;
     eventName: string;
-    startDateTime: string;
-    endDateTime: string;
+    startDateTime?: string;
+    endDateTime?: string;
     dayOfWeek: string;
     weeks?: string[];  // Update the type here
-    groups: string;
+    groups?: string;
 }
 
-const getUniqueId = (event: MyEvent, language: string) => {
-    const daysOfWeekNames = language === 'no' ? ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] :
-        ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const getUniqueId = (event: MyEvent, language: string, isSmallScreen: boolean) => {
+
+    const daysOfWeekNames = language === 'no'
+        ? ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag']
+        : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    // Conditionally update day names for smaller screens
+    const shortDaysOfWeekNames = isSmallScreen
+        ? daysOfWeekNames.map(day => day.slice(0, 3))
+        : daysOfWeekNames;
 
     return event.actid + event.dtstart.split('T')[1]?.split('+')[0] + daysOfWeekNames[event.weekday] ?? "-"
 }
@@ -38,8 +46,10 @@ const EventTable: React.FC<TableProps> = ({ columns, data }) => {
     const { selectedSemesterPlans, setSelectedSemesterPlans, semesterPlans } = useCalendarContext();
     const { language } = useLanguageContext();
 
+    const isSmallScreen = useMedia('(max-width: 600px)'); // Adjust the maximum width as needed
+
     const isSelected = (courseId: string, eventId: string) => {
-        return selectedSemesterPlans.find(plan => plan.courseid === courseId)?.events.some((event) => getUniqueId(event, language) === eventId)
+        return selectedSemesterPlans.find(plan => plan.courseid === courseId)?.events.some((event) => getUniqueId(event, language, isSmallScreen) === eventId)
     };
 
     const handleCheckboxChange = (row: { original: { eventId: string; courseId: string } }) => {
@@ -51,10 +61,7 @@ const EventTable: React.FC<TableProps> = ({ columns, data }) => {
                 // Check if the row is selected or not
                 if (isSelected(courseId, eventId)) {
                     // If selected, filter out the event with actid equal to row.original.actid
-                    const updatedEvents = semesterPlan.events.filter((event) => getUniqueId(event, language) !== eventId);
-                    // Return a new object with the updated events array
-                    console.log(eventId)
-                    console.log(semesterPlan.events)
+                    const updatedEvents = semesterPlan.events.filter((event) => getUniqueId(event, language, isSmallScreen) !== eventId);
                     return {
                         ...semesterPlan,
                         events: updatedEvents,
@@ -65,7 +72,7 @@ const EventTable: React.FC<TableProps> = ({ columns, data }) => {
                         .flatMap((plan) =>
                             plan.events.filter(
                                 (event) =>
-                                    getUniqueId(event, language) === eventId
+                                    getUniqueId(event, language, isSmallScreen) === eventId
                             )
                         );
 
@@ -91,7 +98,7 @@ const EventTable: React.FC<TableProps> = ({ columns, data }) => {
     } = useTable({ columns, data }, useSortBy);
 
     return (
-        <div className="overflow-x-auto rounded-m ">
+        <div className="overflow-x-auto rounded-md">
             <table
                 {...getTableProps()}
                 className="w-full rounded-md bg-white text-black mt-2 mb-2"
@@ -105,7 +112,7 @@ const EventTable: React.FC<TableProps> = ({ columns, data }) => {
                             </th>
                             {headerGroup.headers.map((column) => (
                                 <th
-                                    className="border-b-2 border-black p-2 whitespace-normal overflow-auto text-left w-1/6"
+                                    className="border-b-2 border-black p-2 whitespace-normal overflow-auto text-left w-auto"
                                 >
                                     {column.render('Header')}
                                 </th>
@@ -188,24 +195,45 @@ const ModifyCourses: React.FC = () => {
 
     const { language } = useLanguageContext();
 
+    const isSmallScreen = useMedia('(max-width: 600px)'); // Adjust the maximum width as needed
+
     const columns: Column[] = language === 'no' ? [
         { Header: 'Ukedag', accessor: 'dayOfWeek' },
-        { Header: 'Uke', accessor: 'weeks' },
         { Header: 'Starttid', accessor: 'startDateTime' },
         { Header: 'Sluttid', accessor: 'endDateTime' },
         { Header: 'Beskrivelse', accessor: 'eventName' },
-        { Header: 'Grupper', accessor: 'groups' },
+        ...(isSmallScreen ? [] : [
+            { Header: 'Uke', accessor: 'weeks' },
+            { Header: 'Grupper', accessor: 'groups' },
+        ]),
     ] : [
-        { Header: 'Day of Week', accessor: 'dayOfWeek' },
         { Header: 'Weeks', accessor: 'weeks' },
-        { Header: 'Start Date/Time', accessor: 'startDateTime' },
-        { Header: 'End Date/Time', accessor: 'endDateTime' },
+        { Header: 'Start Time', accessor: 'startDateTime' },
+        { Header: 'End Time', accessor: 'endDateTime' },
         { Header: 'Description', accessor: 'eventName' },
-        { Header: 'Groups', accessor: 'groups' },
+        ...(isSmallScreen ? [] : [
+            { Header: 'Day of Week', accessor: 'dayOfWeek' },
+            { Header: 'Groups', accessor: 'groups' },
+        ]),
     ];
 
-    const daysOfWeekNames = language === 'no' ? ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'] :
-        ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    if (isSmallScreen) {
+        columns.forEach(column => {
+            if (column.Header === 'Ukedag') column.Header = 'Dag';
+            else if (column.Header === 'Starttid') column.Header = 'Start';
+            else if (column.Header === 'Sluttid') column.Header = 'Slutt';
+            // Add more conditions as needed
+        });
+    }
+
+    const daysOfWeekNames = language === 'no'
+        ? ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag']
+        : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    // Conditionally update day names for smaller screens
+    const shortDaysOfWeekNames = isSmallScreen
+        ? daysOfWeekNames.map(day => day.slice(0, 3))
+        : daysOfWeekNames;
 
     const labels = {
         selectedHeader: language === 'no' ? 'Rediger emner:' : 'Modify Courses:',
@@ -240,7 +268,7 @@ const ModifyCourses: React.FC = () => {
                             eventName: event['teaching-title'] ?? "-", // provide a default value if necessary
                             startDateTime: startDateTime ?? "", // provide a default value if necessary
                             endDateTime: endDateTime ?? "", // provide a default value if necessary
-                            dayOfWeek: daysOfWeekNames[event.weekday] ?? "-", // provide a default value if necessary
+                            dayOfWeek: shortDaysOfWeekNames[event.weekday] ?? "-", // provide a default value if necessary
                             weeks: [String(event.weeknr)],
                             groups: groups || "-", // Display "-----" if groups is empty
                         };
@@ -307,17 +335,17 @@ const ModifyCourses: React.FC = () => {
                         return dayComparison;
                     }
 
-                    // Check if weeks is undefined and handle accordingly
-                    if (!a.weeks && !b.weeks) {
-                        return 0;  // No difference in weeks, treat as equal
-                    } else if (!a.weeks) {
-                        return 1;  // `a` comes after `b` if `a` has undefined weeks
-                    } else if (!b.weeks) {
-                        return -1;  // `a` comes before `b` if `b` has undefined weeks
+                    // Check if startTime is undefined and handle accordingly
+                    if (!a.startDateTime && !b.startDateTime) {
+                        return 0;  // No difference in start time, treat as equal
+                    } else if (!a.startDateTime) {
+                        return 1;  // `a` comes after `b` if `a` has undefined start time
+                    } else if (!b.startDateTime) {
+                        return -1;  // `a` comes before `b` if `b` has undefined start time
                     }
 
-                    // As an example, you can compare the lengths of the arrays
-                    return a.weeks.length - b.weeks.length;
+                    // Compare start times
+                    return a.startDateTime.localeCompare(b.startDateTime);
                 });
 
                 const index = indexes[semesterPlan.courseid] ?? 0;
@@ -370,7 +398,7 @@ const ModifyCourses: React.FC = () => {
                                 </a>
                             )}
                             <a
-                                className='rounded-md ml-2'
+                                className='rounded-md transition duration-300 ease-in-out hover:bg-green-500 ml-2'
                                 href={`https://www.ntnu.no/studier/emner/${semesterPlan.courseid}#tab=omEmnet`}
                                 target="_blank"
                                 rel="noopener noreferrer"

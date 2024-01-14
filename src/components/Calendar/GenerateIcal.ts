@@ -6,20 +6,34 @@ import moment from 'moment';
 function downloadICal(content: string, filename: string) {
     // Create a Blob from the content
     const blob = new Blob([content], { type: 'text/calendar' });
-  
+
     // Create a link element
     const link = document.createElement('a');
-  
+
+    // Create a temporary directory path
+    const tempDirectory = 'ics';
+
     // Set the link's href to a data URL representing the Blob
     link.href = window.URL.createObjectURL(blob);
-  
+
     // Set the link's download attribute to the filename
-    link.download = filename;
+    link.download = `${tempDirectory}/${filename}`;
+
+    // Save the Blob content as a file in TEMP/ICS directory
+    const a = document.createElement('a');
+    a.href = link.href;
+    a.style.display = 'none';
+    a.download = link.download;
+    document.body.appendChild(a);
+    document.body.removeChild(a);
+
+    // Open Google Calendar with the link to the saved ICS file
+    window.open(`https://www.google.com/calendar/render?cid=webcal://${link.download}`);
+}
+
   
-    // Open Google Calendar with the iCal file's URL
-    window.open('http://www.google.com/calendar/render?cid=' + link.href);
-  }
   
+// https://calendar.google.com/calendar/u/0/r?cid=http://www.calone.net/ics/24v/mtdt_6_magnuagi.ics
 
 function parseDate(dateString: string): Date {
     const [datePart, timeWithOffset] = dateString.split('T');
@@ -92,7 +106,10 @@ function generateICal(semesterPlans: SemesterPlan[]): string {
         return "";
     }
 
-    return value ?? "";;
+    const icsContent = value ?? "";
+    const icsWithCalName = `X-WR-CALNAME:ÅSØK_mathihgu_2\n${icsContent}`;
+
+    return icsWithCalName;
 }
 
 export { generateICal, downloadICal };
