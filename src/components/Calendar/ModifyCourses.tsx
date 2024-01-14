@@ -112,7 +112,7 @@ const EventTable: React.FC<TableProps> = ({ columns, data }) => {
                             </th>
                             {headerGroup.headers.map((column) => (
                                 <th
-                                    className="border-b-2 border-black p-2 whitespace-normal overflow-auto text-left w-auto"
+                                    className="border-b-2 border-black p-2 whitespace-normal overflow-auto text-left w-1/6"
                                 >
                                     {column.render('Header')}
                                 </th>
