@@ -101,7 +101,7 @@ const EventTable: React.FC<TableProps> = ({ columns, data }) => {
         <div className="overflow-x-auto rounded-md">
             <table
                 {...getTableProps()}
-                className="w-full rounded-md bg-white text-black mt-2 mb-2"
+                className={`w-full rounded-md bg-white text-black mt-2 mb-2`}
             >
                 <thead>
                     {headerGroups.map((headerGroup) => (
@@ -112,7 +112,7 @@ const EventTable: React.FC<TableProps> = ({ columns, data }) => {
                             </th>
                             {headerGroup.headers.map((column) => (
                                 <th
-                                    className="border-b-2 border-black p-2 whitespace-normal overflow-auto text-left w-1/6"
+                                    className={`border-b-2 border-black p-3 whitespace-normal overflow-auto text-left w-${isSmallScreen ? '1/4' : '1/6'}`}
                                 >
                                     {column.render('Header')}
                                 </th>
@@ -165,7 +165,7 @@ const TableRow: React.FC<RowProps> = ({ row, onCheckboxChange, selected }) => {
                         type="checkbox"
                         checked={selected}
                         onChange={() => onCheckboxChange(row)}
-                        style={{ transform: 'scale(1.5)' }} // Add this style for larger checkboxes
+                        style={{ transform: 'scale(1.5)' }} 
                     />
                 </div>
             </td>
@@ -204,8 +204,8 @@ const ModifyCourses: React.FC = () => {
         { Header: 'Beskrivelse', accessor: 'eventName' as keyof Row },
         ...(isSmallScreen ? [] : [
             { Header: 'Uke', accessor: 'weeks' as keyof Row },
-            { Header: 'Grupper', accessor: 'groups' as keyof Row },
         ]),
+        { Header: 'Grupper', accessor: 'groups' as keyof Row },
     ] : [
         { Header: 'Day of Week', accessor: 'dayOfWeek' as keyof Row },
         { Header: 'Start Time', accessor: 'startDateTime' as keyof Row },
@@ -213,8 +213,8 @@ const ModifyCourses: React.FC = () => {
         { Header: 'Description', accessor: 'eventName' as keyof Row },
         ...(isSmallScreen ? [] : [
             { Header: 'Weeks', accessor: 'weeks' as keyof Row },
-            { Header: 'Groups', accessor: 'groups' as keyof Row },
         ]),
+        { Header: 'Groups', accessor: 'groups' as keyof Row },
     ];    
 
     if (isSmallScreen) {

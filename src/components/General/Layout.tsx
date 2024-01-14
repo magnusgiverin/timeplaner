@@ -13,7 +13,7 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex w-full flex-col items-center mb-10">
-        {isSmallScreen ? (<div className="w-full p-6">{children}</div>) : (<div className="w-2/3">{children}</div>)}
+        {isSmallScreen ? (<div className="w-full p-4">{children}</div>) : (<div className="w-2/3">{children}</div>)}
       </main>
     </div>
   );
