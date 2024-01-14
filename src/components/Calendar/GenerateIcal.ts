@@ -2,38 +2,25 @@ import type { SemesterPlan, Event } from '~/interfaces/SemesterPlanData';
 import * as ics from 'ics';
 import type { EventAttributes } from 'ics';
 import moment from 'moment';
+import { put } from "@vercel/blob";
 
-function downloadICal(content: string, filename: string) {
+function saveIcal(content: string, filename: string) {
+    const blob = new Blob([content], { type: 'text/calendar' });
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+}
+
+async function downloadICal(content: string, filename: string) {
     // Create a Blob from the content
     const blob = new Blob([content], { type: 'text/calendar' });
 
-    // Create a link element
-    const link = document.createElement('a');
-
-    // Create a temporary directory path
-    const tempDirectory = 'ics';
-
-    // Set the link's href to a data URL representing the Blob
-    link.href = window.URL.createObjectURL(blob);
-
-    // Set the link's download attribute to the filename
-    link.download = `${tempDirectory}/${filename}`;
-
-    // Save the Blob content as a file in TEMP/ICS directory
-    const a = document.createElement('a');
-    a.href = link.href;
-    a.style.display = 'none';
-    a.download = link.download;
-    document.body.appendChild(a);
-    document.body.removeChild(a);
+    const { url } = await put(filename, blob, { access: 'public', token: "vercel_blob_rw_Z3DZJ7HZqZpz7qY4_NE83hjbh90VXg6Uv5YDGNoL2N9wlkA"});
 
     // Open Google Calendar with the link to the saved ICS file
-    window.open(`https://www.google.com/calendar/render?cid=webcal://${link.download}`);
+    window.open(`https://www.google.com/calendar/render?cid=webcal://${url}`);
 }
-
-  
-  
-// https://calendar.google.com/calendar/u/0/r?cid=http://www.calone.net/ics/24v/mtdt_6_magnuagi.ics
 
 function parseDate(dateString: string): Date {
     const [datePart, timeWithOffset] = dateString.split('T');
@@ -74,7 +61,7 @@ function generateDescription(event: Event, title: string): string {
     return [title, summary, staffInfo, mazeMapLink].filter(Boolean).join('\n\n');
 }
 
-function generateICal(semesterPlans: SemesterPlan[]): string {
+function generateICal(semesterPlans: SemesterPlan[], filename: string): string {
     const icalEvents: EventAttributes[] = [];  // Rename to avoid conflict with the duplicate declaration
 
     for (const semesterPlan of semesterPlans) {
@@ -107,9 +94,9 @@ function generateICal(semesterPlans: SemesterPlan[]): string {
     }
 
     const icsContent = value ?? "";
-    const icsWithCalName = `X-WR-CALNAME:ÅSØK_mathihgu_2\n${icsContent}`;
+    const icsWithCalName = `X-WR-CALNAME:${filename}\n${icsContent}`;
 
     return icsWithCalName;
 }
 
-export { generateICal, downloadICal };
+export { generateICal, downloadICal, saveIcal };

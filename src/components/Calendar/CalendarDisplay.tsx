@@ -6,6 +6,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment-timezone';
 import { setContrast } from './Colors';
 import { useCalendarContext } from '~/contexts/calendarContext';
+import { useMedia } from 'react-use';
 
 export const hashString = (str: string) => {
   let hash = 0;
@@ -104,12 +105,16 @@ const CalendarDisplay: React.FC = () => {
       // Check if backgroundColor is defined before calling setContrast
       const textColor = backgroundColor ? setContrast(backgroundColor) : '';
 
+      const isSmallScreen = useMedia('(max-width: 600px)'); // Adjust the maximum width as needed
+      const fontSize = isSmallScreen ? '13px' : '15px'; // Change '1' to the desired small size
+
       return {
         style: {
           border: '1px solid white',
           outline: `1px solid white`, // Set the outer border with the background color 
           backgroundColor,
           color: textColor, // Set the text color
+          fontSize,
         },
       };
     }

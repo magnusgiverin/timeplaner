@@ -7,8 +7,7 @@ import type { DetailedCourse } from '~/interfaces/StudyPlanData';
 import { useLanguageContext } from '~/contexts/languageContext';
 import { generateColor } from '~/components/Calendar/Colors';
 import CalendarDisplay from '~/components/Calendar/CalendarDisplay';
-import GreenButton from '~/components/General/GreenButton';
-import { downloadICal, generateICal } from '~/components/Calendar/GenerateIcal';
+import { downloadICal, generateICal, saveIcal } from '~/components/Calendar/GenerateIcal';
 import { api } from '~/utils/api';
 import { useCalendarContext } from '~/contexts/calendarContext';
 import ModifyCourses from '~/components/Calendar/ModifyCourses';
@@ -85,8 +84,8 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onDownload, onSave, onMod
                 stroke="currentColor"
                 className="w-6 h-6 mr-2"
             >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75a4.5 4.5 0 0 1-4.884 4.484c-1.076-.091-2.264.071-2.95.904l-7.152 8.684a2.548 2.548 0 1 1-3.586-3.586l8.684-7.152c.833-.686.995-1.874.904-2.95a4.5 4.5 0 0 1 6.336-4.486l-3.276 3.276a3.004 3.004 0 0 0 2.25 2.25l3.276-3.276c.256.565.398 1.192.398 1.852Z" />
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4.867 19.125h.008v.008h-.008v-.008Z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75a4.5 4.5 0 0 1-4.884 4.484c-1.076-.091-2.264.071-2.95.904l-7.152 8.684a2.548 2.548 0 1 1-3.586-3.586l8.684-7.152c.833-.686.995-1.874.904-2.95a4.5 4.5 0 0 1 6.336-4.486l-3.276 3.276a3.004 3.004 0 0 0 2.25 2.25l3.276-3.276c.256.565.398 1.192.398 1.852Z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.867 19.125h.008v.008h-.008v-.008Z" />
             </svg>
             {labels.modify}
         </button>
@@ -208,18 +207,28 @@ const Calendar: React.FC = () => {
                 behavior: 'smooth',
             });
         }
-
-        
     };
 
     const handleDownload = () => {
-        const iCalContent = generateICal(selectedSemesterPlans);
-
         const translatedSeason = language === 'no'
             ? selectedSeason === 'Spring' ? 'Vår' : 'Høst'
             : selectedSeason;
 
-        downloadICal(iCalContent, `${selectedProgramCode}-${selectedYear}-${translatedSeason}.ics`);
+        const filename = `${selectedProgramCode}-${selectedYear}-${translatedSeason}`
+        const iCalContent = generateICal(selectedSemesterPlans, filename);
+
+        downloadICal(iCalContent, filename + ".ics");
+    };
+
+    const handleSave = () => {
+        const translatedSeason = language === 'no'
+            ? selectedSeason === 'Spring' ? 'Vår' : 'Høst'
+            : selectedSeason;
+
+        const filename = `${selectedProgramCode}-${selectedYear}-${translatedSeason}`
+        const iCalContent = generateICal(selectedSemesterPlans, filename);
+
+        saveIcal(iCalContent, filename + ".ics");
     };
 
     return (
@@ -229,7 +238,7 @@ const Calendar: React.FC = () => {
             <BreakLine />
             <ActionButtons
                 onDownload={handleDownload}
-                onSave={handleDownload}
+                onSave={handleSave}
                 onModify={handleModify}
                 labels={{
                     export: getExportLabel(),
