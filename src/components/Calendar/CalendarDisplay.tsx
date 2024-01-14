@@ -1,4 +1,4 @@
-import type { SemesterPlan } from '~/interfaces/SemesterPlanData';
+import type { SemesterPlan, Event as MyEvent } from '~/interfaces/SemesterPlanData';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import type { Formats } from 'react-big-calendar';
 import moment from 'moment';
@@ -25,6 +25,7 @@ interface ParsedEvent {
   start: Date;
   end: Date;
   allDay: boolean;
+  details: MyEvent;
 }
 
 function parseDate(dateString: string): Date {
@@ -63,7 +64,8 @@ function parseSemesterPLans(semesterPlans: SemesterPlan[], indexes: Record<strin
       title: `${semesterPlan.courseid} - ${semesterPlan.coursename}`,
       start: parseDate(event.dtstart),
       end: parseDate(event.dtend),
-      allDay: false
+      allDay: false,
+      details: event
     }
 
     events.push(parsedEvent);
@@ -129,6 +131,20 @@ const CalendarDisplay: React.FC = () => {
       `${localizer?.format(moment(start).toDate(), 'HH:mm', culture) ?? ''} — ${localizer?.format(moment(end).toDate(), 'HH:mm', culture) ?? ''}`
   };
 
+  const handleSelectEvent = (event: ParsedEvent) => {
+    const details = event.details;
+    // Add your logic to show more details of the selected event
+    const title = event.title;
+
+    const staffDetails = details.staffs?.map(staff => `${staff.shortname} (${staff.id}@ntnu.no)`).join(', ');
+    const summary = details.summary ? `Summary: ${details['teaching-title']}` : '';
+    const staffInfo = staffDetails ? `Staff: ${staffDetails}` : '';
+    const room = "Room: " + details.room?.[0]?.roomname ?? ""
+  
+    const eventDetails = [title, summary, staffInfo,room].filter(Boolean).join('\n\n');
+    alert(eventDetails)
+  };
+
   return (
     <div className='flex-column flex-row flex-shrink mt-2 mb-2 justify-center'>
       <div className="h-[60vh]">
@@ -161,6 +177,7 @@ const CalendarDisplay: React.FC = () => {
           max={workWeekEnd}
           className="bg-white text-black border border-gray-300 rounded-md p-2"
           eventPropGetter={eventPropGetter}
+          onSelectEvent={handleSelectEvent}
         />
       </div>
     </div>

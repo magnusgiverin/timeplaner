@@ -148,7 +148,6 @@ interface TableRowStructure {
     // Add other properties or methods as needed
 }
 
-
 interface RowProps {
     row: TableRowStructure;
     onCheckboxChange: (row: TableRowStructure) => void;
