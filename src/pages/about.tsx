@@ -19,8 +19,8 @@ const About = () => {
 
     const getContactInfo = () => {
         return language === "no"
-            ? "Hvis du opplever problemer, har forslag til forbedringer, eller ønsker å dele tilbakemeldinger, nøl ikke med å kontakte oss.</p><p>Nyt bruken av appen!"
-            : "If you encounter any issues, have suggestions for improvements, or want to share your feedback, please don't hesitate to contact us.</p><p>Enjoy using the app!";
+            ? "Hvis du opplever problemer, har forslag til forbedringer, eller ønsker å dele tilbakemeldinger, nøl ikke med å kontakte oss. Nyt bruken av appen!"
+            : "If you encounter any issues, have suggestions for improvements, or want to share your feedback, please don't hesitate to contact us. Enjoy using the app!";
     };
 
     return (

@@ -4,12 +4,22 @@ import type { EventAttributes } from 'ics';
 import moment from 'moment';
 
 function downloadICal(content: string, filename: string) {
+    // Create a Blob from the content
     const blob = new Blob([content], { type: 'text/calendar' });
+  
+    // Create a link element
     const link = document.createElement('a');
+  
+    // Set the link's href to a data URL representing the Blob
     link.href = window.URL.createObjectURL(blob);
+  
+    // Set the link's download attribute to the filename
     link.download = filename;
-    link.click();
-}
+  
+    // Open Google Calendar with the iCal file's URL
+    window.open('http://www.google.com/calendar/render?cid=' + link.href);
+  }
+  
 
 function parseDate(dateString: string): Date {
     const [datePart, timeWithOffset] = dateString.split('T');
@@ -40,10 +50,14 @@ function parseDate(dateString: string): Date {
 
 function generateDescription(event: Event, title: string): string {
     const staffDetails = event.staffs?.map(staff => `${staff.shortname} (${staff.id}@ntnu.no)`).join(', ');
-    const summary = event.summary ? `Summary: ${event.summary}` : '';
+    const summary = event.summary ? `Summary: ${event['teaching-title']}` : '';
     const staffInfo = staffDetails ? `Staff: ${staffDetails}` : '';
 
-    return [title, summary, staffInfo].filter(Boolean).join('\n\n');
+    const roomUrl = event.room?.[0]?.roomurl ?? '';
+    const isUrlValid = /^https?:\/\/\S+$/.test(roomUrl);
+    const mazeMapLink = isUrlValid ? "Room: " + roomUrl : ''
+
+    return [title, summary, staffInfo, mazeMapLink].filter(Boolean).join('\n\n');
 }
 
 function generateICal(semesterPlans: SemesterPlan[]): string {
@@ -55,8 +69,6 @@ function generateICal(semesterPlans: SemesterPlan[]): string {
             const endDate = parseDate(event.dtend);
 
             const roomName = event.room?.[0]?.roomname ?? '';
-            const roomUrl = event.room?.[0]?.roomurl ?? '';
-            const isUrlValid = /^https?:\/\/\S+$/.test(roomUrl);
 
             const title = `${semesterPlan.courseid} - ${semesterPlan.coursename}`;
 
@@ -69,7 +81,6 @@ function generateICal(semesterPlans: SemesterPlan[]): string {
                 status: 'CONFIRMED',
                 busyStatus: 'BUSY',
                 ...(roomName !== '' ? { location: roomName } : {}),
-                ...(isUrlValid ? { url: roomUrl } : {}),
             });
         }
     }
