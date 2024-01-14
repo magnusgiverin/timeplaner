@@ -39,7 +39,7 @@ const getUniqueId = (event: MyEvent, language: string, isSmallScreen: boolean) =
         ? daysOfWeekNames.map(day => day.slice(0, 3))
         : daysOfWeekNames;
 
-    return event.actid + event.dtstart.split('T')[1]?.split('+')[0] + daysOfWeekNames[event.weekday] ?? "-"
+    return event.actid + event.dtstart.split('T')[1]?.split('+')[0] + shortDaysOfWeekNames[event.weekday] ?? "-"
 }
 
 const EventTable: React.FC<TableProps> = ({ columns, data }) => {
@@ -198,31 +198,33 @@ const ModifyCourses: React.FC = () => {
     const isSmallScreen = useMedia('(max-width: 600px)'); // Adjust the maximum width as needed
 
     const columns: Column[] = language === 'no' ? [
-        { Header: 'Ukedag', accessor: 'dayOfWeek' },
-        { Header: 'Starttid', accessor: 'startDateTime' },
-        { Header: 'Sluttid', accessor: 'endDateTime' },
-        { Header: 'Beskrivelse', accessor: 'eventName' },
+        { Header: 'Ukedag', accessor: 'dayOfWeek' as keyof Row },
+        { Header: 'Starttid', accessor: 'startDateTime' as keyof Row },
+        { Header: 'Sluttid', accessor: 'endDateTime' as keyof Row },
+        { Header: 'Beskrivelse', accessor: 'eventName' as keyof Row },
         ...(isSmallScreen ? [] : [
-            { Header: 'Uke', accessor: 'weeks' },
-            { Header: 'Grupper', accessor: 'groups' },
+            { Header: 'Uke', accessor: 'weeks' as keyof Row },
+            { Header: 'Grupper', accessor: 'groups' as keyof Row },
         ]),
     ] : [
-        { Header: 'Weeks', accessor: 'weeks' },
-        { Header: 'Start Time', accessor: 'startDateTime' },
-        { Header: 'End Time', accessor: 'endDateTime' },
-        { Header: 'Description', accessor: 'eventName' },
+        { Header: 'Day of Week', accessor: 'dayOfWeek' as keyof Row },
+        { Header: 'Start Time', accessor: 'startDateTime' as keyof Row },
+        { Header: 'End Time', accessor: 'endDateTime' as keyof Row },
+        { Header: 'Description', accessor: 'eventName' as keyof Row },
         ...(isSmallScreen ? [] : [
-            { Header: 'Day of Week', accessor: 'dayOfWeek' },
-            { Header: 'Groups', accessor: 'groups' },
+            { Header: 'Weeks', accessor: 'weeks' as keyof Row },
+            { Header: 'Groups', accessor: 'groups' as keyof Row },
         ]),
-    ];
+    ];    
 
     if (isSmallScreen) {
         columns.forEach(column => {
             if (column.Header === 'Ukedag') column.Header = 'Dag';
             else if (column.Header === 'Starttid') column.Header = 'Start';
             else if (column.Header === 'Sluttid') column.Header = 'Slutt';
-            // Add more conditions as needed
+            if (column.Header === 'Day of Week') column.Header = 'Day';
+            else if (column.Header === 'Start Time') column.Header = 'Start';
+            else if (column.Header === 'End Time') column.Header = 'End';
         });
     }
 
@@ -254,7 +256,7 @@ const ModifyCourses: React.FC = () => {
                 const eventsGroupedByEventId: Record<string, Row> = {};
 
                 semesterPlan.events.forEach((event) => {
-                    const eventId = getUniqueId(event, language);
+                    const eventId = getUniqueId(event, language, isSmallScreen);
 
                     if (!eventsGroupedByEventId[eventId]) {
                         const startDateTime = event.dtstart ? moment(event.dtstart).format('HH:mm') : '';
@@ -321,7 +323,7 @@ const ModifyCourses: React.FC = () => {
                 function isUseless(eventsGroupedByEventId: Record<string, Row>) {
                     return Object.keys(eventsGroupedByEventId).every((eventId) =>
                         selectedSemesterPlans.find((plan) => plan.courseid === eventsGroupedByEventId[eventId]?.courseId)?.events.every((event) =>
-                            getUniqueId(event, language) !== eventId
+                            getUniqueId(event, language, isSmallScreen) !== eventId
                         )
                     );
                 }
