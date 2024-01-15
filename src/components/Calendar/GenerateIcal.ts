@@ -16,7 +16,7 @@ async function downloadICal(content: string, filename: string) {
     // Create a Blob from the content
     const blob = new Blob([content], { type: 'text/calendar' });
 
-    const { url } = await put(filename, blob, { access: 'public', token: "vercel_blob_rw_Z3DZJ7HZqZpz7qY4_NE83hjbh90VXg6Uv5YDGNoL2N9wlkA"});
+    const { url } = await put(filename, blob, { access: 'public'});
 
     // Open Google Calendar with the link to the saved ICS file
     window.open(`https://www.google.com/calendar/render?cid=webcal://${url}`);

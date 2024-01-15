@@ -209,16 +209,22 @@ const Calendar: React.FC = () => {
         }
     };
 
-    const handleDownload = () => {
+    const handleDownload = async () => {
         const translatedSeason = language === 'no'
-            ? selectedSeason === 'Spring' ? 'Vår' : 'Høst'
-            : selectedSeason;
-
+          ? selectedSeason === 'Spring' ? 'Vår' : 'Høst'
+          : selectedSeason;
+      
         const filename = `${selectedProgramCode}-${selectedYear}-${translatedSeason}`
         const iCalContent = generateICal(selectedSemesterPlans, filename);
-
-        downloadICal(iCalContent, filename + ".ics");
-    };
+      
+        // Use try-catch to handle potential errors
+        try {
+          await downloadICal(iCalContent, filename + ".ics");
+        } catch (error) {
+          // Handle or log the error as needed
+          console.error('Error downloading iCal:', error);
+        }
+      };
 
     const handleSave = () => {
         const translatedSeason = language === 'no'
