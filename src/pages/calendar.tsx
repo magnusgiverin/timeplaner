@@ -219,7 +219,7 @@ const Calendar: React.FC = () => {
       
         // Use try-catch to handle potential errors
         try {
-          await downloadICal(iCalContent, filename + ".ics");
+          await downloadICal(iCalContent, filename + ".ics", selectedSeason);
         } catch (error) {
           // Handle or log the error as needed
           console.error('Error downloading iCal:', error);
