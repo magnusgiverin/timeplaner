@@ -23,7 +23,7 @@ async function downloadICal(content: string, filename: string) {
 
     const filePath = "ics/" + currentSemester + "/"
 
-    const { url } = await put(filePath + filename, blob, { access: 'public'});
+    const { url } = await put(filePath + filename, blob, { access: 'public', token: "vercel_blob_rw_Z3DZJ7HZqZpz7qY4_NE83hjbh90VXg6Uv5YDGNoL2N9wlkA"});
 
     // Open Google Calendar with the link to the saved ICS file
     window.open(`https://www.google.com/calendar/render?cid=webcal://${url}`);
