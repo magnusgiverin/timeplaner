@@ -3,7 +3,6 @@ import * as ics from 'ics';
 import type { EventAttributes } from 'ics';
 import moment from 'moment';
 import { put } from "@vercel/blob";
-import { useAppContext } from '~/contexts/appContext';
 
 function saveIcal(content: string, filename: string) {
     const blob = new Blob([content], { type: 'text/calendar' });
@@ -21,12 +20,10 @@ async function downloadICal(content: string, filename: string, season: string) {
 
     const filePath = "ics/" + currentSemester + "/"
 
-    const { url } = await put(filePath + filename, blob, { access: 'public', token: process.env.BLOB_READ_WRITE_TOKEN});
-    const withoutHttps = url.replace(/^https:\/\//, '');
+    const { url } = await put(filePath + filename, blob, { access: 'public', token: "vercel_blob_rw_Z3DZJ7HZqZpz7qY4_NE83hjbh90VXg6Uv5YDGNoL2N9wlkA"});
 
-    console.log(`https://www.google.com/calendar/render?cid=webcal://${withoutHttps}`)
     // Open Google Calendar with the link to the saved ICS file
-    // window.open(`https://www.google.com/calendar/render?cid=webcal://${url}`);
+    window.open(`https://www.google.com/calendar/render?cid=webcal://${url}`);
 }
 
 function parseDate(dateString: string): Date {
