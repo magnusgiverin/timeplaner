@@ -97,6 +97,10 @@ const EventTable: React.FC<TableProps> = ({ columns, data }) => {
         prepareRow,
     } = useTable({ columns, data }, useSortBy);
 
+    // Adjust the font size based on the screen size
+    const fontSize = isSmallScreen ? 'tiny' : 'base'; // You can customize the font size
+    const cellPaddingClass = isSmallScreen ? 'p-1' : 'p-3'; // Smaller padding for small screens
+
     return (
         <div className="overflow-x-auto rounded-md">
             <table
@@ -129,6 +133,8 @@ const EventTable: React.FC<TableProps> = ({ columns, data }) => {
                                 row={row}
                                 onCheckboxChange={handleCheckboxChange}
                                 selected={isSelected(row.original.courseId, row.original.eventId)}
+                                fontSize={fontSize} // Pass font size as a prop to TableRow
+                                cellPaddingClass={cellPaddingClass} // Pass padding class as a prop to TableRow
                             />
                         );
                     })}
@@ -152,9 +158,11 @@ interface RowProps {
     row: TableRowStructure;
     onCheckboxChange: (row: TableRowStructure) => void;
     selected?: boolean;
+    fontSize: 'tiny' | 'base'; // Add fontSize prop
+    cellPaddingClass: string; // Pass padding class as a prop to TableRow
 }
 
-const TableRow: React.FC<RowProps> = ({ row, onCheckboxChange, selected }) => {
+const TableRow: React.FC<RowProps> = ({ row, onCheckboxChange, selected, fontSize, cellPaddingClass }) => {
     const { getRowProps, cells } = row;
     return (
         <tr {...getRowProps()}>
@@ -164,7 +172,7 @@ const TableRow: React.FC<RowProps> = ({ row, onCheckboxChange, selected }) => {
                         type="checkbox"
                         checked={selected}
                         onChange={() => onCheckboxChange(row)}
-                        style={{ transform: 'scale(1.5)' }} 
+                        style={{ transform: 'scale(1.5)' }}
                     />
                 </div>
             </td>
@@ -175,7 +183,7 @@ const TableRow: React.FC<RowProps> = ({ row, onCheckboxChange, selected }) => {
                         onClick?: (event: React.MouseEvent) => void;
                         // Add other properties as needed based on your use case
                     })}
-                    className="border-t-2 border-gray-500 p-3 whitespace-normal overflow-auto"
+                    className={`border-t-2 border-gray-500 whitespace-normal overflow-auto text-${fontSize} ${cellPaddingClass}`} // Set dynamic font size and padding
                 >
                     {cell.render('Cell')}
                 </td>
@@ -214,7 +222,7 @@ const ModifyCourses: React.FC = () => {
             { Header: 'Weeks', accessor: 'weeks' as keyof Row },
         ]),
         { Header: 'Groups', accessor: 'groups' as keyof Row },
-    ];    
+    ];
 
     if (isSmallScreen) {
         columns.forEach(column => {
@@ -409,15 +417,13 @@ const ModifyCourses: React.FC = () => {
                                 </svg>
                             </a>
                         </div>
-                        {
-                            visibleTables[semesterPlan.courseid] && (
-                                Object.keys(eventsGroupedByEventId).length !== 0 ? (
-                                    <EventTable columns={columns} data={filteredEvents} />
-                                ) : (
-                                    <div>{language === "no" ? "Ingenting funnet" : "No events found"}</div>
-                                )
+                        {visibleTables[semesterPlan.courseid] && (
+                            Object.keys(eventsGroupedByEventId).length !== 0 ? (
+                                <EventTable columns={columns} data={filteredEvents} />
+                            ) : (
+                                <div>{language === "no" ? "Ingenting funnet" : "No events found"}</div>
                             )
-                        }
+                        )}
                     </div>
                 );
             })}
