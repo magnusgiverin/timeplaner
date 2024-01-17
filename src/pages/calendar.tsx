@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import BreakLine from '~/components/General/BreakLine';
 import Layout from '~/components/General/Layout';
 import type { Course } from '~/interfaces/CourseData';
@@ -12,99 +12,25 @@ import { api } from '~/utils/api';
 import { useCalendarContext } from '~/contexts/calendarContext';
 import ModifyCourses from '~/components/Calendar/ModifyCourses';
 import BackButton from '~/components/General/BackButton';
-
-// Header component
-interface HeaderProps {
-    label: string;
-}
-
-const Header: React.FC<HeaderProps> = ({ label }) => (
-    <div className="flex flex-col items-center justify-center mt-20">
-        <h2>{label}</h2>
-    </div>
-);
-
-// ActionButtons component
-interface ActionButtonsProps {
-    onDownload: () => void;
-    onSave: () => void;
-    onModify: () => void;
-    labels: {
-        export: string;
-        save: string;
-        modify: string;
-    };
-}
-
-const ActionButtons: React.FC<ActionButtonsProps> = ({ onDownload, onSave, onModify, labels }) => (
-    <div className="flex flex-row items-center justify-center">
-        <button
-            onClick={onDownload}
-            className="bg-green-500 text-white rounded-full p-2 flex items-center justify-center h-full"
-        >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6 mr-2"
-            >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-            </svg>
-            {labels.export}
-        </button>
-
-        <button
-            onClick={onSave}
-            className="ml-2 bg-green-500 text-white rounded-full p-2 flex items-center justify-center h-full"
-        >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6 mr-2"
-            >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-            </svg>
-            {labels.save}
-        </button>
-
-        <button
-            onClick={onModify}
-            className="bg-blue-500 text-white rounded-full p-2 ml-2 mt-2 mb-2 flex items-center justify-center h-full"
-        >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6 mr-2"
-            >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75a4.5 4.5 0 0 1-4.884 4.484c-1.076-.091-2.264.071-2.95.904l-7.152 8.684a2.548 2.548 0 1 1-3.586-3.586l8.684-7.152c.833-.686.995-1.874.904-2.95a4.5 4.5 0 0 1 6.336-4.486l-3.276 3.276a3.004 3.004 0 0 0 2.25 2.25l3.276-3.276c.256.565.398 1.192.398 1.852Z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4.867 19.125h.008v.008h-.008v-.008Z" />
-            </svg>
-            {labels.modify}
-        </button>
-    </div>
-
-);
+import ActionButtons from '~/components/Calendar/ActionButtons';
+import Header from '~/components/Calendar/Header';
 
 // Main Calendar component
-const Calendar: React.FC = () => {
+const CalendarPage: React.FC = () => {
     const router = useRouter();
 
     const { language } = useLanguageContext();
+
     const {
         selectedSemesterPlans,
-        setSemesterPlans,
         setSelectedSemesterPlans,
-        setCourseColors,
+        semesterPlans,
+        setSemesterPlans,
         currentCourses,
         setCurrentCourses,
+        courseColors,
+        setCourseColors,
+        indexes,
         setIndexes,
     } = useCalendarContext();
 
@@ -135,8 +61,10 @@ const Calendar: React.FC = () => {
         semester: currentSemester,
     });
 
-    useEffect(() => {
+    const [isSaved, setIsSaved] = useState<boolean>(false);
+    const [username, setUsername] = useState<string>();
 
+    useEffect(() => {
         let isMounted = true;
         const fetchData = async () => {
             try {
@@ -191,8 +119,8 @@ const Calendar: React.FC = () => {
         return language === 'no' ? 'Eksporter' : 'Export';
     };
 
-    const getSaveLabel = () => {
-        return language === 'no' ? 'Lagre' : 'Save';
+    const getDownloadLabel = () => {
+        return language === 'no' ? 'Last ned' : 'Download';
     };
 
     const getModifyLabel = () => {
@@ -209,24 +137,28 @@ const Calendar: React.FC = () => {
         }
     };
 
-    const handleDownload = async () => {
+    const getSaveLabel = () => {
+        return language === 'no' ? 'Lagre' : 'Save';
+    };
+
+    const handleExport = async () => {
         const translatedSeason = language === 'no'
-          ? selectedSeason === 'Spring' ? 'Vår' : 'Høst'
-          : selectedSeason;
-      
+            ? selectedSeason === 'Spring' ? 'Vår' : 'Høst'
+            : selectedSeason;
+
         const filename = `${selectedProgramCode}-${selectedYear}-${translatedSeason}`
         const iCalContent = generateICal(selectedSemesterPlans, filename);
-      
+
         // Use try-catch to handle potential errors
         try {
-          await downloadICal(iCalContent, filename + ".ics", selectedSeason);
+            await downloadICal(iCalContent, filename + ".ics", selectedSeason);
         } catch (error) {
-          // Handle or log the error as needed
-          console.error('Error downloading iCal:', error);
+            // Handle or log the error as needed
+            console.error('Error downloading iCal:', error);
         }
-      };
+    };
 
-    const handleSave = () => {
+    const handleDownload = () => {
         const translatedSeason = language === 'no'
             ? selectedSeason === 'Spring' ? 'Vår' : 'Høst'
             : selectedSeason;
@@ -237,28 +169,145 @@ const Calendar: React.FC = () => {
         saveIcal(iCalContent, filename + ".ics");
     };
 
+    const handleSaveRedirect = () => {
+        const queryParam = {
+            username: encodeURIComponent(username ?? ""),
+        }
+
+        void router.push({
+            pathname: '/save',
+            query: queryParam,
+        });
+    };
+
+    const handleSave = () => {
+        const promptMessage =
+            language === "no"
+                ? "Skriv inn NTNU brukernavnet ditt for å gjenhente kalenderen din senere:"
+                : "Enter your NTNU username to retrieve the calendar at a later date:";
+
+        const username = window.prompt(promptMessage)?.toLowerCase();
+
+        if (username) {
+            setIsSaved(true);
+            setUsername(username);
+
+            const programCode = selectedProgramCode;
+            const season = selectedSeason;
+            const year = selectedYear;
+
+            // Prepare data for storage
+            const storageData = {
+                selectedSemesterPlans,
+                semesterPlans,
+                currentCourses,
+                courseColors,
+                indexes,
+                season,
+                programCode,
+                year,
+            };
+
+            // Convert the data to JSON format
+            const jsonData = JSON.stringify(storageData);
+            localStorage.setItem(username, jsonData);
+
+            const modifyCoursesElement = document.getElementById('modifyCourses');
+            if (modifyCoursesElement) {
+                modifyCoursesElement.scrollIntoView({
+                    behavior: 'smooth',
+                });
+            }
+        }
+    };
+
+    const handleExplaination = () => {
+        const norweiganDetails = [
+            "Eksporter: Eksporter kalender til Google Calendar",
+            "Last ned: Last ned kalender fil, for deling/import i kalendertjenester",
+            "Rediger: Rediger innhold i kalender - paraleller, øvingstimer, etc.",
+            isSaved !== undefined && !isSaved
+                ? "Lagre: Lagre kalender på siden med NTNU brukernavnet ditt"
+                : ""
+        ]
+
+        const englishDetails = [
+            "Export: Export the calendar to Google Calendar",
+            "Download: Download the calendar file to your device",
+            "Edit: Edit what events are shown in your calendar",
+            isSaved !== undefined && !isSaved
+                ? "Save: Save the calendar on our website with your NTNU username"
+                : ""
+        ]
+
+        const explaination = (language === "no" ? norweiganDetails : englishDetails).filter(Boolean).join('\n\n');
+        alert(explaination)
+    };
+
+    const handleModification = () => {
+        // This function will be called when any modification occurs in ModifyCourses
+        // You can toggle the isSaved state or perform any other actions here
+        setIsSaved(false);
+    };
+
     return (
         <Layout>
             <BackButton buttonText={language === "no" ? "Rediger emner" : "Edit subjects"} />
             <Header label={getHeaderLabel()} />
             <BreakLine />
             <ActionButtons
-                onDownload={handleDownload}
+                onExport={handleExport}
                 onSave={handleSave}
                 onModify={handleModify}
+                onExplaination={handleExplaination}
+                onDownload={handleDownload}
                 labels={{
                     export: getExportLabel(),
-                    save: getSaveLabel(),
+                    download: getDownloadLabel(),
                     modify: getModifyLabel(),
+                    save: getSaveLabel(),
                 }}
+                isSaved={isSaved}
             />
-            <CalendarDisplay />
+            <CalendarDisplay selectedSemesterPlans={selectedSemesterPlans} indexes={indexes} courseColors={courseColors} />
+            {isSaved && (
+                <>
+                    <BreakLine />
+                    <div>
+                        <p>
+                            {language === "no"
+                                ? "Denne kalenderen er lagret under brukernavnet: "
+                                : "This calendar is saved under the username: "}
+                            <strong>{username}</strong>
+                        </p>
+                        <button
+                            className="bg-green-500 text-white rounded-md p-2 mt-2 flex items-center justify-center h-full"
+                            onClick={handleSaveRedirect}
+                        >
+                            {language === "no" ? "Gå til min side" : "Go to my page"}
+
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="w-6 h-6 mr-2"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                            </svg>
+                        </button>
+                    </div>
+                </>
+            )}
             <div id="modifyCourses">
                 <BreakLine />
-                <ModifyCourses />
+                <ModifyCourses
+                    onModification={handleModification}
+                />
             </div>
         </Layout>
     );
 };
 
-export default Calendar;
+export default CalendarPage;

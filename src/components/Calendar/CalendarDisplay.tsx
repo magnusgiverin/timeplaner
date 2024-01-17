@@ -5,8 +5,6 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment-timezone';
 import { setContrast } from './Colors';
-import { useCalendarContext } from '~/contexts/calendarContext';
-import { useMedia } from 'react-use';
 
 export const hashString = (str: string) => {
   let hash = 0;
@@ -75,9 +73,17 @@ function parseSemesterPLans(semesterPlans: SemesterPlan[], indexes: Record<strin
   return events;
 }
 
-const CalendarDisplay: React.FC = () => {
+interface CalendarDisplayProps {
+  selectedSemesterPlans: SemesterPlan[]; // Replace with your actual type
+  indexes: Record<string, number>;
+  courseColors: Record<string, string>; // Replace with your actual type
+}
 
-  const { selectedSemesterPlans, indexes, courseColors } = useCalendarContext();
+const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
+  selectedSemesterPlans,
+  indexes,
+  courseColors,
+}) => {
 
   const timezone = moment.tz.guess();
   moment.tz.setDefault(timezone);
@@ -141,16 +147,16 @@ const CalendarDisplay: React.FC = () => {
     const summary = details.summary ? `Summary: ${details['teaching-title']}` : '';
     const staffInfo = staffDetails ? `Staff: ${staffDetails}` : '';
     const room = "Room: " + details.room?.[0]?.roomname ?? ""
-  
-    const eventDetails = [title, summary, staffInfo,room].filter(Boolean).join('\n\n');
+
+    const eventDetails = [title, summary, staffInfo, room].filter(Boolean).join('\n\n');
     alert(eventDetails)
   };
 
   return (
     <div className='flex-column flex-row flex-shrink mt-2 mb-2 justify-center'>
       <div className="h-[60vh]">
-      <style>
-        {`
+        <style>
+          {`
           .rbc-allday-cell {
             display: none;
           }
@@ -158,7 +164,7 @@ const CalendarDisplay: React.FC = () => {
             border-bottom: none;
           }
         `}
-      </style>
+        </style>
         <Calendar
           formats={formats}
           defaultView='work_week'

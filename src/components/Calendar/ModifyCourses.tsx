@@ -42,7 +42,7 @@ const getUniqueId = (event: MyEvent, language: string, isSmallScreen: boolean) =
     return event.actid + event.dtstart.split('T')[1]?.split('+')[0] + shortDaysOfWeekNames[event.weekday] ?? "-"
 }
 
-const EventTable: React.FC<TableProps> = ({ columns, data }) => {
+const EventTable: React.FC<TableProps & { onModification: () => void }> = ({ columns, data, onModification }) => {
     const { selectedSemesterPlans, setSelectedSemesterPlans, semesterPlans } = useCalendarContext();
     const { language } = useLanguageContext();
 
@@ -54,7 +54,7 @@ const EventTable: React.FC<TableProps> = ({ columns, data }) => {
 
     const handleCheckboxChange = (row: { original: { eventId: string; courseId: string } }) => {
         const { eventId, courseId } = row.original;
-
+        onModification();
         // Create a new array of selectedSemesterPlans
         const updatedPlans = selectedSemesterPlans.map((semesterPlan) => {
             if (semesterPlan.courseid === courseId) {
@@ -192,7 +192,11 @@ const TableRow: React.FC<RowProps> = ({ row, onCheckboxChange, selected, fontSiz
     );
 };
 
-const ModifyCourses: React.FC = () => {
+interface ModifyCoursesProps {
+    onModification: () => void;
+}
+
+const ModifyCourses: React.FC<ModifyCoursesProps> = ({ onModification }) => {
     const {
         semesterPlans,
         selectedSemesterPlans,
@@ -419,7 +423,7 @@ const ModifyCourses: React.FC = () => {
                         </div>
                         {visibleTables[semesterPlan.courseid] && (
                             Object.keys(eventsGroupedByEventId).length !== 0 ? (
-                                <EventTable columns={columns} data={filteredEvents} />
+                                <EventTable columns={columns} data={filteredEvents} onModification={onModification}/>
                             ) : (
                                 <div>{language === "no" ? "Ingenting funnet" : "No events found"}</div>
                             )

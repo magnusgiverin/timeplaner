@@ -3,6 +3,7 @@ import BackButton from "~/components/General/BackButton";
 import BreakLine from "~/components/General/BreakLine";
 import Layout from "~/components/General/Layout";
 import { useLanguageContext } from "~/contexts/languageContext";
+import Header from '~/components/Calendar/Header';
 
 const About = () => {
     const { language } = useLanguageContext();
@@ -13,12 +14,7 @@ const About = () => {
 
     return (
         <Layout>
-            <div className="mt-20">                
-                <h2 className="flex justify-center font-bold text-5xl my-4 pt-10">
-                    {getTextHeader()}
-                    
-                </h2>
-            </div>
+            <Header label={getTextHeader()}/>
             <BreakLine />
             <div className="flex flex-col items-center justify-center">
                 <BackButton />

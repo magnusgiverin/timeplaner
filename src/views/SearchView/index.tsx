@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Select, { type SingleValue } from 'react-select';
 import type { Program } from '~/interfaces/ProgramData';

@@ -1,6 +1,6 @@
 import BreakLine from "~/components/General/BreakLine";
 import { useLanguageContext } from "~/contexts/languageContext";
-
+import Header from '~/components/Calendar/Header';
 
 const Welcome = () => {
   const { language } = useLanguageContext();
@@ -8,10 +8,8 @@ const Welcome = () => {
   const welcomeText = language === 'en' ? 'Welcome to TimePlanner!' : 'Velkommen til TimePlaner!';
 
   return (
-    <div className="mt-20">
-      <h2 className="flex justify-center font-bold text-5xl my-4 pt-10">
-        {welcomeText}
-      </h2>
+    <div>
+      <Header label={welcomeText}/>
       <BreakLine />
     </div>
   );
