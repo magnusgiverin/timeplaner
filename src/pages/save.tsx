@@ -173,7 +173,7 @@ const SavePage = () => {
                                     className="p-2 mt-2 mb-2 rounded-md"
                                     style={{
                                         ...(savedData.courseColors && index !== undefined && {
-                                            backgroundColor: savedData.courseColors[index!] as string,
+                                            backgroundColor: savedData.courseColors[index],
                                             borderColor: color ? setContrast(color) : 'defaultBorderColor',
                                         }),
                                         color: color ? setContrast(color) : 'black', // Default text color if `color` is undefined
