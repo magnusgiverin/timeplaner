@@ -6,11 +6,11 @@ import Affiliation from "~/views/AffiliationView";
 
 const Home = () => {
   return (
-      <Layout>
-        <Welcome></Welcome>
-        <Search></Search>
-        <Affiliation></Affiliation>
-      </Layout>
+    <Layout>
+      <Welcome></Welcome>
+      <Search></Search>
+      <Affiliation></Affiliation>
+    </Layout>
   );
 };
 

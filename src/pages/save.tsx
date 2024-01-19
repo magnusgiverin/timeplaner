@@ -11,7 +11,7 @@ import type { Course } from '~/interfaces/CourseData';
 import type { SemesterPlan } from '~/interfaces/SemesterPlanData';
 import type { DetailedCourse } from '~/interfaces/StudyPlanData';
 
-interface SavedData {
+export interface SavedData {
     selectedSemesterPlans: SemesterPlan[];
     semesterPlans: SemesterPlan[];
     currentCourses: (Course | DetailedCourse)[];
