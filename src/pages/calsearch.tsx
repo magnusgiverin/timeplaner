@@ -16,8 +16,8 @@ const CalSearchPage = () => {
     }
 
     const getSubText = () => {
-        return language === "no" ? "Her kan du gjenhente etter kalenderen som ble sist lagret på din maskin." :
-            "Here you can retrieve for the calendars which have been saved on your machine."
+        return language === "no" ? "Her kan du gjenhente kalenderene som har blitt lagret på din maskin." :
+            "Here you can retrieve the calendars which have been saved on your machine."
     }
 
     const getExplainationText = () => {
