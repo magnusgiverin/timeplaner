@@ -127,7 +127,6 @@ const SavedComponents: React.FC = () => {
                 </a>
               </div>
             ))}
-          <BreakLine />
         </div>
       )}
     </div>

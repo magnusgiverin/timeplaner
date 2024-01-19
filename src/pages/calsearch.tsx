@@ -36,6 +36,7 @@ const CalSearchPage = () => {
                 <p>{getExplainationText()}</p>
             </div>
             <SavedComponents></SavedComponents>
+            <BreakLine />
             <div className="flex flex-col items-center justify-center">
                 <BackButton
                     buttonText={language === "no" ? "Lag ny kalender" : "Make a new calendar"}
