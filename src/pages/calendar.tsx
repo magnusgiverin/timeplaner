@@ -183,8 +183,8 @@ const CalendarPage: React.FC = () => {
     const handleSave = () => {
         const promptMessage =
             language === "no"
-                ? "Skriv inn NTNU brukernavnet ditt for å gjenhente kalenderen din senere:"
-                : "Enter your NTNU username to retrieve the calendar at a later date:";
+                ? "Skriv inn et navn for kalenderen for å gjenhente den senere:"
+                : "Enter a name for the calendar to retrieve it at a later date:";
 
         const username = window.prompt(promptMessage)?.toLowerCase();
 
@@ -276,15 +276,15 @@ const CalendarPage: React.FC = () => {
                     <div>
                         <p>
                             {language === "no"
-                                ? "Denne kalenderen er lagret under brukernavnet: "
-                                : "This calendar is saved under the username: "}
+                                ? "Denne kalenderen er lagret under navnet: "
+                                : "This calendar is saved under the the name: "}
                             <strong>{username}</strong>
                         </p>
                         <button
                             className="bg-green-500 text-white rounded-md p-2 mt-2 flex items-center justify-center h-full"
                             onClick={handleSaveRedirect}
                         >
-                            {language === "no" ? "Gå til min side" : "Go to my page"}
+                            {language === "no" ? "Gå til bokmerke siden" : "Go to the bookmark page"}
 
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
