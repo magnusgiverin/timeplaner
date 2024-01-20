@@ -62,7 +62,7 @@ const CalendarPage: React.FC = () => {
     });
 
     const [isSaved, setIsSaved] = useState<boolean>(false);
-    const [username, setUsername] = useState<string>();
+    const [key, setKey] = useState<string>();
 
     useEffect(() => {
         let isMounted = true;
@@ -171,7 +171,7 @@ const CalendarPage: React.FC = () => {
 
     const handleSaveRedirect = () => {
         const queryParam = {
-            username: encodeURIComponent(username ?? ""),
+            key: encodeURIComponent(key ?? ""),
         }
 
         void router.push({
@@ -186,11 +186,11 @@ const CalendarPage: React.FC = () => {
                 ? "Skriv inn et navn for kalenderen for å gjenhente den senere:"
                 : "Enter a name for the calendar to retrieve it at a later date:";
 
-        const username = window.prompt(promptMessage)?.toLowerCase();
+        const key = window.prompt(promptMessage)?.toLowerCase();
 
-        if (username) {
+        if (key) {
             setIsSaved(true);
-            setUsername(username);
+            setKey(key);
 
             const programCode = selectedProgramCode;
             const season = selectedSeason;
@@ -210,7 +210,7 @@ const CalendarPage: React.FC = () => {
 
             // Convert the data to JSON format
             const jsonData = JSON.stringify(storageData);
-            localStorage.setItem(username, jsonData);
+            localStorage.setItem(key, jsonData);
 
             const modifyCoursesElement = document.getElementById('modifyCourses');
             if (modifyCoursesElement) {
@@ -227,7 +227,7 @@ const CalendarPage: React.FC = () => {
             "Last ned: Last ned kalender fil, for deling/import i kalendertjenester",
             "Rediger: Rediger innhold i kalender - paraleller, øvingstimer, etc.",
             isSaved !== undefined && !isSaved
-                ? "Lagre: Lagre kalender på siden med NTNU brukernavnet ditt"
+                ? "Lagre: Lagre kalender på siden med et gjenkjennelig navn"
                 : ""
         ]
 
@@ -236,7 +236,7 @@ const CalendarPage: React.FC = () => {
             "Download: Download the calendar file to your device",
             "Edit: Edit what events are shown in your calendar",
             isSaved !== undefined && !isSaved
-                ? "Save: Save the calendar on our website with your NTNU username"
+                ? "Save: Save the calendar on our website with a recognisable name"
                 : ""
         ]
 
@@ -278,7 +278,7 @@ const CalendarPage: React.FC = () => {
                             {language === "no"
                                 ? "Denne kalenderen er lagret under navnet: "
                                 : "This calendar is saved under the the name: "}
-                            <strong>{username}</strong>
+                            <strong>{key}</strong>
                         </p>
                         <button
                             className="bg-green-500 text-white rounded-md p-2 mt-2 flex items-center justify-center h-full"
