@@ -95,17 +95,12 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
     // Replace the following placeholder code with your actual data loading logic
     const loadParsedEvents = async () => {
       // Simulate loading parsed events
-      const events = await parseSemesterPLans(selectedSemesterPlans, indexes);
+      const events = parseSemesterPLans(selectedSemesterPlans, indexes);
       setParsedEvents(events);
     };
 
-    loadParsedEvents();
+    void loadParsedEvents();
   }, [selectedSemesterPlans, indexes]);
-
-  if (!parsedEvents) {
-    // If parsedEvents is not loaded yet, you can display a loading indicator or return null
-    return <div>Loading...</div>; // Replace with your loading indicator or null
-  }
 
   const timezone = moment.tz.guess();
   moment.tz.setDefault(timezone);
