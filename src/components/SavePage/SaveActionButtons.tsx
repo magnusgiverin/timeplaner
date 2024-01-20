@@ -51,8 +51,6 @@ const ActionButtons = ({ savedData, itemKey }: ActionButtonProps) => {
             // Remove the data from the old key
             localStorage.removeItem(itemKey);
       
-            console.log(localStorage);
-            alert(`Name changed to: ${newName}`);
             void router.push({
                 pathname: '/save',
                 query: { key: newName },
