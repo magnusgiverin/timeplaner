@@ -68,8 +68,8 @@ const SavedComponents: React.FC = () => {
   const handleDelete = (key: string) => {
     const confirmationMessage =
       language === 'no'
-        ? `Er du sikker på at du vil slette kalenderen med nøkkel: ${key}?\nDu kan ikke angre denne avgjørelsen.`
-        : `Are you sure you want to delete the calendar with key: ${key}?\nThis cannot be undone.`;
+        ? `Er du sikker på at du vil slette kalenderen med navnet: ${key}?\nDu kan ikke angre denne avgjørelsen.`
+        : `Are you sure you want to delete the calendar named: ${key}?\nThis cannot be undone.`;
 
     const isConfirmed = window.confirm(confirmationMessage);
 
