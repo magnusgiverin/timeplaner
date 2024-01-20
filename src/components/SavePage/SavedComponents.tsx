@@ -117,7 +117,7 @@ const SavedComponents: React.FC = () => {
                   onClick={() => {
                     void router.push({
                       pathname: '/save',
-                      query: { username: item.key },
+                      query: { key: item.key },
                     });
                   }}
                 >
