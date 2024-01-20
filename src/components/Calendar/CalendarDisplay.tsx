@@ -5,6 +5,8 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment-timezone';
 import { setContrast } from './Colors';
+import { useState, useEffect } from 'react';
+import { useLanguageContext } from '~/contexts/languageContext';
 
 export const hashString = (str: string) => {
   let hash = 0;
@@ -85,11 +87,30 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
   courseColors,
 }) => {
 
+  const [parsedEvents, setParsedEvents] = useState<ParsedEvent[]>([]);
+  const { language } = useLanguageContext();
+
+  useEffect(() => {
+    // Assuming you have some logic to asynchronously load parsed events
+    // Replace the following placeholder code with your actual data loading logic
+    const loadParsedEvents = async () => {
+      // Simulate loading parsed events
+      const events = await parseSemesterPLans(selectedSemesterPlans, indexes);
+      setParsedEvents(events);
+    };
+
+    loadParsedEvents();
+  }, [selectedSemesterPlans, indexes]);
+
+  if (!parsedEvents) {
+    // If parsedEvents is not loaded yet, you can display a loading indicator or return null
+    return <div>Loading...</div>; // Replace with your loading indicator or null
+  }
+
   const timezone = moment.tz.guess();
   moment.tz.setDefault(timezone);
 
   const localizer = momentLocalizer(moment);
-  const parsedEvents = parseSemesterPLans(selectedSemesterPlans, indexes);
 
   const today = new Date();
   const defaultDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 8, 15);
@@ -126,7 +147,7 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
 
   const formats: Formats = {
     dateFormat: 'dd',
-    dayFormat: (date, culture, localizer) => localizer?.format(date, 'ddd', culture) ?? '',
+    // dayFormat: (date, culture, localizer) => localizer?.format(date, 'ddd', culture) ?? '',
     dayRangeHeaderFormat: ({ start, end }, culture, localizer) => {
       const formattedStart = localizer?.format(moment(start).toDate(), 'ddd MMM D', culture) ?? '';
       const formattedEnd = localizer?.format(moment(end).toDate(), 'ddd MMM D', culture) ?? '';
@@ -165,27 +186,31 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
           }
         `}
         </style>
-        <Calendar
-          formats={formats}
-          defaultView='work_week'
-          defaultDate={defaultDate}
-          localizer={localizer}
-          events={parsedEvents}
-          startAccessor="start"
-          endAccessor="end"
-          views={{
-            month: false,
-            week: true,
-            work_week: true,
-            day: true,
-            agenda: false,
-          }}
-          min={workWeekStart}
-          max={workWeekEnd}
-          className="bg-white text-black border border-gray-300 rounded-md p-2"
-          eventPropGetter={eventPropGetter}
-          onSelectEvent={handleSelectEvent}
-        />
+        {parsedEvents.length > 0 ? (
+          <Calendar
+            formats={formats}
+            defaultView='work_week'
+            defaultDate={defaultDate}
+            localizer={localizer}
+            events={parsedEvents}
+            startAccessor="start"
+            endAccessor="end"
+            views={{
+              month: false,
+              week: true,
+              work_week: true,
+              day: true,
+              agenda: false,
+            }}
+            min={workWeekStart}
+            max={workWeekEnd}
+            className="bg-white text-black border border-gray-300 rounded-md p-2"
+            eventPropGetter={eventPropGetter}
+            onSelectEvent={handleSelectEvent}
+          />
+        ) : (
+          <h3>{language === "no" ? "Laster inn..." : "Loading..."}</h3>
+        )}
       </div>
     </div>
   );
