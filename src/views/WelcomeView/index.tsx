@@ -5,7 +5,7 @@ import Header from '~/components/General/Header';
 const Welcome = () => {
   const { language } = useLanguageContext();
 
-  const welcomeText = language === 'en' ? 'Welcome to TimePlanner!' : 'Velkommen til TimePlaner!';
+  const welcomeText = language === 'en' ? 'Welcome to TimePlaner!' : 'Velkommen til TimePlaner!';
 
   return (
     <div>

@@ -9,7 +9,7 @@ const About = () => {
     const { language } = useLanguageContext();
 
     const getTextHeader = () => {
-        return language === "no" ? "Velkommen til NTNU sin Kalender App" : "Welcome to the NTNU Calendar App";
+        return language === "no" ? "Hva er TimePlaner.net?" : "What is TimePlaner.net?";
     };
 
     const getP1Header = () => {
