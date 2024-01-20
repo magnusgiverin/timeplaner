@@ -1,6 +1,6 @@
 import BreakLine from "~/components/General/BreakLine";
 import { useLanguageContext } from "~/contexts/languageContext";
-import Header from '~/components/Calendar/Header';
+import Header from '~/components/General/Header';
 
 const Welcome = () => {
   const { language } = useLanguageContext();

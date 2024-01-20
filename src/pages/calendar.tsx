@@ -5,15 +5,15 @@ import Layout from '~/components/General/Layout';
 import type { Course } from '~/interfaces/CourseData';
 import type { DetailedCourse } from '~/interfaces/StudyPlanData';
 import { useLanguageContext } from '~/contexts/languageContext';
-import { generateColor } from '~/components/Calendar/Colors';
-import CalendarDisplay from '~/components/Calendar/CalendarDisplay';
-import { downloadICal, generateICal, saveIcal } from '~/components/Calendar/GenerateIcal';
+import { generateColor } from '~/components/CalendarPage/Colors';
+import CalendarDisplay from '~/components/CalendarPage/CalendarDisplay';
+import { downloadICal, generateICal, saveIcal } from '~/components/CalendarPage/GenerateIcal';
 import { api } from '~/utils/api';
 import { useCalendarContext } from '~/contexts/calendarContext';
-import ModifyCourses from '~/components/Calendar/ModifyCourses';
+import ModifyCourses from '~/components/CalendarPage/ModifyCourses';
 import BackButton from '~/components/General/BackButton';
-import ActionButtons from '~/components/Calendar/ActionButtons';
-import Header from '~/components/Calendar/Header';
+import ActionButtons from '~/components/CalendarPage/ActionButtons';
+import Header from '~/components/General/Header';
 
 // Main Calendar component
 const CalendarPage: React.FC = () => {

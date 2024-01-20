@@ -1,8 +1,8 @@
 import Layout from '~/components/General/Layout';
 import BreakLine from '~/components/General/BreakLine';
 import { useLanguageContext } from '~/contexts/languageContext';
-import Header from '~/components/Calendar/Header';
-import SavedComponents from '~/components/StartPage/SavedComponents';
+import Header from '~/components/General/Header';
+import SavedComponents from '~/components/SavePage/SavedComponents';
 import BackButton from "~/components/General/BackButton";
 import { useRouter } from 'next/router';
 
