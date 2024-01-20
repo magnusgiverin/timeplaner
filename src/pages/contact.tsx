@@ -3,7 +3,7 @@ import BackButton from "~/components/General/BackButton";
 import BreakLine from "~/components/General/BreakLine";
 import Layout from "~/components/General/Layout";
 import { useLanguageContext } from "~/contexts/languageContext";
-import Header from '~/components/Calendar/Header';
+import Header from '~/components/General/Header';
 
 const About = () => {
     const { language } = useLanguageContext();
