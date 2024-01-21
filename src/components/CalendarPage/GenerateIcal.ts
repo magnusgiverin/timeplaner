@@ -65,7 +65,7 @@ function generateDescription(event: Event, title: string): string {
     return [title, summary, staffInfo, mazeMapLink].filter(Boolean).join('\n\n');
 }
 
-function generateICal(semesterPlans: SemesterPlan[], filename: string): string {
+function generateICal(semesterPlans: SemesterPlan[]): string {
     const icalEvents: EventAttributes[] = [];  // Rename to avoid conflict with the duplicate declaration
 
     for (const semesterPlan of semesterPlans) {

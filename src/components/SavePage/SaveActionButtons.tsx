@@ -68,7 +68,7 @@ const ActionButtons = ({ savedData, itemKey }: ActionButtonProps) => {
             : savedData?.season;
 
         const filename = `${savedData?.programCode}-${savedData?.year}-${translatedSeason}`
-        const iCalContent = generateICal(savedData?.selectedSemesterPlans ?? [], filename);
+        const iCalContent = generateICal(savedData?.selectedSemesterPlans ?? []);
 
         // Use try-catch to handle potential errors
         try {
@@ -85,7 +85,7 @@ const ActionButtons = ({ savedData, itemKey }: ActionButtonProps) => {
             : savedData?.season;
 
         const filename = `${savedData?.programCode}-${savedData?.year}-${translatedSeason}`
-        const iCalContent = generateICal(savedData?.selectedSemesterPlans ?? [], filename);
+        const iCalContent = generateICal(savedData?.selectedSemesterPlans ?? []);
 
         saveIcal(iCalContent, filename + ".ics");
     };

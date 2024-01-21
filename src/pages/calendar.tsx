@@ -147,7 +147,7 @@ const CalendarPage: React.FC = () => {
             : selectedSeason;
 
         const filename = `${selectedProgramCode}-${selectedYear}-${translatedSeason}`
-        const iCalContent = generateICal(selectedSemesterPlans, filename);
+        const iCalContent = generateICal(selectedSemesterPlans);
 
         // Use try-catch to handle potential errors
         try {
@@ -164,7 +164,7 @@ const CalendarPage: React.FC = () => {
             : selectedSeason;
 
         const filename = `${selectedProgramCode}-${selectedYear}-${translatedSeason}`
-        const iCalContent = generateICal(selectedSemesterPlans, filename);
+        const iCalContent = generateICal(selectedSemesterPlans);
 
         saveIcal(iCalContent, filename + ".ics");
     };
