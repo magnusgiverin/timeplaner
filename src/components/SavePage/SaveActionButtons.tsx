@@ -1,7 +1,7 @@
 import { downloadICal, generateICal, saveIcal } from "~/components/CalendarPage/GenerateIcal";
 import { useRouter } from "next/router";
 import { useLanguageContext } from "~/contexts/languageContext";
-import type { SavedData } from "~/pages/save";
+import type { SavedData } from "~/pages/saved";
 
 type ActionButtonProps = {
     savedData: SavedData;
@@ -52,7 +52,7 @@ const ActionButtons = ({ savedData, itemKey }: ActionButtonProps) => {
             localStorage.removeItem(itemKey);
       
             void router.push({
-                pathname: '/save',
+                pathname: '/saved',
                 query: { key: newName },
               });
           } else {

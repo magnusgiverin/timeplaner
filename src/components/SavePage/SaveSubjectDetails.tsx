@@ -1,5 +1,5 @@
 import type { SemesterPlan } from "~/interfaces/SemesterPlanData";
-import type { SavedData } from "~/pages/save";
+import type { SavedData } from "~/pages/saved";
 import { setContrast } from "../CalendarPage/Colors";
 
 const SubjectDetails = ({ savedData, semesterPlan }: { savedData: SavedData; semesterPlan: SemesterPlan }) => {

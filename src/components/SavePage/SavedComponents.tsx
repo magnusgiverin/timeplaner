@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import type { SavedData } from '~/pages/save';
+import type { SavedData } from '~/pages/saved';
 import BreakLine from "~/components/General/BreakLine";
 import { useLanguageContext } from "~/contexts/languageContext";
 import { useRouter } from 'next/router';
@@ -97,7 +97,7 @@ const SavedComponents: React.FC = () => {
                   className="bg-blue-500 text-white px-4 py-2 rounded-md"
                   onClick={() => {
                     void router.push({
-                      pathname: '/save',
+                      pathname: '/saved',
                       query: { key: item.key },
                     });
                   }}
@@ -116,7 +116,7 @@ const SavedComponents: React.FC = () => {
                   className="rounded-md transition duration-300 ease-in-out hover:bg-green-500 ml-2 mt-2 mb-2"
                   onClick={() => {
                     void router.push({
-                      pathname: '/save',
+                      pathname: '/saved',
                       query: { key: item.key },
                     });
                   }}

@@ -6,7 +6,7 @@ import SavedComponents from '~/components/SavePage/SavedComponents';
 import BackButton from "~/components/General/BackButton";
 import { useRouter } from 'next/router';
 
-const CalSearchPage = () => {
+const RetreivePage = () => {
     const { language } = useLanguageContext();
     const router = useRouter();
 
@@ -51,4 +51,4 @@ const CalSearchPage = () => {
     );
 };
 
-export default CalSearchPage;
+export default RetreivePage;

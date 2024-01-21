@@ -54,7 +54,7 @@ const SavePage = () => {
     const handleRedirect = () => {
         // Check if the pressed key is Enter (key code 13)
         void router.push({
-            pathname: '/calsearch',
+            pathname: '/retrieve',
         });
     };
 
