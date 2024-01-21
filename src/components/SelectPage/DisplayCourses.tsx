@@ -187,7 +187,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
                         }).slice(0, (showMoreMap[group] ?? groupSubjects.some(subject => 'courses' in subject)) ? groupSubjects.length : 5)}
                         {groupSubjects.length > 5 && !groupSubjects.some(subject => 'courses' in subject) && (
                             <button
-                                className='flex items-center px-4 py-2 mt-2 rounded-full bg-green-500 text-white hidden sm:inline-flex'
+                                className='flex items-center px-4 py-2 mt-2 mb-2 rounded-full bg-green-500 text-white hidden sm:inline-flex'
                                 onClick={() => toggleShowMore(group)}
                             >
                                 {showMoreMap[group] ? (language === "no" ? "Vis mindre" : "Show Less") : (language === "no" ? "Vis mer" : "Show More")}
