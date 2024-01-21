@@ -98,9 +98,8 @@ function generateICal(semesterPlans: SemesterPlan[], filename: string): string {
     }
 
     const icsContent = value ?? "";
-    const icsWithCalName = `X-WR-CALNAME:${filename}\n${icsContent}`;
 
-    return icsWithCalName;
+    return icsContent;
 }
 
 export { generateICal, downloadICal, saveIcal };
