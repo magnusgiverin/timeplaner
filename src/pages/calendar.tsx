@@ -49,7 +49,7 @@ const CalendarPage: React.FC = () => {
     }, [router.query.chosenCourses]);
 
     const selectedYear = router.query.year as string;
-    const selectedProgramCode = router.query.studyCode as string;
+    const selectedProgramCode = decodeURIComponent(router.query.studyCode as string);
     const selectedSeason = router.query.semester as string;
 
     const currentYearLastDigits = new Date().getFullYear().toString().slice(-2);
