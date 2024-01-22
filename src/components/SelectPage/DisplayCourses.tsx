@@ -102,6 +102,8 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
             const explainLabel = language === "no" ? "Symbolforklaring" : "Symbol Explanation";
             const modifyLabel = language === "no" ? "Rediger emner" : "Modify courses";
             const calendarLabel = language === "no" ? "Gå til kalender" : "Go to calendar";
+            
+            const initiallyChosenCourses = selectedCourses.filter(course => course.studyChoice.code === 'O');
 
             return (
                 <div className="flex flex-column justify-center">
@@ -115,7 +117,8 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
                         className="ml-2"
                     />
                     {/* Custom red button with arrow */}
-                    <button
+                    {initiallyChosenCourses.length >= 4 && (
+                        <button
                         className={`flex items-center text-white rounded-md p-2 mt-2 mb-2 ml-2 bg-red-500`}
                         onClick={() => handleCalendarRedirect(selectedCourses)}
                     >
@@ -131,6 +134,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
                             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                         </svg>
                     </button>
+                    )}
                 </div>
             );
         }
