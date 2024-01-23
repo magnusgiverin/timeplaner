@@ -102,7 +102,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
             const explainLabel = language === "no" ? "Symbolforklaring" : "Symbol Explanation";
             const modifyLabel = language === "no" ? "Rediger emner" : "Modify courses";
             const calendarLabel = language === "no" ? "Gå til kalender" : "Go to calendar";
-            
+
             const initiallyChosenCourses = selectedCourses.filter(course => course.studyChoice.code === 'O');
 
             return (
@@ -111,29 +111,49 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
                         text={explainLabel}
                         onClick={() => alert(explanationText)}
                     />
-                    <GreenButton
-                        text={modifyLabel}
-                        onClick={() => handleModifyRedirect(selectedCourses)}
-                        className="ml-2"
-                    />
+
                     {/* Custom red button with arrow */}
-                    {initiallyChosenCourses.length >= 4 && (
+                    {initiallyChosenCourses.length >= 4 ? (
+                        <>
+                            <GreenButton
+                                text={modifyLabel}
+                                onClick={() => handleModifyRedirect(selectedCourses)}
+                                className="ml-2"
+                            />
+                            <button
+                                className={`flex items-center text-white rounded-md p-2 mt-2 mb-2 ml-2 bg-red-500`}
+                                onClick={() => handleCalendarRedirect(selectedCourses)}
+                            >
+                                <span className="mr-2">{calendarLabel}</span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-6 h-6"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                </svg>
+                            </button>
+                        </>
+                    ) : (
                         <button
-                        className={`flex items-center text-white rounded-md p-2 mt-2 mb-2 ml-2 bg-red-500`}
-                        onClick={() => handleCalendarRedirect(selectedCourses)}
-                    >
-                        <span className="mr-2">{calendarLabel}</span>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-6 h-6"
-                        >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                        </svg>
-                    </button>
+                                className={`flex items-center text-white rounded-md p-2 mt-2 mb-2 ml-2 bg-red-500`}
+                                onClick={() => handleModifyRedirect(selectedCourses)}
+                            >
+                                <span className="mr-2">{modifyLabel}</span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-6 h-6"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                </svg>
+                            </button>
                     )}
                 </div>
             );
