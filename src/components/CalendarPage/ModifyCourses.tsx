@@ -42,7 +42,7 @@ const getUniqueId = (event: MyEvent, language: string, isSmallScreen: boolean) =
     return event.actid + event.dtstart.split('T')[1]?.split('+')[0] + shortDaysOfWeekNames[event.weekday] ?? "-"
 }
 
-const EventTable: React.FC<TableProps & { onModification: () => void }> = ({ columns, data, onModification }) => {
+const EventTable: React.FC<TableProps & { onModification?: () => void }> = ({ columns, data, onModification }) => {
     const { selectedSemesterPlans, setSelectedSemesterPlans, semesterPlans } = useCalendarContext();
     const { language } = useLanguageContext();
 
@@ -54,7 +54,10 @@ const EventTable: React.FC<TableProps & { onModification: () => void }> = ({ col
 
     const handleCheckboxChange = (row: { original: { eventId: string; courseId: string } }) => {
         const { eventId, courseId } = row.original;
-        onModification();
+        if(onModification) {
+            onModification();
+        }
+        
         // Create a new array of selectedSemesterPlans
         const updatedPlans = selectedSemesterPlans.map((semesterPlan) => {
             if (semesterPlan.courseid === courseId) {
@@ -193,7 +196,7 @@ const TableRow: React.FC<RowProps> = ({ row, onCheckboxChange, selected, fontSiz
 };
 
 interface ModifyCoursesProps {
-    onModification: () => void;
+    onModification?: () => void;
 }
 
 const ModifyCourses: React.FC<ModifyCoursesProps> = ({ onModification }) => {
