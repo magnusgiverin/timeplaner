@@ -105,6 +105,8 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
 
             const initiallyChosenCourses = selectedCourses.filter(course => course.studyChoice.code === 'O');
 
+            const pointSum = initiallyChosenCourses.reduce((sum, course) => sum + Number(course.credit), 0);
+
             return (
                 <div className="flex flex-column justify-center">
                     <GreenButton
@@ -113,7 +115,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
                     />
 
                     {/* Custom red button with arrow */}
-                    {initiallyChosenCourses.length >= 4 ? (
+                    {pointSum >= 30 ? (
                         <>
                             <GreenButton
                                 text={modifyLabel}
