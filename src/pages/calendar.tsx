@@ -169,9 +169,9 @@ const CalendarPage: React.FC = () => {
         saveIcal(iCalContent, filename + ".ics");
     };
 
-    const handleSaveRedirect = () => {
+    const handleSaveRedirect = (key: string) => {
         const queryParam = {
-            key: encodeURIComponent(key ?? ""),
+            key: key,
         }
 
         void router.push({
@@ -211,13 +211,7 @@ const CalendarPage: React.FC = () => {
             // Convert the data to JSON format
             const jsonData = JSON.stringify(storageData);
             localStorage.setItem(key, jsonData);
-
-            const modifyCoursesElement = document.getElementById('modifyCourses');
-            if (modifyCoursesElement) {
-                modifyCoursesElement.scrollIntoView({
-                    behavior: 'smooth',
-                });
-            }
+            handleSaveRedirect(key);
         }
     };
 
@@ -280,23 +274,6 @@ const CalendarPage: React.FC = () => {
                                 : "This calendar is saved under the the name: "}
                             <strong>{key}</strong>
                         </p>
-                        <button
-                            className="bg-green-500 text-white rounded-md p-2 mt-2 flex items-center justify-center h-full"
-                            onClick={handleSaveRedirect}
-                        >
-                            {language === "no" ? "Gå til bokmerke siden" : "Go to the bookmark page"}
-
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                className="w-6 h-6 ml-2"
-                            >
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-                        </button>
                     </div>
                 </>
             )}
