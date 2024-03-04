@@ -112,12 +112,12 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
   const timeZoneOffset = new Date().toLocaleString("en-US", { timeZoneName: "short", timeZone: timezone }) ?? '+00:00';
 
   const workWeekStart = new Date();
-  workWeekStart.setHours(8, 0, 0, 0);
-  workWeekStart.setHours(workWeekStart.getHours() - parseInt(timeZoneOffset.split(":")[0] ?? "0"));
+  workWeekStart.setHours(6, 0, 0, 0);
+  workWeekStart.setHours(workWeekStart.getHours() + parseInt(timeZoneOffset.split(" ")[3]?.slice(3) ?? "0"));
 
   const workWeekEnd = new Date();
-  workWeekEnd.setHours(20, 0, 0, 0);
-  workWeekEnd.setHours(workWeekEnd.getHours() - parseInt(timeZoneOffset.split(":")[0] ?? "0"));
+  workWeekEnd.setHours(18, 0, 0, 0);
+  workWeekEnd.setHours(workWeekEnd.getHours() + parseInt(timeZoneOffset.split(" ")[3]?.slice(3) ?? "0"));
 
   const eventPropGetter = (event: ParsedEvent) => {
     const courseCode = event.title?.split('-')[0]?.trim();
