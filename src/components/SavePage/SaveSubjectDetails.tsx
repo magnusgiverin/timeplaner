@@ -32,7 +32,7 @@ const SubjectDetails = ({ savedData, semesterPlan }: { savedData: SavedData; sem
         </a>
         <a
           className='rounded-md transition duration-300 ease-in-out hover:bg-green-500 ml-2'
-          href={`https://karakterer.net/course/${semesterPlan.courseid}`}
+          href={`https://grades.no/course/${semesterPlan.courseid}`}
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -170,9 +170,8 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
 
   return (
     <div className='flex-column flex-row flex-shrink mt-2 mb-2 justify-center'>
-      <div className="h-[60vh]">
-        <style>
-          {`
+      <style>
+        {`
           .rbc-allday-cell {
             display: none;
           }
@@ -180,33 +179,32 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
             border-bottom: none;
           }
         `}
-        </style>
-        {parsedEvents.length > 0 ? (
-          <Calendar
-            formats={formats}
-            defaultView='work_week'
-            defaultDate={defaultDate}
-            localizer={localizer}
-            events={parsedEvents}
-            startAccessor="start"
-            endAccessor="end"
-            views={{
-              month: false,
-              week: true,
-              work_week: true,
-              day: true,
-              agenda: false,
-            }}
-            min={workWeekStart}
-            max={workWeekEnd}
-            className="bg-white text-black border border-gray-300 rounded-md p-2"
-            eventPropGetter={eventPropGetter}
-            onSelectEvent={handleSelectEvent}
-          />
-        ) : (
-          <h3>{language === "no" ? "Laster inn..." : "Loading..."}</h3>
-        )}
-      </div>
+      </style>
+      {parsedEvents.length > 0 ? (
+        <Calendar
+          formats={formats}
+          defaultView='work_week'
+          defaultDate={defaultDate}
+          localizer={localizer}
+          events={parsedEvents}
+          startAccessor="start"
+          endAccessor="end"
+          views={{
+            month: false,
+            week: true,
+            work_week: true,
+            day: true,
+            agenda: false,
+          }}
+          min={workWeekStart}
+          max={workWeekEnd}
+          className="bg-white text-black border border-gray-300 rounded-md p-2"
+          eventPropGetter={eventPropGetter}
+          onSelectEvent={handleSelectEvent}
+        />
+      ) : (
+        <h3>{language === "no" ? "Laster inn..." : "Loading..."}</h3>
+      )}
     </div>
   );
 };

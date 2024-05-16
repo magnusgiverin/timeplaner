@@ -27,7 +27,7 @@ const SubjectDetails: React.FC<SubjectDetailsProps> = ({ subject }) => {
                 </a>
                 <a
                     className='rounded-md transition duration-300 ease-in-out hover:bg-green-500 ml-2'
-                    href={`https://karakterer.net/course/${subject.code}`}
+                    href={`https://grades.no/course/${subject.code}`}
                     target="_blank"
                     rel="noopener noreferrer"
                 >
@@ -56,7 +56,7 @@ const SubjectDetails: React.FC<SubjectDetailsProps> = ({ subject }) => {
                 </a>
                 <a
                     className='rounded-md transition duration-300 ease-in-out hover:bg-green-500 ml-2'
-                    href={`https://karakterer.net/course/${subject.courseid}`}
+                    href={`https://grades.no/course/${subject.courseid}`}
                     target="_blank"
                     rel="noopener noreferrer"
                 >
