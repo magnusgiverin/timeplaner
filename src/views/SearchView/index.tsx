@@ -25,11 +25,11 @@ const Search = () => {
         if (!query.isLoading && query.data) {
           // Access the data and handle loading/error states as needed
           const { data: response } = query;
-  
+
           // Sort the programs array based on title
           const sortedPrograms = response.sort((a: Program, b: Program) => a.title.localeCompare(b.title));
           setPrograms(sortedPrograms);
-          setFilteredPrograms(sortedPrograms.slice(0, 20));
+          setFilteredPrograms(sortedPrograms);
         } else {
           // Fetch data using the query
           await query.refetch();
@@ -39,10 +39,10 @@ const Search = () => {
         console.error('Error fetching data:', error);
       }
     };
-  
+
     void fetchData();
   }, [language, query.isLoading, query.data]);
-  
+
 
   const options = filteredPrograms.map((program) => ({
     value: program.programid,
@@ -90,6 +90,14 @@ const Search = () => {
   const titleText = language == "no" ? "Søk etter studieprogram" : "Search for study programs"
   const placeHolderText = language == "no" ? "Skriv her" : "Type here"
 
+  const handleMenuOpen = () => {
+    setShowAll(true);
+  };
+
+  const handleMenuClose = () => {
+    setShowAll(false);
+  };
+  
   return (
     <div className='flex flex-col items-center'>
       <div className="mb-4">
@@ -103,11 +111,13 @@ const Search = () => {
           placeholder={placeHolderText}
           onChange={handleSelectChange}
           onInputChange={handleInputChange}
+          onMenuOpen={handleMenuOpen}
+          onMenuClose={handleMenuClose}
           menuIsOpen={showAll}
         />
       </div>
     </div>
-  );  
+  );
 };
 
 export default Search;
