@@ -6,8 +6,8 @@ import Select from 'react-select';
 import type { PropsValue, SingleValue } from 'react-select';
 import type { DetailedCourse } from '~/interfaces/StudyPlanData';
 import { useLanguageContext } from '~/contexts/languageContext';
-import { useAppContext } from '~/contexts/appContext';
 import BreakLine from '../General/BreakLine';
+import { useRouter } from 'next/router';
 
 interface ToolboxProps {
     onConfirm: () => void;
@@ -19,13 +19,13 @@ interface ToolboxProps {
 }
 
 const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll, exclude, state, allSelected }) => {
-    const [searchQuery, setSearchQuery] = useState<string>('');
     const [courses, setCourses] = useState<Course[]>([]);
     const [options, setOptions] = useState<{ value: string; label: string }[]>([]);
     const [selectedValue, setSelectedValue] = useState<PropsValue<{ value: string; label: string; }> | null>(null);
     const [showAll, setShowAll] = useState<boolean>(false); // Show all programs or only the first 20
 
-    const { season } = useAppContext();
+    const router = useRouter();
+    const selectedSeason = router.query.season as string;
 
     const getCurrentYear = () => new Date().getFullYear();
 
@@ -34,7 +34,7 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
         const currentYear = getCurrentYear() % 100; // Get the last two digits of the current year
 
         // Determine the semester code based on the season and month
-        if (season === 'Spring') {
+        if (selectedSeason === 'Spring') {
             return `${currentYear}v`;
         } else {
             return `${currentYear}h`;
@@ -45,6 +45,35 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
     const query = api.course.courseList.useQuery({
         semesterCode: getSemesterCode(),
     });
+
+    console.log(getSemesterCode())
+
+    useEffect(() => {
+        // Check if data is available before setting the state
+        if (query.data) {
+            // Filter courses based on the selected
+            const filteredCourses = query.data.filter((course: Course) => {
+                return !exclude.includes(course); // Check if courseId is in the exclude list
+            });
+    
+            // Sort the filtered courses array based on courseId
+            const sortedCourses = filteredCourses.sort((a: Course, b: Course) => {
+                // Ensure that courseId is available before comparing
+                if (a.courseid && b.courseid) {
+                    return a.courseid.localeCompare(b.courseid);
+                }
+                return 0; // Default return if courseId is not available
+            });
+    
+            setCourses(sortedCourses);
+    
+            // Initialize the options array with the first 20 courses
+            setOptions(sortedCourses.slice(0, 20).map((course) => ({
+                value: course.courseid,
+                label: course.courseid + ' - ' + course.name,
+            })));
+        }
+    }, [query.data, exclude]); // Include exclude in the dependency array
 
     // useEffect to handle side effects
     useEffect(() => {
@@ -68,15 +97,6 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
         }
     }, [query.data, exclude]); // Include exclude in the dependency array
 
-
-    // useEffect to handle no input
-    useEffect(() => {
-        // Check if data is available before setting the state
-        if (!searchQuery) {
-            setOptions([]); // Clear options when searchQuery is empty
-        }
-    }, [searchQuery]);
-
     const handleSelectChange = (
         selectedOption: SingleValue<{ value: string; label: string }>,
     ) => {
@@ -94,8 +114,6 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
     };
 
     const handleInputChange = (inputValue: string) => {
-        setSearchQuery(inputValue); // Update searchQuery state
-
         // Use the inputValue to filter the options and update the state
         const filteredCourses = courses.filter((course) =>
             course.courseid.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -136,11 +154,11 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
 
     const handleMenuOpen = () => {
         setShowAll(true);
-      };
-    
-      const handleMenuClose = () => {
+    };
+
+    const handleMenuClose = () => {
         setShowAll(false);
-      };
+    };
 
     return (
         <div>
@@ -167,23 +185,23 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
                     />
                 )}
                 <button
-                        className={`flex items-center text-white rounded-md p-2 mt-2 mb-2 bg-red-500`}
-                        onClick={() => onConfirm()}
+                    className={`flex items-center text-white rounded-md p-2 mt-2 mb-2 bg-red-500`}
+                    onClick={() => onConfirm()}
+                >
+                    <span className="mr-2">{getConfirmLabel()}</span>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6"
                     >
-                        <span className="mr-2">{getConfirmLabel()}</span>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-6 h-6"
-                        >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                        </svg>
-                    </button>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                    </svg>
+                </button>
             </div>
-            <BreakLine/>
+            <BreakLine />
         </div>
     );
 };
