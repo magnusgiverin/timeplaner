@@ -28,15 +28,13 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
     const { season } = useAppContext();
 
     const getCurrentYear = () => new Date().getFullYear();
-    const getCurrentMonth = () => new Date().getMonth() + 1; // Month is zero-indexed, so add 1
 
     // Determine the semester code based on the current season and month
     const getSemesterCode = () => {
         const currentYear = getCurrentYear() % 100; // Get the last two digits of the current year
-        const currentMonth = getCurrentMonth();
 
         // Determine the semester code based on the season and month
-        if (season === 'Spring' || (season === 'Autumn' && currentMonth >= 1 && currentMonth <= 6)) {
+        if (season === 'Spring') {
             return `${currentYear}v`;
         } else {
             return `${currentYear}h`;
@@ -136,6 +134,14 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
 
     const { language } = useLanguageContext();
 
+    const handleMenuOpen = () => {
+        setShowAll(true);
+      };
+    
+      const handleMenuClose = () => {
+        setShowAll(false);
+      };
+
     return (
         <div>
             <div>
@@ -148,6 +154,8 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
                     onInputChange={handleInputChange}
                     menuIsOpen={showAll}
                     value={selectedValue} // Set the value prop to control the selected value
+                    onMenuOpen={handleMenuOpen}
+                    onMenuClose={handleMenuClose}
                 />
             </div>
             <div className="flex w-min-max">
