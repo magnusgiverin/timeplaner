@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { StudyPlan } from "~/interfaces/StudyPlanData";
+import type { StudyDirection, StudyPlan } from "~/interfaces/StudyPlanData";
 import { subjectCodesEnglish } from "~/localization/subjectCodes";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
@@ -17,9 +17,14 @@ export const studyPlanRouter = createTRPCRouter({
                 const courseUrl = input.language === 'en'
                     ? `https://www.ntnu.edu/studies/courses/${courseCode}`
                     : `https://www.ntnu.no/studier/emner/${courseCode}`;
+                
                 const courseResponse = await fetch(courseUrl);
+                
+                if (!courseResponse.ok) {
+                    return defaultValue;
+                }
+
                 const courseText = await courseResponse.text();
-            
                 const courseNameMatches = Array.from(courseText.matchAll(/<h1[^>]*>(.*?)<\/h1>/g));
                 const fourthMatch = courseNameMatches.length >= 3 ? courseNameMatches[2] : undefined;
                 let courseName = fourthMatch && fourthMatch[1] ? decode(fourthMatch[1].trim()) : defaultValue;
@@ -37,25 +42,34 @@ export const studyPlanRouter = createTRPCRouter({
                 return courseName;
             };
 
-            const fetchAllCourseNames = async () => {
-                const fetchPromises: Promise<void>[] = [];
-                for (const period of jsonData.studyplan.studyPeriods) {
-                    if (!period.direction.courseGroups) continue;
-                    for (const courseGroup of period.direction.courseGroups) {
+            const recursiveTranslate = async (studyDirection: StudyDirection, language: string, fetchPromises: Promise<void>[]) => {
+                if(studyDirection.courseGroups){
+                    for (const courseGroup of studyDirection.courseGroups) {
                         for (const course of courseGroup.courses) {
                             fetchPromises.push((async () => {
                                 course.name = await fetchCourseName(course.code, course.name);
-
-                                const studyChoiceName = input.language === 'en' ? subjectCodesEnglish[course.studyChoice.code] : course.studyChoice.name;
+                                const studyChoiceName = language === 'en' ? subjectCodesEnglish[course.studyChoice.code] : course.studyChoice.name;
                                 course.studyChoice.name = studyChoiceName ?? course.studyChoice.name;
                             })());
                         }
                     }
                 }
+                for (const studyWaypoint of studyDirection.studyWaypoints) {
+                    for (const direction of studyWaypoint.studyDirections) {
+                        recursiveTranslate(direction, language, fetchPromises);
+                    }
+                }
+            }
+
+            const fetchAllCourseNames = async () => {
+                const fetchPromises: Promise<void>[] = [];
+                for (const period of jsonData.studyplan.studyPeriods) {
+                    recursiveTranslate(period.direction, input.language, fetchPromises);
+                }
                 await Promise.all(fetchPromises);
             };
 
-            let _ = await fetchAllCourseNames();
+            await fetchAllCourseNames();
             return { studyPlanData: jsonData };
         })
 });
