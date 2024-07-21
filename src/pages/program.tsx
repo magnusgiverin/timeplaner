@@ -113,6 +113,7 @@ const ProgramPage = () => {
                     year={index + 1}
                     programCode={selectedProgram.studyprogcode}
                     season={season}
+                    language={language === 'en' ? 'en' : 'no'}
                     onSubjectsStructureChange={handleSubjectsStructureChange}
                 />
             );
