@@ -13,16 +13,18 @@ export const studyPlanRouter = createTRPCRouter({
             const jsonData = await response.json() as StudyPlan;
             
             const fetchCourseName = async (courseCode: string, defaultValue: string): Promise<string> => {
+                const { decode } = require('html-entities');
+                const input = { language: 'en' };  // Replace this with actual input logic
                 const courseUrl = input.language === 'en'
                     ? `https://www.ntnu.edu/studies/courses/${courseCode}`
                     : `https://www.ntnu.no/studier/emner/${courseCode}`;
                 const courseResponse = await fetch(courseUrl);
                 const courseText = await courseResponse.text();
-                
-
+            
                 const courseNameMatches = Array.from(courseText.matchAll(/<h1[^>]*>(.*?)<\/h1>/g));
                 const fourthMatch = courseNameMatches.length >= 3 ? courseNameMatches[2] : undefined;
-                let courseName = fourthMatch && fourthMatch[1] ? fourthMatch[1].trim() : defaultValue;
+                let courseName = fourthMatch && fourthMatch[1] ? decode(fourthMatch[1].trim()) : defaultValue;
+            
                 // Remove "Course - " prefix and " - <code>" suffix
                 const prefix = input.language === 'en' ? 'Course - ' : 'Emne - ';
                 if (courseName.startsWith(prefix)) {
@@ -32,6 +34,7 @@ export const studyPlanRouter = createTRPCRouter({
                 if (courseName.endsWith(suffix)) {
                     courseName = courseName.slice(0, -suffix.length);
                 }
+            
                 return courseName;
             };
 

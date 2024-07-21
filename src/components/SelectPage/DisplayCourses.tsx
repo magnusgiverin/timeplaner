@@ -75,7 +75,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
                         name={`radio_${parentIndex}_${index}`}
                         value={subject.name}
                         checked={selectedPath[level] === subject.name}
-                        onClick={handleClick}
+                        onChange={handleClick}
                         className="w-3 h-3 flex-shrink-0"
                         style={{ marginRight: '16px', transform: 'scale(1.5)' }}
                     />
