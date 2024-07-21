@@ -34,7 +34,7 @@ export interface StudyPeriod {
 
 export interface StudyDirection {
     code: string;
-    courseGroups: CourseGroup[];
+    courseGroups: CourseGroup[] | null;
     name: string;
     studyWaypoints: StudyWayPoint[]; 
 }

@@ -6,6 +6,7 @@ interface CourseLogicProps {
     year: number;
     programCode: string;
     season: string;
+    language: 'en' | 'no';
     onSubjectsStructureChange: (subjectStructure: SubjectStructure) => void;
 }
 
@@ -101,7 +102,7 @@ const getAllSubjects = (jsonData: StudyPlan, semester: number): SubjectStructure
     return subjectsData;
 };
 
-const CourseLogic: React.FC<CourseLogicProps> = ({ year, programCode, season, onSubjectsStructureChange }) => {
+const CourseLogic: React.FC<CourseLogicProps> = ({ year, programCode, season, language, onSubjectsStructureChange }) => {
   const semester = season === 'Autumn' ? year * 2 - 2 : year * 2 - 1;
   const autumnSeason = isAutumnSeason();
   const studyYear = autumnSeason ? getCurrentYear() - year + 1 : getCurrentYear() - year;
@@ -109,6 +110,7 @@ const CourseLogic: React.FC<CourseLogicProps> = ({ year, programCode, season, on
   const query = api.studyPlan.getStudyPlan.useQuery({
     studyProgCode: programCode,
     year: studyYear,
+    language: language,
   });
 
   const { data: studyPlan } = query;

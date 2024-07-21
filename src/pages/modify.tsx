@@ -109,7 +109,7 @@ const ModifyPage = () => {
     }, [courseList]);
 
     const renderSymbolExplanation = () => {
-        const explanationLabel = language === "no" ? "Symbolforklaring" : "Symbol Explanation"
+        const explanationLabel = language === "no" ? "Symbolforklaring" : "Symbol Key"
         if (shownCourses.length > 0) {
             const studyChoices: Record<string, string> = {};
             shownCourses.forEach((course) => {
