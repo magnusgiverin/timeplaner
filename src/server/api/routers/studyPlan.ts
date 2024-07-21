@@ -14,7 +14,6 @@ export const studyPlanRouter = createTRPCRouter({
             
             const fetchCourseName = async (courseCode: string, defaultValue: string): Promise<string> => {
                 const { decode } = require('html-entities');
-                const input = { language: 'en' };  // Replace this with actual input logic
                 const courseUrl = input.language === 'en'
                     ? `https://www.ntnu.edu/studies/courses/${courseCode}`
                     : `https://www.ntnu.no/studier/emner/${courseCode}`;
