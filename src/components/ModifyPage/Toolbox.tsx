@@ -46,8 +46,6 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
         semesterCode: getSemesterCode(),
     });
 
-    console.log(getSemesterCode())
-
     useEffect(() => {
         // Check if data is available before setting the state
         if (query.data) {
