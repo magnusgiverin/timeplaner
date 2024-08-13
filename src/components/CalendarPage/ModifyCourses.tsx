@@ -268,9 +268,11 @@ const ModifyCourses: React.FC<ModifyCoursesProps> = ({ onModification }) => {
             {semesterPlans.length > 0 && (
                 <h3>{labels.selectedHeader}</h3>
             )}
-            {semesterPlans.map((semesterPlan) => {
+            {semesterPlans
+                .filter((line) => line.hasOwnProperty("name"))
+                .map((semesterPlan) => {
+                    
                 const eventsGroupedByEventId: Record<string, Row> = {};
-
                 semesterPlan.events && semesterPlan.events.forEach((event) => {
                     const eventId = getUniqueId(event, language, isSmallScreen);
 
