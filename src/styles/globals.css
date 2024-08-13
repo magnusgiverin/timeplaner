@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 h1 {
     font-size: 4rem;
@@ -21,9 +22,9 @@ h4 {
 }
 
 body {
-    background: linear-gradient(to bottom, #273a4b, #6c757d);
+    background:#273a4b;
     color: white;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 

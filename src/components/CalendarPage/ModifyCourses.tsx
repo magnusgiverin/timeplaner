@@ -265,7 +265,9 @@ const ModifyCourses: React.FC<ModifyCoursesProps> = ({ onModification }) => {
 
     return (
         <div>
-            <h3>{labels.selectedHeader}</h3>
+            {semesterPlans.length > 0 && (
+                <h3>{labels.selectedHeader}</h3>
+            )}
             {semesterPlans.map((semesterPlan) => {
                 const eventsGroupedByEventId: Record<string, Row> = {};
 

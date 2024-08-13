@@ -249,20 +249,22 @@ const CalendarPage: React.FC = () => {
             <BackButton buttonText={language === "no" ? "Rediger emner" : "Edit subjects"} />
             <Header label={getHeaderLabel()} />
             <BreakLine />
-            <ActionButtons
-                onExport={handleExport}
-                onSave={handleSave}
-                onModify={handleModify}
-                onExplaination={handleExplaination}
-                onDownload={handleDownload}
-                labels={{
-                    export: getExportLabel(),
-                    download: getDownloadLabel(),
-                    modify: getModifyLabel(),
-                    save: getSaveLabel(),
-                }}
-                isSaved={isSaved}
-            />
+            {selectedSemesterPlans.length > 0 && (
+                <ActionButtons
+                    onExport={handleExport}
+                    onSave={handleSave}
+                    onModify={handleModify}
+                    onExplaination={handleExplaination}
+                    onDownload={handleDownload}
+                    labels={{
+                        export: getExportLabel(),
+                        download: getDownloadLabel(),
+                        modify: getModifyLabel(),
+                        save: getSaveLabel(),
+                    }}
+                    isSaved={isSaved}
+                />
+            )}
             <CalendarDisplay selectedSemesterPlans={selectedSemesterPlans} indexes={indexes} courseColors={courseColors} />
             {isSaved && (
                 <>
@@ -277,12 +279,12 @@ const CalendarPage: React.FC = () => {
                     </div>
                 </>
             )}
-            <div id="modifyCourses">
+            {selectedSemesterPlans.length > 0 && (
                 <BreakLine />
-                <ModifyCourses
-                    onModification={handleModification}
-                />
-            </div>
+            )}
+            <ModifyCourses
+                onModification={handleModification}
+            />
         </Layout>
     );
 };

@@ -7,13 +7,11 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const isSmallScreen = useMedia('(max-width: 600px)'); // Adjust the maximum width as needed
-
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex w-full flex-col items-center mb-10">
-        {isSmallScreen ? (<div className="w-full p-4">{children}</div>) : (<div className="w-2/3">{children}</div>)}
+       <div className="w-full sm:w-2/3 p-4">{children}</div>
       </main>
     </div>
   );

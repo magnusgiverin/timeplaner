@@ -197,6 +197,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
         return (
             <div>
                 {Object.entries(groupedSubjects).map(([group, groupSubjects], index) => (
+                    <>
                     <div key={index}>
                         {group !== 'Uncategorized' && (
                             <h2 className="text-2xl font-bold mt-2 mb-2">{group}</h2>
@@ -234,6 +235,7 @@ const Display: React.FC<DisplayProps> = ({ chosenSubjects, handleModifyRedirect,
                             </button>
                         )}
                     </div>
+                    </>
                 ))}
             </div>
         );

@@ -6,11 +6,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        sans: ["Inter", ...fontFamily.sans],
       },
       colors: {
-        primaryColour: '#6c757d'
-      }
+        primaryColour: '#6c757d',
+      },
     },
   },
   plugins: [],

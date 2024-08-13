@@ -46,8 +46,6 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
         semesterCode: getSemesterCode(),
     });
 
-    console.log(getSemesterCode())
-
     useEffect(() => {
         // Check if data is available before setting the state
         if (query.data) {
@@ -55,7 +53,7 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
             const filteredCourses = query.data.filter((course: Course) => {
                 return !exclude.includes(course); // Check if courseId is in the exclude list
             });
-    
+
             // Sort the filtered courses array based on courseId
             const sortedCourses = filteredCourses.sort((a: Course, b: Course) => {
                 // Ensure that courseId is available before comparing
@@ -64,9 +62,9 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
                 }
                 return 0; // Default return if courseId is not available
             });
-    
+
             setCourses(sortedCourses);
-    
+
             // Initialize the options array with the first 20 courses
             setOptions(sortedCourses.slice(0, 20).map((course) => ({
                 value: course.courseid,
@@ -185,9 +183,12 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
                     />
                 )}
                 <button
-                    className={`flex items-center text-white rounded-md p-2 mt-2 mb-2 bg-red-500`}
-                    onClick={() => onConfirm()}
+                    className={`flex items-center rounded-md p-2 mt-2 mb-2 ${exclude.length === 0 ? 'bg-gray-500 cursor-not-allowed' : 'bg-red-500 text-white cursor-pointer'
+                        }`}
+                    onClick={() => exclude.length > 0 && onConfirm()}
+                    disabled={exclude.length === 0}
                 >
+                    {/* Button content goes here */}
                     <span className="mr-2">{getConfirmLabel()}</span>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
