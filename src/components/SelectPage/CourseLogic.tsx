@@ -11,7 +11,7 @@ interface CourseLogicProps {
 
 const isAutumnSeason = () => {
     const currentMonth = new Date().getMonth() + 1;
-    const autumnStartMonth = 8; // September
+    const autumnStartMonth = 8;
     return currentMonth >= autumnStartMonth;
 };
 

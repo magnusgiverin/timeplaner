@@ -15,8 +15,9 @@ interface AppContextType {
 }
 
 const isAutumnSeason = () => {
-  const currentMonth = new Date().getMonth() + 1; // Months are zero-indexed
-  return currentMonth >= 9 && currentMonth <= 12;
+    const currentMonth = new Date().getMonth() + 1;
+    const autumnStartMonth = 8; // September
+    return currentMonth >= autumnStartMonth;
 };
 
 const defaultValue: AppContextType = {
