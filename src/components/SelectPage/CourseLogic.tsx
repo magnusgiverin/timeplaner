@@ -12,7 +12,7 @@ interface CourseLogicProps {
 
 const isAutumnSeason = () => {
     const currentMonth = new Date().getMonth() + 1;
-    const autumnStartMonth = 9; // September
+    const autumnStartMonth = 8;
     return currentMonth >= autumnStartMonth;
 };
 
@@ -107,6 +107,8 @@ const CourseLogic: React.FC<CourseLogicProps> = ({ year, programCode, season, la
   const autumnSeason = isAutumnSeason();
   const studyYear = autumnSeason ? getCurrentYear() - year + 1 : getCurrentYear() - year;
 
+  console.log(studyYear);
+  
   const query = api.studyPlan.getStudyPlan.useQuery({
     studyProgCode: programCode,
     year: studyYear,
