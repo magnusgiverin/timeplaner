@@ -202,7 +202,7 @@ const Toolbox: React.FC<ToolboxProps> = ({ onConfirm, onSearch, onToggleShowAll,
                     </svg>
                 </button>
             </div>
-            <BreakLine />
+            <BreakLine />n
         </div>
     );
 };

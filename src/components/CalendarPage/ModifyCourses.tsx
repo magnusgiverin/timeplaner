@@ -271,7 +271,7 @@ const ModifyCourses: React.FC<ModifyCoursesProps> = ({ onModification }) => {
             {semesterPlans.map((semesterPlan) => {
                 const eventsGroupedByEventId: Record<string, Row> = {};
 
-                semesterPlan.events.forEach((event) => {
+                semesterPlan.events && semesterPlan.events.forEach((event) => {
                     const eventId = getUniqueId(event, language, isSmallScreen);
 
                     if (!eventsGroupedByEventId[eventId]) {

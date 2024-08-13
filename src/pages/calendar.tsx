@@ -72,7 +72,9 @@ const CalendarPage: React.FC = () => {
 
                 if (isMounted && response?.data) {
                     setSemesterPlans(response.data);
-                    setSelectedSemesterPlans(response.data.map((semesterPlan) =>
+                    setSelectedSemesterPlans(response.data
+                        .filter((line) => line.hasOwnProperty("name"))
+                        .map((semesterPlan) =>
                     ({
                         ...semesterPlan,
                         events: semesterPlan.events.filter((event) =>
