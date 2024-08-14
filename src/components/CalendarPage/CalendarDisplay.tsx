@@ -169,7 +169,7 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
   };
 
   return (
-    <div className='flex-column flex-row flex-shrink mt-2 mb-2 justify-center'>
+    <div className='flex flex-col justify-center items-center mt-2 mb-2'>
       <style>
         {`
           .rbc-allday-cell {
@@ -182,26 +182,28 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
       </style>
       {parsedEvents.length > 0 ? (
         <Calendar
-          formats={formats}
-          defaultView='work_week'
-          defaultDate={defaultDate}
-          localizer={localizer}
-          events={parsedEvents}
-          startAccessor="start"
-          endAccessor="end"
-          views={{
-            month: false,
-            week: true,
-            work_week: true,
-            day: true,
-            agenda: false,
-          }}
-          min={workWeekStart}
-          max={workWeekEnd}
-          className="bg-white text-black border border-gray-300 rounded-md p-2"
-          eventPropGetter={eventPropGetter}
-          onSelectEvent={handleSelectEvent}
-        />
+        formats={formats}
+        defaultView='work_week'
+        defaultDate={defaultDate}
+        localizer={localizer}
+        events={parsedEvents}
+        startAccessor="start"
+        endAccessor="end"
+        views={{
+          month: false,
+          week: true,
+          work_week: true,
+          day: true,
+          agenda: false,
+        }}
+        min={workWeekStart}
+        max={workWeekEnd}
+        style={{ width: '70vw', height: '70vh'}} // Adjusted width, height, and centering
+        className="bg-white text-black border border-gray-300 rounded-md p-2" 
+        eventPropGetter={eventPropGetter}
+        onSelectEvent={handleSelectEvent}
+      />
+      
       ) : (
         <h3>{language === "no" ? "Laster inn..." : "Loading..."}</h3>
       )}
