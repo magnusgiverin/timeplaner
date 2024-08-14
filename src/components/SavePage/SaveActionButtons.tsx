@@ -92,14 +92,14 @@ const ActionButtons = ({ savedData, itemKey }: ActionButtonProps) => {
 
     const handleExplaination = () => {
         const norweiganDetails = [
-            "Eksporter: Eksporter kalender til Google Calendar",
+            // "Eksporter: Eksporter kalender til Google Calendar",
             "Last ned: Last ned kalender fil, for deling/import i kalendertjenester",
             "Lag ny: Lag en ny kalender",
             "Bytt navn: Bytt navn på kalenderen din"
         ]
 
         const englishDetails = [
-            "Export: Export the calendar to Google Calendar",
+            // "Export: Export the calendar to Google Calendar",
             "Download: Download the calendar file to your device",
             "Make new: Make a new calendar",
             "Change name: Change the name of the calendar on your device"
@@ -111,7 +111,7 @@ const ActionButtons = ({ savedData, itemKey }: ActionButtonProps) => {
 
     return (
         <div className="flex flex-wrap items-center justify-center">
-            <button
+            {/* <button
                 onClick={handleExport}
                 className="m-1 bg-blue-500 text-white rounded-full p-2 flex items-center justify-center h-full"
             >
@@ -126,7 +126,7 @@ const ActionButtons = ({ savedData, itemKey }: ActionButtonProps) => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
                 </svg>
                 {getExportLabel()}
-            </button>
+            </button> */}
 
             <button
                 onClick={handleDownload} // Ensure you call the function here

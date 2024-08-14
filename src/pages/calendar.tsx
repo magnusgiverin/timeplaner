@@ -219,7 +219,7 @@ const CalendarPage: React.FC = () => {
 
     const handleExplaination = () => {
         const norweiganDetails = [
-            "Eksporter: Eksporter kalender til Google Calendar",
+            // "Eksporter: Eksporter kalender til Google Calendar",
             "Last ned: Last ned kalender fil, for deling/import i kalendertjenester",
             "Rediger: Rediger innhold i kalender - paraleller, øvingstimer, etc.",
             isSaved !== undefined && !isSaved
@@ -228,7 +228,7 @@ const CalendarPage: React.FC = () => {
         ]
 
         const englishDetails = [
-            "Export: Export the calendar to Google Calendar",
+            // "Export: Export the calendar to Google Calendar",
             "Download: Download the calendar file to your device",
             "Edit: Edit what events are shown in your calendar",
             isSaved !== undefined && !isSaved
