@@ -199,7 +199,7 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
         min={workWeekStart}
         max={workWeekEnd}
         style={{ height: '70vh' }} // Static height
-        className="bg-white text-black border border-gray-300 rounded-md p-2 w-[95vw] sm:w-[70vw]" // Responsive width
+        className="bg-white text-black border border-gray-300 rounded-md p-2 h-[85vh] w-[95vw] sm:w-[70vw] md:h-[70vh]" // Responsive width
         eventPropGetter={eventPropGetter}
         onSelectEvent={handleSelectEvent}
       />
