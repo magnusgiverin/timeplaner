@@ -11,6 +11,7 @@ import type { SemesterPlan } from '~/interfaces/SemesterPlanData';
 import type { DetailedCourse } from '~/interfaces/StudyPlanData';
 import ModifyCourses from '~/components/CalendarPage/ModifyCourses';
 import { useCalendarContext } from '~/contexts/calendarContext';
+import BreakLine from '~/components/General/BreakLine';
 
 export interface SavedData {
     selectedSemesterPlans: SemesterPlan[];
@@ -101,7 +102,9 @@ const SavePage = () => {
                     <Header label={getHeaderLabel()} />
                     <h3 className="flex flex-col items-center justify-center text-green-500 mb-2">{key}</h3>
                     <ActionButtons itemKey={key} savedData={savedData} />
+                    <BreakLine />
                     <CalendarDisplay selectedSemesterPlans={selectedSemesterPlans} indexes={savedData.indexes} courseColors={savedData.courseColors} />
+                    <BreakLine />
                     <ModifyCourses/>
                 </>
             )}
