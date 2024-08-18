@@ -62,7 +62,7 @@ function parseSemesterPLans(semesterPlans: SemesterPlan[], indexes: Record<strin
   semesterPlans.map((semesterPlan) => semesterPlan.events.map((event) => {
     const parsedEvent = {
       id: indexes[event.courseid] ?? 0,
-      title: `${semesterPlan.courseid} - ${semesterPlan.coursename}`,
+      title: `${semesterPlan.courseid} - ${semesterPlan.coursename} ${event.room?.[0] ? ", " + event.room?.[0].roomname : ""}`,
       start: parseDate(event.dtstart),
       end: parseDate(event.dtend),
       allDay: false,
@@ -162,9 +162,8 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
     const staffDetails = details.staffs?.map(staff => `${staff.shortname} (${staff.id}@ntnu.no)`).join(', ');
     const summary = details.summary ? `Summary: ${details['teaching-title']}` : '';
     const staffInfo = staffDetails ? `Staff: ${staffDetails}` : '';
-    const room = "Room: " + details.room?.[0]?.roomname ?? ""
 
-    const eventDetails = [title, summary, staffInfo, room].filter(Boolean).join('\n\n');
+    const eventDetails = [title, summary, staffInfo].filter(Boolean).join('\n\n');
     alert(eventDetails)
   };
 
