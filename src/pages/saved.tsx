@@ -53,19 +53,6 @@ const SavePage = () => {
         }
     }, [router]);
 
-    console.log(selectedSemesterPlans);
-
-    const getHeaderLabel = () => {
-        if (language === 'no' && savedData) {
-            const translatedSeason = savedData.season === 'Spring' ? 'Vår' : 'Høst';
-            return `${savedData.programCode}, ${savedData.year}. klasse, ${translatedSeason}`;
-        } else if (savedData) {
-            return `${savedData.programCode}, Year ${savedData.year}, ${savedData.season}`;
-        } else {
-            return "";
-        }
-    };
-
     const handleRedirect = () => {
         // Check if the pressed key is Enter (key code 13)
         void router.push({
@@ -99,11 +86,9 @@ const SavePage = () => {
             <BackButton redirect={handleRedirect} />
             {savedData && (
                 <>
-                    <Header label={getHeaderLabel()} />
-                    <h3 className="flex flex-col items-center justify-center text-green-500 mb-2">{key}</h3>
-                    <ActionButtons itemKey={key} savedData={savedData} />
-                    <BreakLine />
+                <h2 className="flex flex-col items-center justify-center">{key}</h2>
                     <CalendarDisplay selectedSemesterPlans={selectedSemesterPlans} indexes={savedData.indexes} courseColors={savedData.courseColors} />
+                    <ActionButtons itemKey={key} savedData={savedData} />
                     <BreakLine />
                     <ModifyCourses/>
                 </>
