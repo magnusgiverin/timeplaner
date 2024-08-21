@@ -79,7 +79,7 @@ interface CalendarDisplayProps {
   selectedSemesterPlans: SemesterPlan[]; // Replace with your actual type
   indexes: Record<string, number>;
   courseColors: Record<string, string>; // Replace with your actual type
-  isUnmatched: Boolean;
+  isUnmatched: boolean;
 }
 
 const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
