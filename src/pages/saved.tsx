@@ -87,7 +87,7 @@ const SavePage = () => {
             {savedData && (
                 <>
                 <h2 className="flex flex-col items-center justify-center">{key}</h2>
-                    <CalendarDisplay selectedSemesterPlans={selectedSemesterPlans} indexes={savedData.indexes} courseColors={savedData.courseColors} />
+                    <CalendarDisplay isUnmatched={false} selectedSemesterPlans={selectedSemesterPlans} indexes={savedData.indexes} courseColors={savedData.courseColors} />
                     <ActionButtons itemKey={key} savedData={savedData} />
                     <BreakLine />
                     <ModifyCourses/>

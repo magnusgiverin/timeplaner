@@ -79,12 +79,14 @@ interface CalendarDisplayProps {
   selectedSemesterPlans: SemesterPlan[]; // Replace with your actual type
   indexes: Record<string, number>;
   courseColors: Record<string, string>; // Replace with your actual type
+  isUnmatched: Boolean;
 }
 
 const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
   selectedSemesterPlans,
   indexes,
   courseColors,
+  isUnmatched,
 }) => {
 
   const [parsedEvents, setParsedEvents] = useState<ParsedEvent[]>([]);
@@ -202,6 +204,8 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
         eventPropGetter={eventPropGetter}
         onSelectEvent={handleSelectEvent}
       />
+      ) : isUnmatched ? (
+        <h3>{language === "no" ? "Du må velge timer nederst (rød varselstrekant)" : "You need to select events below (red warning triangle)"}</h3>
       ) : (
         <h3>{language === "no" ? "Laster inn..." : "Loading..."}</h3>
       )}

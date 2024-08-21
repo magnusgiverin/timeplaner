@@ -14,6 +14,7 @@ import ModifyCourses from '~/components/CalendarPage/ModifyCourses';
 import BackButton from '~/components/General/BackButton';
 import ActionButtons from '~/components/CalendarPage/ActionButtons';
 import Header from '~/components/General/Header';
+import { SemesterPlan } from '~/interfaces/SemesterPlanData'
 
 // Main Calendar component
 const CalendarPage: React.FC = () => {
@@ -246,12 +247,21 @@ const CalendarPage: React.FC = () => {
         setIsSaved(false);
     };
 
+    function isUnmatched(semesterPlans: SemesterPlan[]): boolean {
+        for (const semesterPlan of semesterPlans) {
+          if (semesterPlan.events.length > 0) {
+            return false;
+          }
+        }
+        return true;
+      }
+
     return (
         <Layout>
             <BackButton buttonText={language === "no" ? "Rediger emner" : "Edit subjects"} />
             <Header label={getHeaderLabel()} />
             <BreakLine />
-            {selectedSemesterPlans.length > 0 && (
+            {selectedSemesterPlans.length > 0 && !isUnmatched(selectedSemesterPlans) && (
                 <ActionButtons
                     onExport={handleExport}
                     onSave={handleSave}
@@ -267,7 +277,7 @@ const CalendarPage: React.FC = () => {
                     isSaved={isSaved}
                 />
             )}
-            <CalendarDisplay selectedSemesterPlans={selectedSemesterPlans} indexes={indexes} courseColors={courseColors} />
+            <CalendarDisplay isUnmatched={isUnmatched(selectedSemesterPlans)} selectedSemesterPlans={selectedSemesterPlans} indexes={indexes} courseColors={courseColors} />
             {isSaved && (
                 <>
                     <BreakLine />
