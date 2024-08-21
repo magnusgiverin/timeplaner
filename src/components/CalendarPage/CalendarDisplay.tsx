@@ -142,6 +142,8 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
     return {}
   }
 
+  console.log(courseColors);
+
   const formats: Formats = {
     dateFormat: 'dd',
     // dayFormat: (date, culture, localizer) => localizer?.format(date, 'ddd', culture) ?? '',
@@ -204,7 +206,8 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
         eventPropGetter={eventPropGetter}
         onSelectEvent={handleSelectEvent}
       />
-      ) : isUnmatched ? (
+  
+      ) : isUnmatched && Object.keys(courseColors).length !== 0 ? (
         <h3>{language === "no" ? "Du må velge timer nederst (rød varselstrekant)" : "You need to select events below (red warning triangle)"}</h3>
       ) : (
         <h3>{language === "no" ? "Laster inn..." : "Loading..."}</h3>
