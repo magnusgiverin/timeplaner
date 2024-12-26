@@ -17,11 +17,11 @@ interface AppContextType {
 const isAutumnSeason = () => {
     const currentMonth = new Date().getMonth() + 1;
     const autumnStartMonth = 8; // September
-    return currentMonth >= autumnStartMonth;
+    return currentMonth <= autumnStartMonth;
 };
 
 const defaultValue: AppContextType = {
-    year: new Date().getFullYear(), // Set the initial year to the current year
+    year: isAutumnSeason() ? new Date().getFullYear() + 1 : new Date().getFullYear(), // Set the initial year to the current year
     setYear: () => {
         console.log("Setting year")
     },
