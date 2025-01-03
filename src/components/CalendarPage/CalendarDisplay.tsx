@@ -142,8 +142,6 @@ const CalendarDisplay: React.FC<CalendarDisplayProps> = ({
     return {}
   }
 
-  console.log(courseColors);
-
   const formats: Formats = {
     dateFormat: 'dd',
     // dayFormat: (date, culture, localizer) => localizer?.format(date, 'ddd', culture) ?? '',

@@ -54,7 +54,7 @@ const CalendarPage: React.FC = () => {
     const selectedSeason = router.query.semester as string;
 
     let currentYearLastDigits = new Date().getFullYear().toString().slice(-2);
-    currentYearLastDigits = selectedSeason === 'Spring' ? (parseInt(currentYearLastDigits) + 1).toString() : currentYearLastDigits;
+    currentYearLastDigits = selectedSeason === 'Spring' ? (parseInt(currentYearLastDigits)).toString() : currentYearLastDigits;
 
     const currentSemester = `${currentYearLastDigits}${selectedSeason === 'Spring' ? 'v' : 'h'}`;
     const subjectList = currentCourses.map((course) => ('courseid' in course ? course.courseid : course.code));

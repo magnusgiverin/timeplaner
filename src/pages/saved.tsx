@@ -44,7 +44,6 @@ const SavePage = () => {
         const storedData = localStorage.getItem(key); // Replace 'your_key' with your actual key
         if (storedData) {
             const parsedData = JSON.parse(storedData) as SavedData;
-            console.log(parsedData.selectedSemesterPlans)
             setSavedData(parsedData);
             setSemesterPlans(parsedData.semesterPlans);
             setSelectedSemesterPlans(parsedData.selectedSemesterPlans);
