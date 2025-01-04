@@ -8,6 +8,7 @@ import { LanguageProvider } from "~/contexts/languageContext";
 import { CalendarContextProvider } from "~/contexts/calendarContext";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from '@vercel/analytics/react';
+import Script from "next/script";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -17,6 +18,16 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </Head>
+      {/* Google tag (gtag.js) */}
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-7031DC8EQ1" />
+      <Script id="google-analytics">
+        {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7031DC8EQ1');
+  `}
+      </Script>
       <LanguageProvider>
         <AppContextProvider>
           <CalendarContextProvider>
