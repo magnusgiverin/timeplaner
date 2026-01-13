@@ -106,6 +106,8 @@ const ProgramPage = () => {
         return null;
     }, [selectedProgram, index, season]);
 
+    console.log(language);
+
     const courseLogicComponent = useMemo(() => {
         if (selectedProgram && index !== -1) {
             return (
@@ -113,6 +115,7 @@ const ProgramPage = () => {
                     year={index + 1}
                     programCode={selectedProgram.studyprogcode}
                     season={season}
+                    language={language === 'en' ? 'en' : 'no'}
                     onSubjectsStructureChange={handleSubjectsStructureChange}
                 />
             );
